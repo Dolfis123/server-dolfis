@@ -50,7 +50,7 @@ function EditSDUsaha() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5050/lihat-surat-domisili-usaha/${hashed_id}`
+        `https://dolfis.store/api/lihat-surat-domisili-usaha/${hashed_id}`
       );
       setData(response.data.data);
     } catch (error) {
@@ -100,7 +100,7 @@ function EditSDUsaha() {
 
     try {
       const response = await axios.put(
-        `http://localhost:5050/update-surat-domisili-usaha-user/${hashed_id}`,
+        `https://dolfis.store/api/update-surat-domisili-usaha-user/${hashed_id}`,
         {
           nama,
           // nip,

@@ -13,7 +13,7 @@ function ConfirmasiDataSDUsaha() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5050/lihat-surat-domisili-usaha/${hashed_id}`
+        `https://dolfis.store/api/lihat-surat-domisili-usaha/${hashed_id}`
       );
       setData(response.data.data);
     } catch (error) {
@@ -106,7 +106,7 @@ function ConfirmasiDataSDUsaha() {
                 <div className="flex-1">
                   {data.ktp_image && (
                     <img
-                      src={`http://localhost:5050/images/${data.ktp_image}`}
+                      src={`https://dolfis.store/api/images/${data.ktp_image}`}
                       className="mt-2 rounded-md"
                       alt={data.nama}
                       style={{ maxWidth: "200px" }}

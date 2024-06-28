@@ -16,7 +16,7 @@ function Pelayanan() {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await axios.get("http://localhost:5050/api/pelayanan");
+        const response = await axios.get("https://dolfis.store/api/pelayanan");
         setServices(response.data);
       } catch (error) {
         console.error("Error fetching services:", error);

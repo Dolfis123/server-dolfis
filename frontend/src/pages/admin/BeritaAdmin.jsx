@@ -41,7 +41,7 @@ function BeritaAdmin() {
     // setTags(news.tags);
     setStatus(news.status);
     setImage(null);
-    setImageUrl(`http://localhost:5050/images/${news.image_url}`);
+    setImageUrl(`https://dolfis.store/api/images/${news.image_url}`);
     setShowEditModal(true);
   };
 
@@ -76,7 +76,7 @@ function BeritaAdmin() {
 
   const fetchNews = async () => {
     try {
-      const response = await axios.get("http://localhost:5050/news");
+      const response = await axios.get("https://dolfis.store/api/news");
       setNewsList(response.data.Result.reverse());
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -99,7 +99,7 @@ function BeritaAdmin() {
     if (image) formData.append("image", image);
 
     try {
-      await axios.post("http://localhost:5050/news", formData, {
+      await axios.post("https://dolfis.store/api/news", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -123,7 +123,7 @@ function BeritaAdmin() {
     if (image) formData.append("image", image);
 
     try {
-      await axios.put(`http://localhost:5050/news/${editId}`, formData, {
+      await axios.put(`https://dolfis.store/api/news/${editId}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -137,7 +137,7 @@ function BeritaAdmin() {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:5050/news/${deleteId}`);
+      await axios.delete(`https://dolfis.store/api/news/${deleteId}`);
       fetchNews();
       handleCloseDeleteModal();
     } catch (error) {
@@ -209,7 +209,7 @@ function BeritaAdmin() {
                     <td className="border p-2 text-center">{index + 1}</td>
                     <td className="border p-2">
                       <img
-                        src={`http://localhost:5050/images/${news.image_url}`}
+                        src={`https://dolfis.store/api/images/${news.image_url}`}
                         alt="News"
                         className="w-24 h-24 object-cover"
                       />

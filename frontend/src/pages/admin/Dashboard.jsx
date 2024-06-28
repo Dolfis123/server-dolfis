@@ -27,7 +27,7 @@ function Dashboard() {
     setEditId(ucapan.id);
     setPesan(ucapan.pesan);
     setImage(null);
-    setImageUrl(`http://localhost:5050/images/${ucapan.image}`);
+    setImageUrl(`https://dolfis.store/api/images/${ucapan.image}`);
     setShowEditModal(true);
   };
   const handleCloseEditModal = () => {
@@ -45,7 +45,7 @@ function Dashboard() {
 
   const fetchUcapan = async () => {
     try {
-      const response = await axios.get("http://localhost:5050/lihat-ucapan");
+      const response = await axios.get("https://dolfis.store/api/lihat-ucapan");
       setUcapanList(response.data.Result);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -63,7 +63,7 @@ function Dashboard() {
     formData.append("image", image);
 
     try {
-      await axios.post("http://localhost:5050/ucapan", formData, {
+      await axios.post("https://dolfis.store/api/ucapan", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -82,11 +82,15 @@ function Dashboard() {
     if (image) formData.append("image", image);
 
     try {
-      await axios.put(`http://localhost:5050/edit-ucapan/${editId}`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      await axios.put(
+        `https://dolfis.store/api/edit-ucapan/${editId}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       fetchUcapan();
       handleCloseEditModal();
     } catch (error) {

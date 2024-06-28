@@ -28,7 +28,7 @@ function PersyaSuratDomUsaha() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5050/lihat-surat-domisili-usaha/${hashed_id}`
+        `https://dolfis.store/api/lihat-surat-domisili-usaha/${hashed_id}`
       );
       setData(response.data.data);
       setFormData({
@@ -79,13 +79,15 @@ function PersyaSuratDomUsaha() {
     e.preventDefault();
 
     if (noTeleponErrorMessage) {
-      alert("Terjadi kesalahan pada kolom nomor telepon. Periksa kembali input Anda.");
+      alert(
+        "Terjadi kesalahan pada kolom nomor telepon. Periksa kembali input Anda."
+      );
       return;
     }
 
     try {
       const response = await axios.put(
-        `http://localhost:5050/update-nomor-email-domisil/${hashed_id}`,
+        `https://dolfis.store/api/update-nomor-email-domisil/${hashed_id}`,
         formData
       );
 
@@ -139,7 +141,9 @@ function PersyaSuratDomUsaha() {
                   onChange={handleInputChange}
                 />
                 {noTeleponErrorMessage && (
-                  <div className="text-red-500 mt-2">{noTeleponErrorMessage}</div>
+                  <div className="text-red-500 mt-2">
+                    {noTeleponErrorMessage}
+                  </div>
                 )}
               </div>
               <div className="mb-4">

@@ -60,7 +60,7 @@ function Pegawai() {
     setRetirementDate(employee.retirement_date);
     setNationality(employee.nationality);
     setPhoto(null);
-    setPhotoUrl(`http://localhost:5050/uploads/${employee.photo}`);
+    setPhotoUrl(`https://dolfis.store/api/uploads/${employee.photo}`);
     setShowEditModal(true);
   };
 
@@ -105,7 +105,7 @@ function Pegawai() {
 
   const fetchEmployees = async () => {
     try {
-      const response = await axios.get("http://localhost:5050/api/employees");
+      const response = await axios.get("https://dolfis.store/api/employees");
       setEmployeeList(
         Array.isArray(response.data.data) ? response.data.data : []
       );
@@ -147,7 +147,7 @@ function Pegawai() {
     if (photo) formData.append("photo", photo);
 
     try {
-      await axios.post("http://localhost:5050/api/employees", formData, {
+      await axios.post("https://dolfis.store/api/employees", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -182,7 +182,7 @@ function Pegawai() {
 
     try {
       await axios.put(
-        `http://localhost:5050/api/employees/${editId}`,
+        `https://dolfis.store/api/employees/${editId}`,
         formData,
         {
           headers: {
@@ -199,7 +199,7 @@ function Pegawai() {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:5050/api/employees/${deleteId}`);
+      await axios.delete(`https://dolfis.store/api/employees/${deleteId}`);
       fetchEmployees();
       handleCloseDeleteModal();
     } catch (error) {
@@ -272,7 +272,7 @@ function Pegawai() {
                     <td className="border p-2 text-center">{index + 1}</td>
                     <td className="border p-2">
                       <img
-                        src={`http://localhost:5050/uploads/${employee.photo}`}
+                        src={`https://dolfis.store/api/uploads/${employee.photo}`}
                         alt="Employee"
                         className="w-24 h-24 object-cover"
                       />

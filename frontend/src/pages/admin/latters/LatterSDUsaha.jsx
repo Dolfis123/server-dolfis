@@ -20,7 +20,7 @@ function LatterSDUsaha() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5050/lihat-surat-domisili-admin/${id}`
+        `https://dolfis.store/api/lihat-surat-domisili-admin/${id}`
       );
       setData(response.data.data);
     } catch (error) {
@@ -30,7 +30,7 @@ function LatterSDUsaha() {
 
   const fetchEmployees = async () => {
     try {
-      const response = await axios.get("http://localhost:5050/api/employees");
+      const response = await axios.get("https://dolfis.store/api/employees");
       setEmployees(response.data.data);
     } catch (error) {
       console.error("Error fetching employees:", error);

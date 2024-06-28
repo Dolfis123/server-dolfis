@@ -53,13 +53,13 @@ app.use(
 
 app.use("/api/images", express.static(path.join(__dirname, "public/images")));
 app.use("/api/images", express.static(path.join(__dirname, "public/uploads")));
-app.use("uploads", express.static(path.join(__dirname, "public/uploads")));
-app.use("/public/images", express.static("public/images"));
-app.use("/public/uploads", express.static("public/uploads"));
+app.use("/api/uploads", express.static(path.join(__dirname, "public/uploads")));
+app.use("/api/public/images", express.static("public/images"));
+app.use("/api/public/uploads", express.static("public/uploads"));
 
 app.use("/api", ketDomisiliUsaha);
 app.use("/api", ucapanSowiRoute);
-app.use("api", loginRoute);
+app.use("/api", loginRoute);
 app.use("/api", newsRoutes);
 app.use("/api", employeeRoutes);
 app.use("/api", persyaratanLayananRoute);
@@ -74,7 +74,7 @@ app.get("/server", (req, res) => {
 });
 
 // Tambahkan di bagian rute backend
-app.get("/logout", (req, res) => {
+app.get("/api/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) {
       return res.status(500).json({ Status: "Error", Error: "Logout failed" });
