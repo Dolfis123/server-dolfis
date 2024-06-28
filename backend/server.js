@@ -54,8 +54,8 @@ app.use(
 app.use("/api/images", express.static(path.join(__dirname, "public/images")));
 app.use("/api/images", express.static(path.join(__dirname, "public/uploads")));
 app.use("/api/uploads", express.static(path.join(__dirname, "public/uploads")));
-app.use("/public/images", express.static("public/images"));
-app.use("/public/uploads", express.static("public/uploads"));
+app.use("/api/public/images", express.static("public/images"));
+app.use("/api/public/uploads", express.static("public/uploads"));
 
 app.use("/api", ketDomisiliUsaha);
 app.use("/api", ucapanSowiRoute);

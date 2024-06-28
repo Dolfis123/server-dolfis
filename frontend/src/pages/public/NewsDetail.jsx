@@ -24,7 +24,7 @@ function NewsDetail() {
     const fetchLatestNews = async () => {
       try {
         const response = await axios.get("https://website.fahri.life/api/news");
-        setLatestNews(response.data.Result.slice(0, 5)); // Get the latest 4 news items
+        setLatestNews(response.data.Result.slice(0, 5)); // Get the latest 5 news items
       } catch (error) {
         console.error("Error fetching latest news:", error);
       }
@@ -41,8 +41,8 @@ function NewsDetail() {
   return (
     <div>
       <Navbar />
-      <div className="container py-5 flex">
-        <div className="w-3/4 max-w-4xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
+      <div className="container py-5 flex flex-col lg:flex-row">
+        <div className="lg:w-3/4 max-w-4xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
           <h1
             style={{ marginTop: "80px", marginLeft: "10px" }}
             className="text-3xl font-bold mb-4"
@@ -75,10 +75,8 @@ function NewsDetail() {
             </p>
           </div>
         </div>
-        <div className="w-1/4 pl-5">
-          <h2 style={{ marginTop: "60px" }} className="text-2xl font-bold mb-4">
-            Beritan Terkini
-          </h2>
+        <div className="lg:w-1/4 pl-5 lg:pl-5 mt-5 lg:mt-0">
+          <h2 className="text-2xl font-bold mb-4">Beritan Terkini</h2>
           <ul className="space-y-4">
             {latestNews.map((item) => (
               <li key={item.id} className="bg-white p-3 shadow-md rounded-lg">
