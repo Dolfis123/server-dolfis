@@ -78,7 +78,7 @@ function NewsDetail() {
         <div className="lg:w-1/4 pl-5 lg:pl-5 mt-5 lg:mt-0">
           <h2 className="text-2xl font-bold mb-4">Beritan Terkini</h2>
           <ul className="space-y-4">
-            {latestNews.map((item) => (
+            {latestNews.reverse().map((item) => (
               <li key={item.id} className="bg-white p-3 shadow-md rounded-lg">
                 <a href={`/news/${item.id}`} className="text-blue-500">
                   <img
