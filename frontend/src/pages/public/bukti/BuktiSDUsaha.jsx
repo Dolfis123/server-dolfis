@@ -53,18 +53,14 @@ function BuktiSDUsaha() {
           <div className="mb-4" id="my-content">
             <table className="w-full mb-4">
               <tbody>
-                <tr className="flex flex-col lg:flex-row">
-                  <td className="w-full lg:w-1/4 text-center lg:text-left mb-4 lg:mb-0">
-                    <img
-                      src={logoLurah}
-                      alt="logo"
-                      className="w-20 mx-auto lg:mx-0 mb-5"
-                    />
-                    <p className="text-black">
+                <tr>
+                  <td className="w-1/4">
+                    <img src={logoLurah} alt="logo" className="w-20 mb-5" />
+                    <p className="text-black text-left">
                       <span>JL Trikora Sowi</span>
                     </p>
                   </td>
-                  <td className="text-center lg:w-3/4">
+                  <td className="text-center w-3/4">
                     <b>
                       <h5 className="text-black">
                         PEMERINTAH KABUPATEN MANOKWARI
@@ -90,25 +86,25 @@ function BuktiSDUsaha() {
                 Terima kasih telah mengunakan layanan kami. <br /> Berikut data
                 pendaftaran Anda:
               </p>
-              <div className="ml-0 lg:ml-12 font-serif text-black">
-                <div className="flex flex-col lg:flex-row mb-2">
-                  <span className="w-full lg:w-40">Nama</span>
+              <div className="ml-12 font-serif text-black">
+                <div className="flex mb-2">
+                  <span className="w-40">Nama</span>
                   <span>: {data.nama}</span>
                 </div>
-                <div className="flex flex-col lg:flex-row mb-2">
-                  <span className="w-full lg:w-40">Keperluan</span>
+                <div className="flex mb-2">
+                  <span className="w-40">Keperluan</span>
                   <span>: {data.keperluan}</span>
                 </div>
-                <div className="flex flex-col lg:flex-row mb-2">
-                  <span className="w-full lg:w-40">Tanggal</span>
+                <div className="flex mb-2">
+                  <span className="w-40">Tanggal</span>
                   <span>: {formatDate(data.tanggal)}</span>
                 </div>
-                <div className="flex flex-col lg:flex-row mb-2">
-                  <span className="w-full lg:w-40">No Pendaftaran</span>
+                <div className="flex mb-2">
+                  <span className="w-40">No Pendaftaran</span>
                   <span>: {data.nomor_surat}</span>
                 </div>
               </div>
-              <div className="ml-0 lg:ml-12 mt-10 text-black">
+              <div className="ml-12 mt-10 text-black">
                 <h6 className="text-black">*Persyaratan</h6>
                 <ol className="list-decimal ml-4">
                   <li>Fotocopy KTP</li>
