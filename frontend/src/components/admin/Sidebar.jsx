@@ -21,7 +21,7 @@ function Sidebar({ activeComponent }) {
     const confirmed = window.confirm("Apakah Anda yakin ingin keluar?");
     if (confirmed) {
       try {
-        await axios.get("https://dolfis.store/api/logout");
+        await axios.get("https://website.fahri.life/api/logout");
         sessionStorage.removeItem("token");
         navigate("/");
       } catch (err) {

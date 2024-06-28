@@ -30,7 +30,7 @@ const requireLogin = (req, res, next) => {
 };
 
 const corsOptions = {
-  origin: ["https://dolfis.store", "*"],
+  origin: ["https://website.fahri.life", "*"],
   optionsSuccessStatus: 200,
   credentials: true,
   allowedHeaders: ["Content-Type", "Authorization"],

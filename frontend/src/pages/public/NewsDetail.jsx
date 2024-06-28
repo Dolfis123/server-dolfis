@@ -12,7 +12,9 @@ function NewsDetail() {
   useEffect(() => {
     const fetchNewsDetail = async () => {
       try {
-        const response = await axios.get(`https://dolfis.store/api/news/${id}`);
+        const response = await axios.get(
+          `https://website.fahri.life/api/news/${id}`
+        );
         setNews(response.data.Result[0]);
       } catch (error) {
         console.error("Error fetching news detail:", error);
@@ -21,7 +23,7 @@ function NewsDetail() {
 
     const fetchLatestNews = async () => {
       try {
-        const response = await axios.get("https://dolfis.store/api/news");
+        const response = await axios.get("https://website.fahri.life/api/news");
         setLatestNews(response.data.Result.slice(0, 5)); // Get the latest 4 news items
       } catch (error) {
         console.error("Error fetching latest news:", error);
@@ -52,7 +54,7 @@ function NewsDetail() {
             {new Date(news.created_at).toLocaleDateString()}
           </p>
           <img
-            src={`https://dolfis.store/api/images/${news.image_url}`}
+            src={`https://website.fahri.life/api/images/${news.image_url}`}
             alt={news.title}
             className="w-full h-96 object-contain"
           />
@@ -82,7 +84,7 @@ function NewsDetail() {
               <li key={item.id} className="bg-white p-3 shadow-md rounded-lg">
                 <a href={`/news/${item.id}`} className="text-blue-500">
                   <img
-                    src={`https://dolfis.store/api/images/${item.image_url}`}
+                    src={`https://website.fahri.life/api/images/${item.image_url}`}
                     alt={item.title}
                     className="w-full h-32 object-cover mb-2"
                   />

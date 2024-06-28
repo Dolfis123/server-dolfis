@@ -50,7 +50,7 @@ function Beranda() {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get("https://dolfis.store/api/news");
+        const response = await axios.get("https://website.fahri.life/api/news");
         if (response.data.Result) {
           setNewsList(response.data.Result.reverse());
         } else {
@@ -67,7 +67,7 @@ function Beranda() {
     const fetchUcapan = async () => {
       try {
         const response = await axios.get(
-          "https://dolfis.store/api/lihat-ucapan"
+          "https://website.fahri.life/api/lihat-ucapan"
         );
         if (response.data.Result) {
           setUcapanList(response.data.Result);
@@ -232,7 +232,7 @@ function Beranda() {
             <div className="flex-shrink-0">
               <img
                 className="rounded-full w-32 h-32 object-cover mr-4"
-                src={`https://dolfis.store/api/images/${ucapan.image}`}
+                src={`https://website.fahri.life/api/images/${ucapan.image}`}
                 alt=""
               />
             </div>
@@ -256,7 +256,7 @@ function Beranda() {
                 title={news.title}
                 content={news.content.substring(0, 100) + "..."}
                 link={`/news/${news.id}`}
-                imageUrl={`https://dolfis.store/api/images/${news.image_url}`}
+                imageUrl={`https://website.fahri.life/api/images/${news.image_url}`}
               />
             ))}
           </div>

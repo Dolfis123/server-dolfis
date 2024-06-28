@@ -50,7 +50,7 @@ function EditSDUsaha() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `https://dolfis.store/api/lihat-surat-domisili-usaha/${hashed_id}`
+        `https://website.fahri.life/api/lihat-surat-domisili-usaha/${hashed_id}`
       );
       setData(response.data.data);
     } catch (error) {

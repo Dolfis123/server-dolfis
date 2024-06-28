@@ -105,7 +105,7 @@ function SuratDomisiliUsaha() {
       formData.append("ktp_image", ktpImage);
 
       const response = await axios.post(
-        "https://dolfis.store/api/buat-surat-domisili",
+        "https://website.fahri.life/api/buat-surat-domisili",
         formData,
         {
           headers: {
