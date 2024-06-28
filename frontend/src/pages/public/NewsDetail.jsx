@@ -60,7 +60,7 @@ function NewsDetail() {
           />
           <div className="p-2">
             <p className="text-gray-600 mb-4">
-              <strong>Category:</strong> {news.category}
+              <strong>Kategori:</strong> {news.category}
             </p>
             <div
               className="text-gray-800 leading-relaxed"
@@ -71,7 +71,7 @@ function NewsDetail() {
             <br />
 
             <p className="text-gray-600 mb-4">
-              <strong>Author:</strong> {news.author}
+              <strong>Pengarang:</strong> {news.author}
             </p>
           </div>
         </div>
