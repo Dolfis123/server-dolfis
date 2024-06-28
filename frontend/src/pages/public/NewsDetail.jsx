@@ -24,7 +24,11 @@ function NewsDetail() {
     const fetchLatestNews = async () => {
       try {
         const response = await axios.get("https://website.fahri.life/api/news");
-        setLatestNews(response.data.Result.slice(0, 5)); // Get the latest 5 news items
+        // Assuming the response is not sorted by default
+        const sortedNews = response.data.Result.sort(
+          (a, b) => new Date(b.created_at) - new Date(a.created_at)
+        );
+        setLatestNews(sortedNews.slice(0, 5)); // Get the latest 5 news items
       } catch (error) {
         console.error("Error fetching latest news:", error);
       }
@@ -78,7 +82,7 @@ function NewsDetail() {
         <div className="lg:w-1/4 pl-5 lg:pl-5 mt-5 lg:mt-0">
           <h2 className="text-2xl font-bold mb-4">Beritan Terkini</h2>
           <ul className="space-y-4">
-            {latestNews.reverse().map((item) => (
+            {latestNews.map((item) => (
               <li key={item.id} className="bg-white p-3 shadow-md rounded-lg">
                 <a href={`/news/${item.id}`} className="text-blue-500">
                   <img
