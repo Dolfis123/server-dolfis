@@ -141,7 +141,7 @@ function Dashboard() {
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-300">
                       <img
-                        src={`https://website.fahri.life/images/${ucapan.image}`}
+                        src={`https://website.fahri.life/api/images/${ucapan.image}`}
                         alt="foto"
                         className="w-24 h-24 object-cover"
                       />
