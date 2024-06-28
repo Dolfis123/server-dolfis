@@ -59,25 +59,6 @@ const createEmployee = (req, res) => {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
-    const validGenders = ["Laki-laki", "Perempuan"];
-    const validMaritalStatuses = ["Lajang", "Menikah", "Cerai"];
-    const validBloodTypes = ["A", "B", "AB", "O"];
-
-    if (gender && !validGenders.includes(gender)) {
-      console.error("Validation error: Invalid gender value");
-      return res.status(400).json({ error: "Invalid gender value" });
-    }
-
-    if (marital_status && !validMaritalStatuses.includes(marital_status)) {
-      console.error("Validation error: Invalid marital status value");
-      return res.status(400).json({ error: "Invalid marital status value" });
-    }
-
-    if (blood_type && !validBloodTypes.includes(blood_type)) {
-      console.error("Validation error: Invalid blood type value");
-      return res.status(400).json({ error: "Invalid blood type value" });
-    }
-
     const checkDuplicateQuery = `SELECT * FROM employees WHERE nip = ?`;
 
     db.query(checkDuplicateQuery, [nip], (err, result) => {
