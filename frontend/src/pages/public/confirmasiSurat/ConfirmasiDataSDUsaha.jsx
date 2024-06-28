@@ -32,7 +32,7 @@ function ConfirmasiDataSDUsaha() {
 
   return (
     <div className="w-full">
-      <div className="bg-gray-100 min-h-screen py-8 w-1/2">
+      <div className="bg-gray-100 min-h-screen py-8 w-full">
         <div className="container mx-auto p-4 ">
           <div className="bg-white shadow-md rounded-lg p-6 w-full">
             <div className="text-center mb-6">

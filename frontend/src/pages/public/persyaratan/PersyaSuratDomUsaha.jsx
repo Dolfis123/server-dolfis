@@ -101,7 +101,7 @@ function PersyaSuratDomUsaha() {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen w-1/2">
+    <div className="bg-gray-100 min-h-screen w-full">
       <Navbar />
       <div className="container mx-auto p-4">
         <div className="bg-white shadow-md rounded-lg p-6">
