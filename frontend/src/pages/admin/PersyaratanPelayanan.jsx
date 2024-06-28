@@ -109,13 +109,13 @@ function PersyaratanPelayanan() {
       <section id="content" className="flex-grow">
         <Navbar />
         <div className="p-4">
-          <Button
+          {/* <Button
             variant="primary"
             onClick={handleShowModal}
             style={{ marginTop: "20px" }}
           >
             Tambah Data pelayanan
-          </Button>
+          </Button> */}
 
           <Table striped bordered hover style={{ marginTop: "20px" }}>
             <thead>
