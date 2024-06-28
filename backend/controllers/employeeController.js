@@ -2,8 +2,6 @@ const db = require("../config/database");
 const moment = require("moment-timezone");
 const path = require("path");
 const multer = require("multer");
-const crypto = require("crypto");
-const { v4: uuidv4 } = require("uuid");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -52,7 +50,6 @@ const createEmployee = (req, res) => {
     } = req.body;
 
     const photo = req.file ? req.file.filename : null;
-    const employee_id = uuidv4();
 
     if (!full_name || !nip || !join_date || !employment_status) {
       console.error("Validation error: Missing required fields");
@@ -74,11 +71,10 @@ const createEmployee = (req, res) => {
 
       const sqlQuery = `
         INSERT INTO employees
-        (employee_id, full_name, nip, address, birth_date, phone_number, email, position, join_date, employment_status, department, gender, marital_status, education, blood_type, retirement_date, nationality, photo)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (full_name, nip, address, birth_date, phone_number, email, position, join_date, employment_status, department, gender, marital_status, education, blood_type, retirement_date, nationality, photo)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `;
       const values = [
-        employee_id,
         full_name,
         nip,
         address,
@@ -106,7 +102,7 @@ const createEmployee = (req, res) => {
 
         return res.json({
           message: "Employee created successfully",
-          employee_id,
+          employee_id: result.insertId,
         });
       });
     });
@@ -281,6 +277,7 @@ const deleteEmployee = (req, res) => {
     });
   });
 };
+
 const getAllEmployees1 = (req, res) => {
   const sqlQuery = "SELECT employee_id, full_name, nip FROM employees";
 
