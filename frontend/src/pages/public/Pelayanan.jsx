@@ -83,10 +83,10 @@ function Pelayanan() {
           {services.length > 0 ? (
             services.map((service, index) => (
               <div key={index} className="mb-6">
-                <p
+                <div
                   className="text-lg mb-4"
                   dangerouslySetInnerHTML={{ __html: service.pelayanan }}
-                ></p>
+                ></div>
                 <ul className="list-disc list-inside mb-4">
                   {Array.isArray(service.persyaratan) ? (
                     service.persyaratan.map((requirement, reqIndex) => (
