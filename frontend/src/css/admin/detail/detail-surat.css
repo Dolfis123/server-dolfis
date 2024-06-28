@@ -1,0 +1,20 @@
+.back {
+  background-image: url("../../../public/img/lurah-2.jpeg");
+  background-size: cover; /* Sesuaikan dengan kebutuhan, misalnya 'cover' atau 'contain' */
+  background-repeat: no-repeat;
+  background-position: center center; /* Sesuaikan dengan kebutuhan */
+  /* Jika Anda ingin menambahkan warna latar cadangan (fallback) */
+  background-color: #ffffff; /* Ganti dengan warna latar yang diinginkan */
+}
+/* di SuratTidakMampu.css atau detail-surat.css */
+#my-content {
+  color: #000000 !important;
+}
+
+#my-content * {
+  color: #000000 !important;
+}
+.note {
+  font-size: 1.2rem;
+  color: #000000;
+}

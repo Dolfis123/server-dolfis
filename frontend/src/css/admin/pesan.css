@@ -1,0 +1,12 @@
+.custom-modal .modal-dialog {
+  max-width: 50%; /* Anda bisa mengatur persentase ini sesuai kebutuhan */
+}
+
+.custom-modal .modal-body {
+  max-height: 100vh;
+  overflow-y: auto;
+}
+.custom-modal ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}

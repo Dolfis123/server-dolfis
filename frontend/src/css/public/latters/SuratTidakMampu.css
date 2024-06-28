@@ -1,0 +1,87 @@
+/* SuratTidakMampu.css */
+/* Reset margin dan padding untuk mencetak */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+}
+
+.kopsurat {
+  width: 694px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  height: 500px;
+  padding: 20px;
+  margin-top: 0px;
+}
+
+.kop-surat {
+  border-bottom: 4px solid #000;
+  padding: 0px;
+  width: 100%;
+}
+.back {
+  color: #000000;
+}
+.tengah {
+  text-transform: none !important;
+  margin: 0px, 0px, 0px, 0px !important;
+  text-align: center;
+  font-family: "Times New Roman" !important;
+  /* margin-right: 3000px; */
+  /* line-height: 7px; */
+}
+
+.nomor {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.border-line {
+  border-bottom: 2px solid #000; /* Warna dan ketebalan garis dapat disesuaikan */
+  width: 291px; /* Menyesuaikan lebar garis dengan lebar elemen parent */ /* Jarak antara garis dan elemen di bawahnya */
+  margin-left: 211px;
+}
+
+.border-bawa {
+  border-bottom: 2px solid #000; /* Warna dan ketebalan garis dapat disesuaikan */
+  width: 157px; /* Menyesuaikan lebar garis dengan lebar elemen parent */ /* Jarak antara garis dan elemen di bawahnya */
+  margin-left: 349px;
+}
+
+/* ... (Gaya CSS lainnya) */
+
+/* Reset gaya huruf pertama pada paragraf */
+p {
+  font-family: "Times New Roman", Times, serif !important;
+  text-transform: none !important;
+}
+
+/* Atau jika masih terdapat isu, tambahkan aturan berikut */
+p:first-letter {
+  text-transform: none !important;
+}
+
+p.custom-style {
+  margin-left: 50px;
+  margin-bottom: 0;
+  margin-top: 30px;
+}
+#my-content {
+  height: 100% !important;
+  font-family: "Times New Roman", Times, serif !important;
+}
+h5 {
+  font-family: "Times New Roman", Times, serif !important;
+}
+
+ol {
+  list-style-type: decimal !important;
+}
+ul {
+  list-style-type: circle !important;
+}
+
+.test {
+  color: #000000;
+}

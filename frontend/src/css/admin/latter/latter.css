@@ -1,0 +1,9 @@
+.inline-block {
+  display: inline-block;
+}
+
+.border-bottom {
+  display: inline-block;
+  border-bottom: 5px solid rgb(0, 0, 0); /* Menyesuaikan ketebalan garis */
+  padding-bottom: 5px; /* Sesuaikan dengan kebutuhan */
+}
