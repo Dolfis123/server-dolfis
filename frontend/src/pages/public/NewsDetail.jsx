@@ -58,7 +58,7 @@ function NewsDetail() {
             alt={news.title}
             className="w-full h-96 object-contain"
           />
-          <div className="p-2">
+          <div className="p-3">
             <p className="text-gray-600 mb-4">
               <strong>Kategori:</strong> {news.category}
             </p>
