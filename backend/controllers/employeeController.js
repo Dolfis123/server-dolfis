@@ -23,10 +23,12 @@ const upload = multer({
 const createEmployee = (req, res) => {
   upload.single("photo")(req, res, (err) => {
     if (err instanceof multer.MulterError && err.code === "LIMIT_FILE_SIZE") {
+      console.error("File size error:", err);
       return res
         .status(400)
         .json({ error: "Ukuran file tidak boleh lebih dari 5 MB" });
     } else if (err) {
+      console.error("File upload error:", err);
       return res.status(500).json({ error: "Error uploading file" });
     }
 
@@ -50,20 +52,42 @@ const createEmployee = (req, res) => {
     } = req.body;
 
     const photo = req.file ? req.file.filename : null;
-    const employee_id = uuidv4(); // Menghasilkan UUID yang valid
+    const employee_id = uuidv4();
 
     if (!full_name || !nip || !join_date || !employment_status) {
+      console.error("Validation error: Missing required fields");
       return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    const validGenders = ["Laki-laki", "Perempuan"];
+    const validMaritalStatuses = ["Lajang", "Menikah", "Cerai"];
+    const validBloodTypes = ["A", "B", "AB", "O"];
+
+    if (gender && !validGenders.includes(gender)) {
+      console.error("Validation error: Invalid gender value");
+      return res.status(400).json({ error: "Invalid gender value" });
+    }
+
+    if (marital_status && !validMaritalStatuses.includes(marital_status)) {
+      console.error("Validation error: Invalid marital status value");
+      return res.status(400).json({ error: "Invalid marital status value" });
+    }
+
+    if (blood_type && !validBloodTypes.includes(blood_type)) {
+      console.error("Validation error: Invalid blood type value");
+      return res.status(400).json({ error: "Invalid blood type value" });
     }
 
     const checkDuplicateQuery = `SELECT * FROM employees WHERE nip = ?`;
 
     db.query(checkDuplicateQuery, [nip], (err, result) => {
       if (err) {
+        console.error("Error running query:", err);
         return res.status(500).json({ error: "Error in running query" });
       }
 
       if (result.length > 0) {
+        console.error("Duplicate entry error: NIP already exists");
         return res.status(400).json({ error: "NIP already exists" });
       }
 
@@ -95,6 +119,7 @@ const createEmployee = (req, res) => {
 
       db.query(sqlQuery, values, (err, result) => {
         if (err) {
+          console.error("Error running query:", err);
           return res.status(500).json({ error: "Error in running query" });
         }
 
