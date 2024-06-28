@@ -28,7 +28,7 @@ function NewsDetail() {
         const sortedNews = response.data.Result.sort(
           (a, b) => new Date(b.created_at) - new Date(a.created_at)
         );
-        setLatestNews(sortedNews.slice(0, 5)); // Get the latest 5 news items
+        setLatestNews(sortedNews.slice(1, 5)); // Get the latest 5 news items
       } catch (error) {
         console.error("Error fetching latest news:", error);
       }
