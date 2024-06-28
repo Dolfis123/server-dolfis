@@ -50,7 +50,7 @@ function Beranda() {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get("http://localhost:5050/news");
+        const response = await axios.get("https://dolfis.store/news");
         setNewsList(response.data.Result.reverse());
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -62,7 +62,7 @@ function Beranda() {
   useEffect(() => {
     const fetchUcapan = async () => {
       try {
-        const response = await axios.get("http://localhost:5050/lihat-ucapan");
+        const response = await axios.get("https://dolfis.store/lihat-ucapan");
         setUcapanList(response.data.Result);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -222,7 +222,7 @@ function Beranda() {
             <div className="flex-shrink-0">
               <img
                 className="rounded-full w-32 h-32 object-cover mr-4"
-                src={`http://localhost:5050/images/${ucapan.image}`}
+                src={`https://dolfis.store/images/${ucapan.image}`}
                 alt=""
               />
             </div>
@@ -246,7 +246,7 @@ function Beranda() {
                 title={news.title}
                 content={news.content.substring(0, 100) + "..."}
                 link={`/news/${news.id}`}
-                imageUrl={`http://localhost:5050/images/${news.image_url}`}
+                imageUrl={`https://dolfis.store/images/${news.image_url}`}
               />
             ))}
           </div>
