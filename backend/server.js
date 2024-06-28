@@ -51,16 +51,16 @@ app.use(
   })
 );
 
-app.use("/images", express.static(path.join(__dirname, "public/images")));
-app.use("/images", express.static(path.join(__dirname, "public/uploads")));
-app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
+app.use("/api/images", express.static(path.join(__dirname, "public/images")));
+app.use("/api/images", express.static(path.join(__dirname, "public/uploads")));
+app.use("uploads", express.static(path.join(__dirname, "public/uploads")));
 app.use("/public/images", express.static("public/images"));
 app.use("/public/uploads", express.static("public/uploads"));
 
-app.use(ketDomisiliUsaha);
-app.use(ucapanSowiRoute);
-app.use(loginRoute);
-app.use(newsRoutes);
+app.use("/api", ketDomisiliUsaha);
+app.use("/api", ucapanSowiRoute);
+app.use("api", loginRoute);
+app.use("/api", newsRoutes);
 app.use("/api", employeeRoutes);
 app.use("/api", persyaratanLayananRoute);
 

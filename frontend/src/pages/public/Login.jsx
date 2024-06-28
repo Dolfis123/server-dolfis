@@ -10,7 +10,7 @@ const LoginForm = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://dolfis.store/login", {
+      const response = await axios.post("https://dolfis.store/api/login", {
         email,
         password,
       });
