@@ -174,7 +174,7 @@ function SDUsaha() {
   return (
     <div>
       <Navbar />
-      <div className="container mx-auto p-4 w-1/2">
+      <div className="container mx-auto p-4 w-full">
         <div className="bg-white shadow-md rounded-lg p-6">
           <form onSubmit={handleSubmit} className="block  ">
             <div className="text-center mb-6 mt-16">
