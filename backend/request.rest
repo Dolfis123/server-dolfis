@@ -3,8 +3,8 @@ POST http://localhost:5050/regis
 Content-Type: application/json
 
 {
-    "email": "admin@gmail.com",
-    "password": "admin"
+    "email": "lurahsowi@gmail.com",
+    "password": "sowi123"
 }
 ###
 GET http://localhost:5050/api/pelayanan

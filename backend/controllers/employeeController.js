@@ -23,12 +23,10 @@ const upload = multer({
 const createEmployee = (req, res) => {
   upload.single("photo")(req, res, (err) => {
     if (err instanceof multer.MulterError && err.code === "LIMIT_FILE_SIZE") {
-      console.error("File size error:", err);
       return res
         .status(400)
         .json({ error: "Ukuran file tidak boleh lebih dari 5 MB" });
     } else if (err) {
-      console.error("File upload error:", err);
       return res.status(500).json({ error: "Error uploading file" });
     }
 
@@ -52,10 +50,9 @@ const createEmployee = (req, res) => {
     } = req.body;
 
     const photo = req.file ? req.file.filename : null;
-    const employee_id = uuidv4();
+    const employee_id = uuidv4(); // Menghasilkan UUID yang valid
 
     if (!full_name || !nip || !join_date || !employment_status) {
-      console.error("Validation error: Missing required fields");
       return res.status(400).json({ error: "Missing required fields" });
     }
 
@@ -63,12 +60,10 @@ const createEmployee = (req, res) => {
 
     db.query(checkDuplicateQuery, [nip], (err, result) => {
       if (err) {
-        console.error("Error running query:", err);
         return res.status(500).json({ error: "Error in running query" });
       }
 
       if (result.length > 0) {
-        console.error("Duplicate entry error: NIP already exists");
         return res.status(400).json({ error: "NIP already exists" });
       }
 
@@ -100,7 +95,6 @@ const createEmployee = (req, res) => {
 
       db.query(sqlQuery, values, (err, result) => {
         if (err) {
-          console.error("Error running query:", err);
           return res.status(500).json({ error: "Error in running query" });
         }
 
