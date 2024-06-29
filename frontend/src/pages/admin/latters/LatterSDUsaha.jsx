@@ -140,9 +140,7 @@ function LatterSDUsaha() {
               </div>
               <div className="flex mb-2">
                 <span className="w-40">Jabatan</span>
-                <span>
-                  : {selectedEmployee ? selectedEmployee.position : ""}
-                </span>
+                <span>: {selectedEmployee.position}</span>
               </div>
               <div className="flex mb-2">
                 <span className="w-40">Alamat Kantor</span>
