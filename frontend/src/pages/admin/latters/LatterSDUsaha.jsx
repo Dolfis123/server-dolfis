@@ -31,7 +31,7 @@ function LatterSDUsaha() {
   const fetchEmployees = async () => {
     try {
       const response = await axios.get(
-        "https://website.fahri.life/api/employees"
+        "https://website.fahri.life/api/api/employees"
       );
       setEmployees(response.data.data);
     } catch (error) {
