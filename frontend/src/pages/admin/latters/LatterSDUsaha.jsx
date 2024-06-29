@@ -66,9 +66,7 @@ function LatterSDUsaha() {
   const handleEmployeeChange = (e) => {
     const employeeId = e.target.value;
     console.log("Selected employee ID: ", employeeId); // Tambahkan ini
-    const employee = employees.find(
-      (emp) => emp.employee_id === parseInt(employeeId)
-    );
+    const employee = employees.find((emp) => emp.employee_id === employeeId); // Menggunakan perbandingan string langsung
     console.log("Selected employee: ", employee); // Tambahkan ini
     setSelectedEmployee(employee);
   };
