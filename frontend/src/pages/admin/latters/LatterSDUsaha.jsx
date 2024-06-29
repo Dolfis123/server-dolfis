@@ -8,7 +8,7 @@ import "../../../css/admin/latter/latter.css";
 function LatterSDUsaha() {
   const [data, setData] = useState(null);
   const [employees, setEmployees] = useState([]);
-  const [selectedEmployee, setSelectedEmployee] = useState("");
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -53,7 +53,7 @@ function LatterSDUsaha() {
     html2pdf().from(element).set(options).save();
   };
 
-  if (!data || !employees.length) {
+  if (!data) {
     return <div>Loading...</div>;
   }
 
@@ -140,7 +140,9 @@ function LatterSDUsaha() {
               </div>
               <div className="flex mb-2">
                 <span className="w-40">Jabatan</span>
-                <span>: {data.position}</span>
+                <span>
+                  : {selectedEmployee ? selectedEmployee.position : ""}
+                </span>
               </div>
               <div className="flex mb-2">
                 <span className="w-40">Alamat Kantor</span>
@@ -223,7 +225,7 @@ function LatterSDUsaha() {
             </span>
           </button>
         </div>
-        <div className="flex flex-col items-center mt-8">
+        <div className="inline-block" style={{ marginLeft: "475px" }}>
           <h6 style={{ marginBottom: "10px" }}>
             <select
               className="border p-2"
