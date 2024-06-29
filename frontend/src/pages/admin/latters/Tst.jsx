@@ -20,7 +20,7 @@ function LatterSDUsaha() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5050/lihat-surat-domisili-admin/${id}`
+        `https://website.fahri.life/api/lihat-surat-domisili-admin/${id}`
       );
       setData(response.data.data);
     } catch (error) {
@@ -30,7 +30,10 @@ function LatterSDUsaha() {
 
   const fetchEmployees = async () => {
     try {
-      const response = await axios.get("http://localhost:5050/api/employees");
+      const response = await axios.get(
+        "https://website.fahri.life/api/employees"
+      );
+      console.log("Employees data: ", response.data.data); // Tambahkan ini
       setEmployees(response.data.data);
     } catch (error) {
       console.error("Error fetching employees:", error);
@@ -62,9 +65,9 @@ function LatterSDUsaha() {
 
   const handleEmployeeChange = (e) => {
     const employeeId = e.target.value;
-    const employee = employees.find(
-      (emp) => emp.employee_id === parseInt(employeeId)
-    );
+    console.log("Selected employee ID: ", employeeId); // Tambahkan ini
+    const employee = employees.find((emp) => emp.employee_id === employeeId); // Menggunakan perbandingan string langsung
+    console.log("Selected employee: ", employee); // Tambahkan ini
     setSelectedEmployee(employee);
   };
 
@@ -147,7 +150,6 @@ function LatterSDUsaha() {
                 <span>: JL. TRIKORA SOWI IV</span>
               </div>
             </div>
-
             <p className="mb-0 text-black">Dengan ini menyatakan bahwa :</p>
             <div className="ml-12 mt-4 font-serif">
               <div className="flex mb-2">
@@ -167,77 +169,51 @@ function LatterSDUsaha() {
                 <span>: {data.nama_pempinan}</span>
               </div>
               <div className="flex mb-2">
-                <span className="w-40">No KTP</span>
-                <span className="font-serif">: {data.ktp}</span>
-              </div>
-              <div className="flex mb-2">
-                <span className="w-40">Alamat</span>
-                <span>: {data.alamat}</span>
+                <span className="w-40">No. Telepon</span>
+                <span>: {data.no_telepon}</span>
               </div>
             </div>
-
-            <p className="mt-4 mb-0 font-serif">
-              Adalah benar – benar berdomisili di Kelurahan Sowi, Distrik
-              Manokwari Selatan, Kabupaten Manokwari, Provinsi Papua Barat.
+            <p className="text-black mt-4 mb-0">
+              Demikian surat keterangan ini dibuat untuk dapat dipergunakan
+              sebagaimana mestinya.
             </p>
-
-            <p className="font-serif" style={{ marginLeft: "475px" }}>
-              Dikeluarkan di: Manokwari
-            </p>
-            <p
-              className="font-serif"
-              style={{ marginLeft: "475px", marginBottom: "12px" }}
-            >
-              Pada Tanggal: {formatDate(data.tanggal)}
-            </p>
-            <h6 className="font-serif " style={{ marginLeft: "515px" }}>
-              <b> LURAH SOWI</b>
-            </h6>
-            <br />
-            <br />
-            <div className="inline-block" style={{ marginLeft: "475px" }}>
-              <h6 style={{ marginBottom: "10px" }}>
-                <select
-                  className="border p-2"
-                  onChange={handleEmployeeChange}
-                  value={selectedEmployee ? selectedEmployee.employee_id : ""}
-                >
-                  <option value="">Pilih Pegawai</option>
-                  {employees.map((employee) => (
-                    <option
-                      key={employee.employee_id}
-                      value={employee.employee_id}
-                    >
-                      {employee.full_name} - {employee.nip}
-                    </option>
-                  ))}
-                </select>
-              </h6>
-              {selectedEmployee && (
-                <>
-                  <h6 className="font-serif">
-                    Nama: {selectedEmployee.full_name}
-                  </h6>
-                  <h6 className="font-serif">NIP: {selectedEmployee.nip}</h6>
-                  <h6 className="font-serif">
-                    Jabatan: {selectedEmployee.position}
-                  </h6>
-                </>
-              )}
+            <div className="text-black mt-4">
+              <div className="text-left">
+                <span>
+                  {formatDate(data.tanggal_surat)} <br />
+                  {selectedEmployee ? selectedEmployee.position : ""}
+                </span>
+              </div>
+              <div className="text-right">
+                <span>
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  {selectedEmployee ? selectedEmployee.full_name : ""}
+                </span>
+              </div>
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-center mt-8">
-          <button
-            className="bg-blue-500 text-white px-4 py-2 rounded flex items-center"
-            onClick={generateSuratPDFK}
-          >
-            <i className="material-icons mr-2">print</i>
-            <span className="overflow-hidden whitespace-nowrap text-ellipsis">
-              Download Surat
-            </span>
-          </button>
-        </div>
+        <button
+          onClick={generateSuratPDFK}
+          className="bg-blue-500 text-white px-4 py-2 rounded"
+        >
+          Download PDF
+        </button>
+        <select
+          onChange={handleEmployeeChange} 
+         value={selectedEmployee ? selectedEmployee.employee_id : ""}
+          className="mt-4 p-2 border rounded"
+        >
+          <option value="">Pilih Pegawai</option>
+          {employees.map((employee) => (
+            <option key={employee.employee_id} value={employee.employee_id}>
+              {employee.full_name} - {employee.nip}
+            </option>
+          ))}
+        </select>
       </div>
     </div>
   );
