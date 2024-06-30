@@ -47,7 +47,7 @@ const getAllNews = (req, res) => {
   });
 };
 
-const getAllNewspublished = (req, res) => {
+const getAllNewsPublished = (req, res) => {
   const sqlQuery = "SELECT * FROM news WHERE status = 'published'";
   db.query(sqlQuery, (err, result) => {
     if (err) {
@@ -114,5 +114,5 @@ module.exports = {
   deleteNews,
   updateNews,
   getById,
-  getAllNewspublished,
+  getAllNewsPublished,
 };
