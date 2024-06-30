@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../../components/public/Navbar";
 import Footer from "../../components/public/Footer";
@@ -84,14 +84,14 @@ function NewsDetail() {
           <ul className="space-y-4">
             {latestNews.map((item) => (
               <li key={item.id} className="bg-white p-3 shadow-md rounded-lg">
-                <a href={`/news/${item.id}`} className="text-blue-500">
+                <Link to={`/news/${item.id}`} className="text-blue-500">
                   <img
                     src={`https://website.fahri.life/api/images/${item.image_url}`}
                     alt={item.title}
                     className="w-full h-32 object-cover mb-2"
                   />
                   {item.title}
-                </a>
+                </Link>
                 <p className="text-gray-600 text-sm">
                   {new Date(item.created_at).toLocaleDateString()}
                 </p>
