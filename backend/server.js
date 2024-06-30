@@ -11,6 +11,9 @@ const loginRoute = require("./routes/loginRoute");
 const newsRoutes = require("./routes/beritaRoute");
 const employeeRoutes = require("./routes/employeeRoute");
 const persyaratanLayananRoute = require("./routes/persyaratanLayananRoute");
+const pemetaanRwRoute = require("./routes/pemetaanRwRoute");
+const polygonsRoute = require("./routes/poligonRwRoute");
+
 const app = express();
 const PORT = 5050;
 
@@ -30,7 +33,7 @@ const requireLogin = (req, res, next) => {
 };
 
 const corsOptions = {
-  origin: ["https://website.fahri.life", "*"],
+  origin: ["https://website.fahri.life", "http://localhost:5173", "*"],
   optionsSuccessStatus: 200,
   credentials: true,
   allowedHeaders: ["Content-Type", "Authorization"],
@@ -63,6 +66,8 @@ app.use("/api", loginRoute);
 app.use("/api", newsRoutes);
 app.use("/api", employeeRoutes);
 app.use("/api", persyaratanLayananRoute);
+app.use("/api", pemetaanRwRoute);
+app.use("/api/polygons", polygonsRoute);
 
 app.use("/admin", requireLogin, (req, res, next) => {
   next();

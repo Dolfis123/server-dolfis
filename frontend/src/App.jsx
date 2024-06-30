@@ -19,6 +19,8 @@ import LatterSDUsaha from "./pages/admin/latters/LatterSDUsaha";
 import NewsDetail from "./pages/public/NewsDetail";
 import PersyaratanPelayanan from "./pages/admin/PersyaratanPelayanan";
 import Pelayanan from "./pages/public/Pelayanan";
+import Wilayah from "./pages/public/Wilayah";
+import MarkerRw from "./pages/admin/MarkerRW";
 
 const isAuthenticated = () => {
   return !!sessionStorage.getItem("token");
@@ -47,7 +49,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Beranda />} />
           <Route path="/pelayanan" element={<Pelayanan />} />
-          s
+          <Route path="/wilayah" element={<Wilayah />} />
+          <Route path="/marker-rw" element={<MarkerRw />} />
+
           <Route path="/login" element={<Login />} />
           <Route path="/news/:id" element={<NewsDetail />} />
           {/* Dashboard start */}

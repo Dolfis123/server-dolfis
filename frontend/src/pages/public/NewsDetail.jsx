@@ -37,7 +37,10 @@ function NewsDetail() {
     fetchNewsDetail();
     fetchLatestNews();
   }, [id]);
-
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toLocaleDateString("id-ID", options);
+  };
   if (!news) {
     return <div>Loading...</div>;
   }
@@ -54,8 +57,7 @@ function NewsDetail() {
             {news.title}
           </h1>
           <p className="text-gray-600 mb-4" style={{ marginLeft: "10px" }}>
-            <strong>Diterbitkan:</strong>{" "}
-            {new Date(news.created_at).toLocaleDateString()}
+            {formatDate(news.created_at)}
           </p>
           <img
             src={`https://website.fahri.life/api/images/${news.image_url}`}
@@ -75,7 +77,7 @@ function NewsDetail() {
             <br />
 
             <p className="text-gray-600 mb-4">
-              <strong>Pengarang:</strong> {news.author}
+              <strong>Penulis:</strong> {news.author}
             </p>
           </div>
         </div>
@@ -93,7 +95,7 @@ function NewsDetail() {
                   {item.title}
                 </Link>
                 <p className="text-gray-600 text-sm">
-                  {new Date(item.created_at).toLocaleDateString()}
+                  {formatDate(news.created_at)}
                 </p>
               </li>
             ))}

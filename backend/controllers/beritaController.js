@@ -47,6 +47,16 @@ const getAllNews = (req, res) => {
   });
 };
 
+const getAllNewspublished = (req, res) => {
+  const sqlQuery = "SELECT * FROM news WHERE status = 'published'";
+  db.query(sqlQuery, (err, result) => {
+    if (err) {
+      return res.json({ Error: "Get News error in SQL" });
+    }
+    return res.json({ Status: "Success", Result: result });
+  });
+};
+
 const deleteNews = (req, res) => {
   const id = req.params.id;
   const sqlQuery = "DELETE FROM news WHERE id = ?";
@@ -104,4 +114,5 @@ module.exports = {
   deleteNews,
   updateNews,
   getById,
+  getAllNewspublished,
 };

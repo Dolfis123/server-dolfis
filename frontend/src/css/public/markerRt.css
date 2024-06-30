@@ -1,0 +1,19 @@
+.img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50%; /* Atur tinggi container sesuai kebutuhan */
+}
+
+.img-thumbnail {
+  max-width: 100%;
+  max-height: 100px; /* Atur lebar dan tinggi maksimum gambar */
+}
+.img-container {
+  float: right; /* Mengatur gambar di sebelah kiri */
+  margin-right: 10px; /* Memberikan jarak antara gambar dan teks */
+}
+
+.popup-content {
+  overflow: hidden; /* Mengatasi float */
+}

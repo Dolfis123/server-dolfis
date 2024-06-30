@@ -1,0 +1,178 @@
+.bg-white {
+  background-color: white;
+}
+
+.bg-primary {
+  background-color: #3490dc; /* Ganti dengan warna primary Anda */
+}
+
+.text-primary {
+  color: #3490dc; /* Ganti dengan warna primary Anda */
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50; /* Pastikan ini lebih tinggi dari elemen lain */
+}
+
+.navbar-nav .nav-link {
+  transition: color 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #3490dc; /* Ganti dengan warna hover yang diinginkan */
+}
+
+.btn {
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #2779bd; /* Ganti dengan warna hover yang diinginkan */
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.bg-primary {
+  background-color: #3490dc; /* Ganti dengan warna primary Anda */
+}
+
+.text-primary {
+  color: #3490dc; /* Ganti dengan warna primary Anda */
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50; /* Pastikan ini lebih tinggi dari elemen lain */
+}
+
+.navbar-nav .nav-link {
+  transition: color 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #3490dc; /* Ganti dengan warna hover yang diinginkan */
+}
+
+.btn {
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #2779bd; /* Ganti dengan warna hover yang diinginkan */
+}
+.bg-white {
+  background-color: white;
+}
+
+.bg-primary {
+  background-color: #3490dc; /* Ganti dengan warna primary Anda */
+}
+
+.text-primary {
+  color: #3490dc; /* Ganti dengan warna primary Anda */
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50; /* Pastikan ini lebih tinggi dari elemen lain */
+}
+
+.navbar-nav .nav-link {
+  transition: color 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #3490dc; /* Ganti dengan warna hover yang diinginkan */
+}
+
+.btn {
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #2779bd; /* Ganti dengan warna hover yang diinginkan */
+}
+
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+
+.lg\:whitespace-normal {
+  white-space: normal;
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.bg-primary {
+  background-color: #3490dc; /* Ganti dengan warna primary Anda */
+}
+
+.text-primary {
+  color: #3490dc; /* Ganti dengan warna primary Anda */
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50; /* Pastikan ini lebih tinggi dari elemen lain */
+}
+
+.navbar-nav .nav-link {
+  transition: color 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #3490dc; /* Ganti dengan warna hover yang diinginkan */
+}
+
+.btn {
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #2779bd; /* Ganti dengan warna hover yang diinginkan */
+}
+
+.text-blue-600 {
+  color: #3490dc;
+}
+
+.font-bold {
+  font-weight: bold;
+}

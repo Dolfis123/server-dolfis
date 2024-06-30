@@ -10,13 +10,10 @@ const LoginForm = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "https://website.fahri.life/api/login",
-        {
-          email,
-          password,
-        }
-      );
+      const response = await axios.post("http://localhost:5050/api/login", {
+        email,
+        password,
+      });
       if (response.data.Status === "Success") {
         sessionStorage.setItem("token", response.data.Token);
         window.location.href = "/dashboard"; // Redirect to dashboard

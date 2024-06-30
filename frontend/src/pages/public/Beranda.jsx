@@ -50,7 +50,9 @@ function Beranda() {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get("https://website.fahri.life/api/news");
+        const response = await axios.get(
+          "https://website.fahri.life/api/news_publis"
+        );
         if (response.data.Result) {
           setNewsList(response.data.Result.reverse());
         } else {
@@ -157,6 +159,10 @@ function Beranda() {
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentNewsList = newsList.slice(startIndex, startIndex + itemsPerPage);
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toLocaleDateString("id-ID", options);
+  };
 
   return (
     <div>
@@ -252,7 +258,7 @@ function Beranda() {
             {currentNewsList.map((news) => (
               <NewsCard
                 key={news.id}
-                date={new Date(news.created_at).toLocaleDateString()}
+                date={formatDate(news.created_at)}
                 title={news.title}
                 content={news.content.substring(0, 100) + "..."}
                 link={`/news/${news.id}`}
