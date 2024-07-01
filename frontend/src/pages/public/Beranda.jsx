@@ -50,9 +50,7 @@ function Beranda() {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get(
-          "https://website.fahri.life/api/news/published"
-        );
+        const response = await axios.get("https://website.fahri.life/api/news");
         if (response.data.Result) {
           setNewsList(response.data.Result.reverse());
         } else {
