@@ -18,9 +18,7 @@ function Navbar() {
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <Link to="/" className="flex items-center space-x-2">
           <img src={logo} alt="Logo" className="h-10" />
-          <h2 className="text-primary whitespace-nowrap lg:whitespace-normal">
-            Kelurahan Sowi
-          </h2>
+          <h1 className=" lg:whitespace-normal">Kelurahan Sowi</h1>
         </Link>
         <div className="lg:hidden">
           <button

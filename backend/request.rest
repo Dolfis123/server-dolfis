@@ -7,4 +7,4 @@ Content-Type: application/json
     "password": "sowi123"
 }
 ###
-GET http://localhost:5050/api/news_publis
+GET http://localhost:5050/api/rw

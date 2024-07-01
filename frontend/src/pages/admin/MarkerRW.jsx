@@ -96,7 +96,9 @@ function MarkerRw() {
         );
         alert("Data berhasil diperbarui");
       } else {
+        console.log("URL endpoint:", "https://website.fahri.life/api/rw");
         await axios.post("https://website.fahri.life/api/rw", formDataToSend);
+
         alert("Data berhasil ditambahkan");
       }
 
