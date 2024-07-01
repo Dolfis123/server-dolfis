@@ -47,16 +47,6 @@ const getAllNews = (req, res) => {
   });
 };
 
-const getAllNewsPublished = (req, res) => {
-  const sqlQuery = "SELECT * FROM news WHERE status = 'published'";
-  db.query(sqlQuery, (err, result) => {
-    if (err) {
-      return res.json({ Error: "Get News error in SQL" });
-    }
-    return res.json({ Status: "Success", Result: result });
-  });
-};
-
 const deleteNews = (req, res) => {
   const id = req.params.id;
   const sqlQuery = "DELETE FROM news WHERE id = ?";
@@ -108,11 +98,21 @@ const getById = (req, res) => {
   });
 };
 
+const getAllPublishedNews = (req, res) => {
+  const sqlQuery = "SELECT * FROM news WHERE status = 'published'";
+  db.query(sqlQuery, (err, result) => {
+    if (err) {
+      return res.json({ Error: "Get Published News error in SQL" });
+    }
+    return res.json({ Status: "Success", Result: result });
+  });
+};
+
 module.exports = {
   createNews,
   getAllNews,
   deleteNews,
   updateNews,
   getById,
-  getAllNewsPublished,
+  getAllPublishedNews, // Add this line
 };
