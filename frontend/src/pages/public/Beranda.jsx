@@ -62,6 +62,7 @@ function Beranda() {
         console.error("Error fetching data:", error);
       }
     };
+
     fetchNews();
   }, []);
 
