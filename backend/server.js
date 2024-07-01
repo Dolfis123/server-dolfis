@@ -31,8 +31,9 @@ const requireLogin = (req, res, next) => {
     next();
   });
 };
+
 const corsOptions = {
-  origin: ["https://website.fahri.life", "http://localhost:5173"],
+  origin: ["https://website.fahri.life", "http://localhost:5173", "*"],
   optionsSuccessStatus: 200,
   credentials: true,
   allowedHeaders: ["Content-Type", "Authorization"],

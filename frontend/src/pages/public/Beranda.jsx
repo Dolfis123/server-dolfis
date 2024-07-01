@@ -51,7 +51,7 @@ function Beranda() {
     const fetchNews = async () => {
       try {
         const response = await axios.get(
-          "https://website.fahri.life/api/news_status"
+          "https://website.fahri.life/api/news_publis"
         );
         if (response.data.Result) {
           setNewsList(response.data.Result.reverse());
