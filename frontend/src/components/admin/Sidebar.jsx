@@ -8,6 +8,7 @@ function Sidebar({ activeComponent }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState({
     permintaan: false,
     arsip: false,
+    wilayah: false,
   });
 
   const toggleDropdown = (dropdown) => {
@@ -188,18 +189,60 @@ function Sidebar({ activeComponent }) {
               </Link>
             </li>
           </ul>
+          <li
+            className={`${activeComponent === "Peta Wilayah" ? "active" : ""}`}
+          >
+            <button
+              className="flex items-center justify-between w-full px-4 py-2 text-left text-gray-700 bg-white rounded-md hover:bg-gray-50 focus:outline-none"
+              onClick={() => toggleDropdown("wilayah")}
+            >
+              <div className="flex items-center">
+                <i className="bx bxs-group"></i>
+                <span className="text ml-2">Peta Wilayah</span>
+              </div>
+              <svg
+                className={`w-5 h-5 transition-transform ${
+                  isDropdownOpen.arsip ? "transform rotate-180" : ""
+                }`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </button>
+
+            {isDropdownOpen.wilayah && (
+              <ul className="pl-8 mt-2 space-y-2">
+                <li>
+                  <Link
+                    to="/marker-rw"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                  >
+                    Marker RW
+                  </Link>
+                </li>
+              </ul>
+            )}
+          </li>
           <li className={`${activeComponent === "Pegawai" ? "active" : ""}`}>
             <Link to="/pegawai-admin">
               <i className="bx bxs-shopping-bag-alt"></i>
               <span className="text">Pegawai</span>
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link href="#">
               <i className="bx bxs-cog"></i>
               <span className="text">Peta Wilayah</span>
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link to="#" className="logout" onClick={handleLogout}>
               <i className="bx bxs-log-out-circle"></i>
