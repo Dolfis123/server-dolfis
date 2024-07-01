@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 // import Topnavbar from "../../components/admin/Topnavbar";
 import Navbar from "../../components/admin/Navbar";
+import Sidebar from "../../components/admin/Sidebar";
+
 // import Footer from "../../components/admin/Footer";
 
 function MarkerRw() {
@@ -177,216 +179,224 @@ function MarkerRw() {
   };
 
   return (
-    <div>
-      {/* <Topnavbar /> */}
-      <Navbar activeComponent={"Peta Wilayah"} />
-      <div className="text-center mb-40">
-        <div className="mt-3">
-          <button
-            onClick={handleOpen}
-            className="bg-blue-500 text-white py-2 px-4 rounded"
-          >
-            <span className="material-symbols-outlined">add_location</span>{" "}
-            Tambah Data
-          </button>
-        </div>
-        {open && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white p-8 rounded-lg w-96">
-              <h2>{selectedRW ? "Edit Maps" : "Tambah Maps"}</h2>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <input
-                  type="text"
-                  name="latLong"
-                  placeholder="Latitude Longitude"
-                  value={formData.latLong}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded"
-                />
-                <input
-                  type="text"
-                  name="nama_RW"
-                  placeholder="Nama RW"
-                  value={formData.nama_RW}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded"
-                />
-                <input
-                  type="text"
-                  name="nama_ketua_rw"
-                  placeholder="Nama Ketua RW"
-                  value={formData.nama_ketua_rw}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded"
-                />
-                <input
-                  type="text"
-                  name="jumlah_pria"
-                  placeholder="Jumlah Pria"
-                  value={formData.jumlah_pria}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded"
-                />
-                <input
-                  type="text"
-                  name="jumlah_wanita"
-                  placeholder="Jumlah Wanita"
-                  value={formData.jumlah_wanita}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded"
-                />
-                <input
-                  type="text"
-                  name="jumlah_kk"
-                  placeholder="Jumlah KK"
-                  value={formData.jumlah_kk}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded"
-                />
-                <input
-                  type="text"
-                  name="no_hp"
-                  placeholder="Nomor Hp"
-                  value={formData.no_hp}
-                  onChange={handleChangeNumberHp}
-                  className="w-full px-4 py-2 border rounded"
-                />
-                {formData.no_hpError && (
-                  <div className="text-red-500">{formData.no_hpError}</div>
-                )}
-                <textarea
-                  name="deskripsi"
-                  placeholder="Deskripsi"
-                  value={formData.deskripsi}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded"
-                ></textarea>
-                <input
-                  type="file"
-                  accept=".jpg, .jpeg, .png"
-                  onChange={handleFileChange}
-                  className="w-full"
-                />
-                {imageUrl && (
-                  <div>
-                    <img src={imageUrl} alt="preview" className="w-24 mt-2" />
-                  </div>
-                )}
-                <button
-                  type="submit"
-                  className="bg-blue-500 text-white py-2 px-4 rounded"
-                >
-                  Submit
-                </button>
-              </form>
-            </div>
+    <div className="flex-auto">
+      <Sidebar activeComponent="Peta Wilayah" />
+      <section id="content" className="flex-grow">
+        {" "}
+        /{/* <Topnavbar /> */}
+        <Navbar activeComponent={"Peta Wilayah"} />
+        <div className="text-center mb-40">
+          <div className="mt-3">
+            <button
+              onClick={handleOpen}
+              className="bg-blue-500 text-white py-2 px-4 rounded"
+            >
+              <span className="material-symbols-outlined">add_location</span>{" "}
+              Tambah Data
+            </button>
           </div>
-        )}
-        <div className="ml-64 mt-6">
-          <table className="w-full border-collapse border border-gray-200">
-            <thead>
-              <tr>
-                <th className="border border-gray-300 px-4 py-2">Foto</th>
-                <th className="border border-gray-300 px-4 py-2">Nama RW</th>
-                <th className="border border-gray-300 px-4 py-2">
-                  Latitude Longitude
-                </th>
-                <th className="border border-gray-300 px-4 py-2">
-                  Nama Ketua RW
-                </th>
-                <th className="border border-gray-300 px-4 py-2">Nomor Hp</th>
-                <th className="border border-gray-300 px-4 py-2">
-                  Jumlah Pria
-                </th>
-                <th className="border border-gray-300 px-4 py-2">
-                  Jumlah Wanita
-                </th>
-                <th className="border border-gray-300 px-4 py-2">Jumlah KK</th>
-                <th className="border border-gray-300 px-4 py-2">Deskripsi</th>
-                <th className="border border-gray-300 px-4 py-2">Aksi</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rwData.map((rw) => (
-                <tr key={rw.id_RW}>
-                  <td className="border border-gray-300 px-4 py-2">
-                    <img
-                      src={`https://website.fahri.life/api/images/${rw.image_rw}`}
-                      alt="rw"
-                      className="w-24"
-                    />
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    {rw.nama_RW}
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    {rw.latLong}
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    {rw.nama_ketua_rw}
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    {rw.no_hp}
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    {rw.jumlah_pria}
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    {rw.jumlah_wanita}
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    {rw.jumlah_kk}
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    {rw.deskripsi}
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    <button
-                      onClick={() => handleEdit(rw)}
-                      className="bg-blue-500 text-white py-1 px-2 rounded mr-2"
-                    >
-                      <span className="material-symbols-outlined">edit</span>{" "}
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => handleOpenConfirm(rw.id_RW)}
-                      className="bg-red-500 text-white py-1 px-2 rounded"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        {openConfirm && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white p-6 rounded-lg">
-              <h2 className="text-lg font-semibold">Confirm Delete</h2>
-              <p>
-                Are you sure you want to delete this data? This action cannot be
-                undone.
-              </p>
-              <div className="flex justify-end mt-4">
-                <button
-                  onClick={handleCloseConfirm}
-                  className="bg-gray-500 text-white py-2 px-4 rounded mr-2"
-                >
-                  No
-                </button>
-                <button
-                  onClick={handleDelete}
-                  className="bg-red-500 text-white py-2 px-4 rounded"
-                >
-                  Yes
-                </button>
+          {open && (
+            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+              <div className="bg-white p-8 rounded-lg w-96">
+                <h2>{selectedRW ? "Edit Maps" : "Tambah Maps"}</h2>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <input
+                    type="text"
+                    name="latLong"
+                    placeholder="Latitude Longitude"
+                    value={formData.latLong}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border rounded"
+                  />
+                  <input
+                    type="text"
+                    name="nama_RW"
+                    placeholder="Nama RW"
+                    value={formData.nama_RW}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border rounded"
+                  />
+                  <input
+                    type="text"
+                    name="nama_ketua_rw"
+                    placeholder="Nama Ketua RW"
+                    value={formData.nama_ketua_rw}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border rounded"
+                  />
+                  <input
+                    type="text"
+                    name="jumlah_pria"
+                    placeholder="Jumlah Pria"
+                    value={formData.jumlah_pria}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border rounded"
+                  />
+                  <input
+                    type="text"
+                    name="jumlah_wanita"
+                    placeholder="Jumlah Wanita"
+                    value={formData.jumlah_wanita}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border rounded"
+                  />
+                  <input
+                    type="text"
+                    name="jumlah_kk"
+                    placeholder="Jumlah KK"
+                    value={formData.jumlah_kk}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border rounded"
+                  />
+                  <input
+                    type="text"
+                    name="no_hp"
+                    placeholder="Nomor Hp"
+                    value={formData.no_hp}
+                    onChange={handleChangeNumberHp}
+                    className="w-full px-4 py-2 border rounded"
+                  />
+                  {formData.no_hpError && (
+                    <div className="text-red-500">{formData.no_hpError}</div>
+                  )}
+                  <textarea
+                    name="deskripsi"
+                    placeholder="Deskripsi"
+                    value={formData.deskripsi}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border rounded"
+                  ></textarea>
+                  <input
+                    type="file"
+                    accept=".jpg, .jpeg, .png"
+                    onChange={handleFileChange}
+                    className="w-full"
+                  />
+                  {imageUrl && (
+                    <div>
+                      <img src={imageUrl} alt="preview" className="w-24 mt-2" />
+                    </div>
+                  )}
+                  <button
+                    type="submit"
+                    className="bg-blue-500 text-white py-2 px-4 rounded"
+                  >
+                    Submit
+                  </button>
+                </form>
               </div>
             </div>
+          )}
+          <div className="ml-64 mt-6">
+            <table className="w-full border-collapse border border-gray-200">
+              <thead>
+                <tr>
+                  <th className="border border-gray-300 px-4 py-2">Foto</th>
+                  <th className="border border-gray-300 px-4 py-2">Nama RW</th>
+                  <th className="border border-gray-300 px-4 py-2">
+                    Latitude Longitude
+                  </th>
+                  <th className="border border-gray-300 px-4 py-2">
+                    Nama Ketua RW
+                  </th>
+                  <th className="border border-gray-300 px-4 py-2">Nomor Hp</th>
+                  <th className="border border-gray-300 px-4 py-2">
+                    Jumlah Pria
+                  </th>
+                  <th className="border border-gray-300 px-4 py-2">
+                    Jumlah Wanita
+                  </th>
+                  <th className="border border-gray-300 px-4 py-2">
+                    Jumlah KK
+                  </th>
+                  <th className="border border-gray-300 px-4 py-2">
+                    Deskripsi
+                  </th>
+                  <th className="border border-gray-300 px-4 py-2">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rwData.map((rw) => (
+                  <tr key={rw.id_RW}>
+                    <td className="border border-gray-300 px-4 py-2">
+                      <img
+                        src={`https://website.fahri.life/api/images/${rw.image_rw}`}
+                        alt="rw"
+                        className="w-24"
+                      />
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2">
+                      {rw.nama_RW}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2">
+                      {rw.latLong}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2">
+                      {rw.nama_ketua_rw}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2">
+                      {rw.no_hp}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2">
+                      {rw.jumlah_pria}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2">
+                      {rw.jumlah_wanita}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2">
+                      {rw.jumlah_kk}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2">
+                      {rw.deskripsi}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2">
+                      <button
+                        onClick={() => handleEdit(rw)}
+                        className="bg-blue-500 text-white py-1 px-2 rounded mr-2"
+                      >
+                        <span className="material-symbols-outlined">edit</span>{" "}
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleOpenConfirm(rw.id_RW)}
+                        className="bg-red-500 text-white py-1 px-2 rounded"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-        )}
-      </div>
-      {/* <Footer /> */}
+          {openConfirm && (
+            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+              <div className="bg-white p-6 rounded-lg">
+                <h2 className="text-lg font-semibold">Confirm Delete</h2>
+                <p>
+                  Are you sure you want to delete this data? This action cannot
+                  be undone.
+                </p>
+                <div className="flex justify-end mt-4">
+                  <button
+                    onClick={handleCloseConfirm}
+                    className="bg-gray-500 text-white py-2 px-4 rounded mr-2"
+                  >
+                    No
+                  </button>
+                  <button
+                    onClick={handleDelete}
+                    className="bg-red-500 text-white py-2 px-4 rounded"
+                  >
+                    Yes
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+        {/* <Footer /> */}
+      </section>
     </div>
   );
 }
