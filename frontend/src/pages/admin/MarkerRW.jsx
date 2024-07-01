@@ -91,12 +91,12 @@ function MarkerRw() {
 
       if (selectedRW) {
         await axios.put(
-          `http://localhost:5050/api/rw/${selectedRW.id_RW}`,
+          `https://website.fahri.life/api/rw/${selectedRW.id_RW}`,
           formDataToSend
         );
         alert("Data berhasil diperbarui");
       } else {
-        await axios.post("http://localhost:5050/api/rw", formDataToSend);
+        await axios.post("https://website.fahri.life/api/rw", formDataToSend);
         alert("Data berhasil ditambahkan");
       }
 
@@ -123,7 +123,7 @@ function MarkerRw() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:5050/api/rw");
+      const response = await axios.get("https://website.fahri.life/api/rw");
       setRWData(response.data);
     } catch (error) {
       console.error("Gagal mengambil data:", error);
@@ -147,7 +147,7 @@ function MarkerRw() {
       deskripsi: rw.deskripsi || "",
       image_rw: null,
     });
-    setImageUrl(`http://localhost:5050/api/images/${rw.image_rw}`);
+    setImageUrl(`https://website.fahri.life/api/images/${rw.image_rw}`);
     setOpen(true);
   };
 
@@ -163,7 +163,7 @@ function MarkerRw() {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:5050/api/rw/${idToDelete}`);
+      await axios.delete(`https://website.fahri.life/api/rw/${idToDelete}`);
       alert("Data berhasil dihapus");
       setIdToDelete(null);
       setOpenConfirm(false);
@@ -309,7 +309,7 @@ function MarkerRw() {
                 <tr key={rw.id_RW}>
                   <td className="border border-gray-300 px-4 py-2">
                     <img
-                      src={`http://localhost:5050/api/images/${rw.image_rw}`}
+                      src={`https://website.fahri.life/api/images/${rw.image_rw}`}
                       alt="rw"
                       className="w-24"
                     />
