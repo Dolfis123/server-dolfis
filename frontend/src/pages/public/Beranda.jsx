@@ -233,20 +233,20 @@ function Beranda() {
       </div>
       <div className="container py-5">
         {ucapanList.map((ucapan) => (
-          <div key={ucapan.id} className="flex items-center mb-5">
-            <div className="flex-shrink-0">
+          <div key={ucapan.id} className="mb-5">
+            <div className="card bg-white shadow-md rounded-lg p-4 flex flex-row items-center">
               <img
                 className="rounded-full w-32 h-32 object-cover mr-4"
                 src={`https://website.fahri.life/api/images/${ucapan.image}`}
                 alt=""
               />
-            </div>
-            <div>
-              <h4 className="text-xl font-bold">Kelurahan Sowi</h4>
-              <p
-                className="text-gray-700 mt-2 text-justify"
-                dangerouslySetInnerHTML={{ __html: ucapan.pesan }}
-              ></p>
+              <div>
+                <h4 className="text-xl font-bold">Kelurahan Sowi</h4>
+                <p
+                  className="text-gray-700 mt-2 text-justify"
+                  dangerouslySetInnerHTML={{ __html: ucapan.pesan }}
+                ></p>
+              </div>
             </div>
           </div>
         ))}
