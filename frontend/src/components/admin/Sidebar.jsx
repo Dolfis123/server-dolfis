@@ -249,12 +249,6 @@ function Sidebar({ activeComponent }) {
               <span className="text">Keluar</span>
             </Link>
           </li>
-          <li>
-            <a href="#" className="logout" onClick={handleLogout}>
-              <i className="bx bxs-log-out-circle"></i>
-              <span className="text">Keluar</span>
-            </a>
-          </li>
         </ul>
       </section>
       {/* <!-- SIDEBAR --> */}
