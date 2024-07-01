@@ -6,7 +6,7 @@ const pemetaanRwController = require("../controllers/pemetaanRwController");
 router.get("/rw", pemetaanRwController.getAllRW);
 
 // Routes untuk menambahkan data RW baru
-router.post("/rw", pemetaanRwController.createRW);
+router.post("/add", pemetaanRwController.createRW);
 
 // Routes untuk memperbarui data RW
 router.put("/rw/:id", pemetaanRwController.updateRW);
