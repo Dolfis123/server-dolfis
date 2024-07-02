@@ -8,7 +8,7 @@ import luarh1 from "../../public/img/lurah-1.jpeg";
 import axios from "axios";
 import Footer from "../../components/public/Footer";
 import { Link } from "react-router-dom";
-import "../../css/public/beranda.css";
+// import "../../css/public/beranda.css"; // Import the updated CSS file
 
 function Beranda() {
   const [showServices, setShowServices] = useState(false);
@@ -50,7 +50,7 @@ function Beranda() {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get("https://website.fahri.life/api/news");
+        const response = await axios.get("http://localhost:5050/api/news");
         if (response.data.Result) {
           setNewsList(response.data.Result.reverse());
         } else {
@@ -68,7 +68,7 @@ function Beranda() {
     const fetchUcapan = async () => {
       try {
         const response = await axios.get(
-          "https://website.fahri.life/api/lihat-ucapan"
+          "http://localhost:5050/api/lihat-ucapan"
         );
         if (response.data.Result) {
           setUcapanList(response.data.Result);
@@ -212,18 +212,6 @@ function Beranda() {
                     >
                       Surat Keterangan Tidak Mampu
                     </Link>
-                    {/* <button className="btn bg-primary text-white py-2 px-4 rounded">
-                      Perumahan Publik
-                    </button>
-                    <button className="btn bg-primary text-white py-2 px-4 rounded">
-                      Fasilitas Publik DBKL
-                    </button>
-                    <button className="btn bg-primary text-white py-2 px-4 rounded">
-                      Layanan Pembersihan Area
-                    </button>
-                    <button className="btn bg-primary text-white py-2 px-4 rounded">
-                      Kesehatan Publik
-                    </button> */}
                   </div>
                 )}
               </div>
@@ -237,7 +225,7 @@ function Beranda() {
             <div className="card bg-white shadow-md rounded-lg p-4 flex flex-row items-center">
               <img
                 className="rounded-full w-32 h-32 object-cover mr-4"
-                src={`https://website.fahri.life/api/images/${ucapan.image}`}
+                src={`http://localhost:5050/api/images/${ucapan.image}`}
                 alt=""
               />
               <div>
@@ -261,7 +249,7 @@ function Beranda() {
                 title={news.title}
                 content={news.content.substring(0, 100) + "..."}
                 link={`/news/${news.id}`}
-                imageUrl={`https://website.fahri.life/api/images/${news.image_url}`}
+                imageUrl={`http://localhost:5050/api/images/${news.image_url}`}
               />
             ))}
           </div>

@@ -1,4 +1,4 @@
-/* Update your CSS file with the following styles */
+Update your CSS file with the following styles
 
 body {
   background-color: #fff; /* Set the background color to white */
@@ -46,4 +46,30 @@ body {
   background: rgba(0, 0, 0, 0.5);
   padding: 20px;
   border-radius: 8px;
+}
+
+.header-carousel-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.header-carousel-item img {
+  width: 100%;
+  height: auto;
+}
+
+.carousel-caption {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+}
+
+.carousel-caption-content {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 8px;
+  display: inline-block;
 }
