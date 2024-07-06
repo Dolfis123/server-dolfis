@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../../components/public/Navbar";
 import Footer from "../../components/public/Footer";
-
 import { Link } from "react-router-dom";
 
 function Pelayanan() {
@@ -16,9 +15,7 @@ function Pelayanan() {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await axios.get(
-          "https://website.fahri.life/api/pelayanan"
-        );
+        const response = await axios.get("http://localhost:5050/api/pelayanan");
         setServices(response.data);
       } catch (error) {
         console.error("Error fetching services:", error);
@@ -27,6 +24,10 @@ function Pelayanan() {
 
     fetchServices();
   }, []);
+
+  const createMarkup = (html) => {
+    return { __html: html };
+  };
 
   return (
     <div>
@@ -76,28 +77,31 @@ function Pelayanan() {
 
         <h2 className="text-xl font-bold text-blue-600 mb-4">Layanan</h2>
         <h3 className="text-2xl font-bold mb-4">
-          PERSYARATAN PELAYANAN PUBLIK DI KANTOR KELURAHAN SOWI
+          Persyaratan Pelayanan Publik di Kelurahan Amban
         </h3>
 
         <div className="bg-white shadow-md rounded-lg p-6 mb-6">
           {services.length > 0 ? (
             services.map((service, index) => (
               <div key={index} className="mb-6">
-                <div
-                  className="text-lg mb-4"
-                  dangerouslySetInnerHTML={{ __html: service.pelayanan }}
-                ></div>
+                <h4
+                  className="text-lg font-semibold mb-4"
+                  dangerouslySetInnerHTML={createMarkup(service.pelayanan)}
+                ></h4>
                 <ul className="list-disc list-inside mb-4">
                   {Array.isArray(service.persyaratan) ? (
                     service.persyaratan.map((requirement, reqIndex) => (
-                      <li key={reqIndex}>{requirement}</li>
+                      <li
+                        key={reqIndex}
+                        dangerouslySetInnerHTML={createMarkup(requirement)}
+                      ></li>
                     ))
                   ) : (
                     <li>Tidak ada persyaratan</li>
                   )}
                 </ul>
-                <p className="text-lg mb-4">{service.waktu}</p>
-                <p className="text-lg mb-4">{service.biaya}</p>
+                <p className="text-lg mb-4">Waktu: {service.waktu}</p>
+                <p className="text-lg mb-4">Biaya: {service.biaya}</p>
               </div>
             ))
           ) : (

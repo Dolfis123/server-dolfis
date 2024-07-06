@@ -17,7 +17,7 @@ function Pegawai() {
   const [email, setEmail] = useState("");
   const [position, setPosition] = useState("");
   const [join_date, setJoinDate] = useState("");
-  const [employment_status, setEmploymentStatus] = useState("active");
+  const [employment_status, setEmploymentStatus] = useState("aktif");
   // const [department, setDepartment] = useState("");
   const [gender, setGender] = useState("");
   const [marital_status, setMaritalStatus] = useState("");
@@ -60,7 +60,7 @@ function Pegawai() {
     setRetirementDate(employee.retirement_date);
     setNationality(employee.nationality);
     setPhoto(null);
-    setPhotoUrl(`https://website.fahri.life/api/uploads/${employee.photo}`);
+    setPhotoUrl(`http://localhost:5050/api/uploads/${employee.photo}`);
     setShowEditModal(true);
   };
 
@@ -91,7 +91,7 @@ function Pegawai() {
     setEmail("");
     setPosition("");
     setJoinDate("");
-    setEmploymentStatus("active");
+    setEmploymentStatus("aktif");
     // setDepartment("");
     setGender("");
     setMaritalStatus("");
@@ -105,9 +105,7 @@ function Pegawai() {
 
   const fetchEmployees = async () => {
     try {
-      const response = await axios.get(
-        "https://website.fahri.life/api/employees"
-      );
+      const response = await axios.get("http://localhost:5050/api/employees");
       setEmployeeList(
         Array.isArray(response.data.data) ? response.data.data : []
       );
@@ -149,7 +147,7 @@ function Pegawai() {
     if (photo) formData.append("photo", photo);
 
     try {
-      await axios.post("https://website.fahri.life/api/employees", formData, {
+      await axios.post("http://localhost:5050/api/employees", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -184,7 +182,7 @@ function Pegawai() {
 
     try {
       await axios.put(
-        `https://website.fahri.life/api/employees/${editId}`,
+        `http://localhost:5050/api/employees/${editId}`,
         formData,
         {
           headers: {
@@ -201,9 +199,7 @@ function Pegawai() {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(
-        `https://website.fahri.life/api/employees/${deleteId}`
-      );
+      await axios.delete(`http://localhost:5050/api/employees/${deleteId}`);
       fetchEmployees();
       handleCloseDeleteModal();
     } catch (error) {
@@ -276,7 +272,7 @@ function Pegawai() {
                     <td className="border p-2 text-center">{index + 1}</td>
                     <td className="border p-2">
                       <img
-                        src={`https://website.fahri.life/api/uploads/${employee.photo}`}
+                        src={`http://localhost:5050/api/uploads/${employee.photo}`}
                         alt="Employee"
                         className="w-24 h-24 object-cover"
                       />
@@ -284,7 +280,6 @@ function Pegawai() {
                     <td className="border p-2">{employee.full_name}</td>
                     <td className="border p-2">{employee.nip}</td>
                     <td className="border p-2">{employee.position}</td>
-
                     <td className="border p-2 flex space-x-2">
                       <button
                         onClick={() => handleShowEditModal(employee)}

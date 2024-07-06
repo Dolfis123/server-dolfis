@@ -1,10 +1,10 @@
 ###
-POST http://localhost:5050/regis
+POST http://localhost:5050/api/regis
 Content-Type: application/json
 
 {
-    "email": "lurahsowi@gmail.com",
-    "password": "sowi123"
+    "email": "amban024@gmail.com",
+    "password": "4mb4n024"
 }
 ###
-GET http://localhost:5050/api/rw
+GET http://localhost:5050/api/lihat-surat-ket-ktp-menunggu

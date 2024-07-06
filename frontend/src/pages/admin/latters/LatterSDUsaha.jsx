@@ -20,7 +20,7 @@ function LatterSDUsaha() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `https://website.fahri.life/api/lihat-surat-domisili-admin/${id}`
+        `http://localhost:5050/api/lihat-surat-domisili-admin/${id}`
       );
       setData(response.data.data);
     } catch (error) {
@@ -30,9 +30,7 @@ function LatterSDUsaha() {
 
   const fetchEmployees = async () => {
     try {
-      const response = await axios.get(
-        "https://website.fahri.life/api/employees"
-      );
+      const response = await axios.get("http://localhost:5050/api/employees");
       console.log("Employees data: ", response.data.data); // Tambahkan ini
       setEmployees(response.data.data);
     } catch (error) {
@@ -66,7 +64,7 @@ function LatterSDUsaha() {
   const handleEmployeeChange = (e) => {
     const employeeId = e.target.value;
     console.log("Selected employee ID: ", employeeId); // Tambahkan ini
-    const employee = employees.find((emp) => emp.employee_id === employeeId); // Menggunakan perbandingan string langsung
+    const employee = employees.find((emp) => emp.employee_id == employeeId); // Menggunakan perbandingan string langsung
     console.log("Selected employee: ", employee); // Tambahkan ini
     setSelectedEmployee(employee);
   };

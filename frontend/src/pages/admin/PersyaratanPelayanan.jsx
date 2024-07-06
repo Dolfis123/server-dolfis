@@ -27,9 +27,7 @@ function PersyaratanPelayanan() {
 
   const fetchPelayanan = async () => {
     try {
-      const response = await axios.get(
-        "https://website.fahri.life/api/pelayanan"
-      );
+      const response = await axios.get("http://localhost:5050/api/pelayanan");
       setPelayananList(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -45,7 +43,7 @@ function PersyaratanPelayanan() {
     const formData = { pelayanan };
 
     try {
-      await axios.post("https://website.fahri.life/api/pelayanan", formData, {
+      await axios.post("http://localhost:5050/api/pelayanan", formData, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -63,7 +61,7 @@ function PersyaratanPelayanan() {
 
     try {
       await axios.put(
-        `https://website.fahri.life/api/pelayanan/${editId}`,
+        `http://localhost:5050/api/pelayanan/${editId}`,
         formData,
         {
           headers: {

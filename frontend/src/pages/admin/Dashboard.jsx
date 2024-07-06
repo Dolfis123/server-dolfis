@@ -27,7 +27,7 @@ function Dashboard() {
     setEditId(ucapan.id);
     setPesan(ucapan.pesan);
     setImage(null);
-    setImageUrl(`https://website.fahri.life/api/images/${ucapan.image}`);
+    setImageUrl(`http://localhost:5050/api/images/${ucapan.image}`);
     setShowEditModal(true);
   };
   const handleCloseEditModal = () => {
@@ -46,7 +46,7 @@ function Dashboard() {
   const fetchUcapan = async () => {
     try {
       const response = await axios.get(
-        "https://website.fahri.life/api/lihat-ucapan"
+        "http://localhost:5050/api/lihat-ucapan"
       );
       setUcapanList(response.data.Result);
     } catch (error) {
@@ -65,7 +65,7 @@ function Dashboard() {
     formData.append("image", image);
 
     try {
-      await axios.post("https://website.fahri.life/api/ucapan", formData, {
+      await axios.post("http://localhost:5050/api/ucapan", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -85,7 +85,7 @@ function Dashboard() {
 
     try {
       await axios.put(
-        `https://website.fahri.life/api/edit-ucapan/${editId}`,
+        `http://localhost:5050/api/edit-ucapan/${editId}`,
         formData,
         {
           headers: {
@@ -141,7 +141,7 @@ function Dashboard() {
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-300">
                       <img
-                        src={`https://website.fahri.life/api/images/${ucapan.image}`}
+                        src={`http://localhost:5050/api/images/${ucapan.image}`}
                         alt="foto"
                         className="w-24 h-24 object-cover"
                       />

@@ -21,7 +21,22 @@ import PersyaratanPelayanan from "./pages/admin/PersyaratanPelayanan";
 import Pelayanan from "./pages/public/Pelayanan";
 import Wilayah from "./pages/public/Wilayah";
 import MarkerRw from "./pages/admin/MarkerRW";
+import SuratKetDomisili from "./pages/public/format/SuratKetDomisili";
+import SuratTidakMampu from "./pages/public/format/SuratTidakMampu";
 
+import PersyaratanSuratKetDomisili from "./pages/public/persyaratan/PersyaratanSuratKetDomisili";
+import BuktiSuratDomisili from "./pages/public/bukti/BuktiSuratDomisili";
+import PersyaratanSuratTidakMampuPendidikan from "./pages/public/persyaratan/PersyaratanSuratTidakMampuPendidikan";
+import BuktiSuratTidakMampuPendidikan from "./pages/public/bukti/BuktiSuratTidakMampuPendidikan";
+import SuratDomisiliUmum from "./pages/admin/permintaan/SuratDomisiliUmum";
+import SuratTidakMampuPendidikan from "./pages/admin/permintaan/SuratTidakMampuPendidikan";
+import PersyaratanKetKtp from "./pages/public/persyaratan/PersyaratanKetKtp";
+import SuratKetKtp from "./pages/public/format/SuratKetKtp";
+import BuktiSuratKetKTP from "./pages/public/bukti/BuktiSuratKetKTP";
+import PerSuratKetKTP from "./pages/admin/permintaan/PerSuratKetKTP";
+import ArsipKetKtp from "./pages/admin/arsip/ArsipKetKtp";
+import ArsipKetDomisiliUmum from "./pages/admin/arsip/ArsipKetDomisiliUmum";
+import ArsipKetTidakMampuPendidikan from "./pages/admin/arsip/ArsipKetTidakMampuPendidikan";
 const isAuthenticated = () => {
   return !!sessionStorage.getItem("token");
 };
@@ -51,7 +66,6 @@ function App() {
           <Route path="/pelayanan" element={<Pelayanan />} />
           <Route path="/wilayah" element={<Wilayah />} />
           <Route path="/marker-rw" element={<MarkerRw />} />
-
           <Route path="/login" element={<Login />} />
           <Route path="/news/:id" element={<NewsDetail />} />
           {/* Dashboard start */}
@@ -95,6 +109,63 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path=" /permintaan-tidak-mampu"
+            element={
+              <ProtectedRoute>
+                <SDUsahaAdmin />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/permintaan-surat-domisili-umum"
+            element={
+              <ProtectedRoute>
+                <SuratDomisiliUmum />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/permintaan-surat-tidak-mampu-pendidikan"
+            element={
+              <ProtectedRoute>
+                <SuratTidakMampuPendidikan />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/permintaan-surat-ket-ktp"
+            element={
+              <ProtectedRoute>
+                <PerSuratKetKTP />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/arsip-ket-ktp"
+            element={
+              <ProtectedRoute>
+                <ArsipKetKtp />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/arsip-ket-tidak-mampu-pendidikan"
+            element={
+              <ProtectedRoute>
+                <ArsipKetTidakMampuPendidikan />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/arsip-ket-domisili-umum"
+            element={
+              <ProtectedRoute>
+                <ArsipKetDomisiliUmum />
+              </ProtectedRoute>
+            }
+          />
+
           <Route
             path="/persyaratan-layanan"
             element={
@@ -143,6 +214,96 @@ function App() {
             element={<BuktiSDUsaha />}
           />
           {/* Format surat End */}
+          {/* Format surat kete domisili */}
+          <Route
+            path="/surat-ket-domisili-umum"
+            element={<SuratKetDomisili />}
+          />
+          <Route
+            path="/persyaratan-surat-ket-domisili-umum/:hashed_id"
+            element={<PersyaratanSuratKetDomisili />}
+          />
+          <Route
+            path="/confir-data-domisili-umum/:hashed_id"
+            element={<ConfirmasiDataSDUsaha />}
+          />
+          <Route
+            path="/edit-domisili-umum/:hashed_id"
+            element={<EditSDUsaha />}
+          />
+          <Route
+            path="/format-surat-domisili-umum/:id"
+            element={<LatterSDUsaha />}
+          />
+          <Route
+            path="/bukti-surat-domisili-umum/:hashed_id"
+            element={<BuktiSuratDomisili />}
+          />
+          {/* End Format surat kete domisili */}
+          {/* Surat Tidak Mampu Strat*/}
+          <Route
+            path="/persyaratan-surat-tidak-mampu/:hashed_id"
+            element={<PersyaratanSuratTidakMampuPendidikan />}
+          />
+          <Route
+            path="/bukti-surat-tidak-mampu/:hashed_id"
+            element={<BuktiSuratTidakMampuPendidikan />}
+          />
+          {/* <Route
+            path="/confir-data-tidak-mampu/:hashed_id"
+            element={<ConfirmasiDataTidakMampu />}
+          /> */}
+          {/* <Route
+            path="/detail-surat-tidak-mampu/:id"
+            element={<DesailSuratTidakMampu />}
+          /> */}
+          {/* <Route
+            path="/surat-tidak-mampu-arsip"
+            element={<SuratTidakMampuArsip />}
+          /> */}
+          {/* <Route
+            path="/format-surat-tidak-mampu/:id"
+            element={<FormatSuratTidakMampu />}
+          />
+          <Route path="/surat-tidak-mampu-pendidikan" />
+          <Route
+            path="/permintaan-surat-tidak-mampu"
+            element={<SuratTidakMampuPermintaan />}
+          /> */}
+          <Route path="/tidak-mampu-pendidikan" element={<SuratTidakMampu />} />
+          {/* Surat Tidak Mampu end*/}
+          {/* Surat Ket Ktp start */}
+          <Route path="/tidak-ket-ktp" element={<SuratKetKtp />} />
+          <Route
+            path="/persyaratan-surat-ket-ktp/:hashed_id"
+            element={<PersyaratanKetKtp />}
+          />
+          <Route
+            path="/bukti-ket-ktp/:hashed_id"
+            element={<BuktiSuratKetKTP />}
+          />
+          {/* <Route
+            path="/confir-data-tidak-mampu/:hashed_id"
+            element={<ConfirmasiDataTidakMampu />}
+          /> */}
+          {/* <Route
+            path="/detail-surat-tidak-mampu/:id"
+            element={<DesailSuratTidakMampu />}
+          /> */}
+          {/* <Route
+            path="/surat-tidak-mampu-arsip"
+            element={<SuratTidakMampuArsip />}
+          /> */}
+          {/* <Route
+            path="/format-surat-tidak-mampu/:id"
+            element={<FormatSuratTidakMampu />}
+          />
+          <Route path="/surat-tidak-mampu-pendidikan" />
+          <Route
+            path="/permintaan-surat-tidak-mampu"
+            element={<SuratTidakMampuPermintaan />}
+          /> */}
+          {/* Surat Ket Ktp end */}
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "../../public/img/logo.jpg";
+import logo from "../../public/img/logo.png";
 import { Link, useLocation } from "react-router-dom";
 import "../../css/public/navbar.css";
 
@@ -18,7 +18,7 @@ function Navbar() {
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <Link to="/" className="flex items-center space-x-2">
           <img src={logo} alt="Logo" className="h-10" />
-          <h1 className=" lg:whitespace-normal">Kelurahan Sowi</h1>
+          <h1 className=" lg:whitespace-normal">Kelurahan Amban</h1>
         </Link>
         <div className="lg:hidden">
           <button
@@ -49,7 +49,7 @@ function Navbar() {
                 "/pelayanan"
               )}`}
             >
-              Layanan
+              Persyaratan Layanan
             </Link>
             <Link
               to="/wilayah"

@@ -40,7 +40,7 @@ function SDUsahaAdmin() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "https://website.fahri.life/api/lihat-surat-ket-domisili-menunggu"
+        "http://localhost:5050/api/lihat-surat-ket-domisili-menunggu"
       );
 
       // Asumsikan bahwa setiap item dalam response.data.data memiliki atribut 'tanggal' atau 'createdAt'
@@ -66,7 +66,7 @@ function SDUsahaAdmin() {
     if (selectSurat.id) {
       const id = selectSurat.id;
       axios
-        .delete(`https://website.fahri.life/api/hapus-surat-domisili/${id}`)
+        .delete(`http://localhost:5050/api/hapus-surat-domisili/${id}`)
         .then((res) => {
           console.log("Data berhasil dihapus");
           setShowDeleteModal(false);
@@ -85,10 +85,7 @@ function SDUsahaAdmin() {
     if (selectSurat.id) {
       const id = selectSurat.id;
       axios
-        .put(
-          `https://website.fahri.life/api/update-all-domisili/${id}`,
-          selectSurat
-        )
+        .put(`http://localhost:5050/api/update-all-domisili/${id}`, selectSurat)
         .then((res) => {
           console.log("Data berhasil diubah");
           setShowEditModal(false);
@@ -164,7 +161,7 @@ function SDUsahaAdmin() {
                       <td className="border p-2">
                         {surat.ktp_image && (
                           <img
-                            src={`https://website.fahri.life/api/images/${surat.ktp_image}`}
+                            src={`http://localhost:5050/api/images/${surat.ktp_image}`}
                             alt={surat.nama}
                             className="w-16 h-16 object-cover"
                           />

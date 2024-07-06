@@ -50,7 +50,7 @@ function Beranda() {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get("https://website.fahri.life/api/news");
+        const response = await axios.get("http://localhost:5050/api/news");
         if (response.data.Result) {
           setNewsList(response.data.Result.reverse());
         } else {
@@ -68,7 +68,7 @@ function Beranda() {
     const fetchUcapan = async () => {
       try {
         const response = await axios.get(
-          "https://website.fahri.life/api/lihat-ucapan"
+          "http://localhost:5050/api/lihat-ucapan"
         );
         if (response.data.Result) {
           setUcapanList(response.data.Result);
@@ -179,17 +179,17 @@ function Beranda() {
                   Selamat Datang
                 </h5>
                 <h4 className="display-1 text-capitalize text-white mb-4">
-                  Pemerintah Kabupaten Manokwari <br /> Distrik Manokwari <br />{" "}
-                  Kelurahan Sowi
+                  Pemerintah Kabupaten Manokwari <br /> Distrik Manokwari Barat{" "}
+                  <br /> Kelurahan Amban
                 </h4>
                 <br />
                 <br />
                 <div className="flex justify-center">
                   <button
-                    className="btn bg-primary text-white mb-4 py-2 px-4"
+                    className="btn bg-primary text-white mb-4 py-2 px-2"
                     onClick={toggleServices}
                   >
-                    <span className="me-2" style={{ fontSize: "20px" }}>
+                    <span className="me-1" style={{ fontSize: "15px" }}>
                       🚀
                     </span>
                     {showServices
@@ -199,18 +199,96 @@ function Beranda() {
                   </button>
                 </div>
                 {showServices && (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-2">
                     <Link
                       to="/surat-ket-domisili-usaha"
                       className="btn bg-primary text-white py-2 px-4 rounded"
                     >
-                      Surat Keterangan Domisili Usaha
+                      Surat Ket Domisili Usaha
                     </Link>
                     <Link
-                      to="#"
+                      to="/surat-ket-domisili-umum"
                       className="btn bg-primary text-white py-2 px-4 rounded"
                     >
-                      Surat Keterangan Tidak Mampu
+                      Surat Ket Domisili
+                    </Link>
+                    <Link
+                      to="/tidak-mampu-pendidikan"
+                      className="btn bg-primary text-white py-2 px-4 rounded"
+                    >
+                      Surat Ket Tidak Mampu Untuk Pendidikan
+                    </Link>
+                    <Link
+                      to="/tidak-ket-ktp"
+                      className="btn bg-primary text-white py-2 px-4 rounded"
+                    >
+                      Surat Ket KTP
+                    </Link>
+                    <Link
+                      to="/tidak-mampu-pendidikan"
+                      className="btn bg-primary text-white py-2 px-4 rounded"
+                    >
+                      Surat Ket KK
+                    </Link>
+                    <Link
+                      to="/tidak-mampu-pendidikan"
+                      className="btn bg-primary text-white py-2 px-4 rounded"
+                    >
+                      Surat Ket Usaha
+                    </Link>
+                    <Link
+                      to="/tidak-mampu-pendidikan"
+                      className="btn bg-primary text-white py-2 px-4 rounded"
+                    >
+                      Surat Ket Kematian
+                    </Link>
+                    <Link
+                      to="/tidak-mampu-pendidikan"
+                      className="btn bg-primary text-white py-2 px-4 rounded"
+                    >
+                      Surat Ket Ahli Waris
+                    </Link>
+                    <Link
+                      to="/tidak-mampu-pendidikan"
+                      className="btn bg-primary text-white py-2 px-4 rounded"
+                    >
+                      Surat Ket KK
+                    </Link>
+                    <Link
+                      to="/tidak-mampu-pendidikan"
+                      className="btn bg-primary text-white py-2 px-4 rounded"
+                    >
+                      Surat Ket KK
+                    </Link>
+                    <Link
+                      to="/tidak-mampu-pendidikan"
+                      className="btn bg-primary text-white py-2 px-4 rounded"
+                    >
+                      Surat Ket KK
+                    </Link>
+                    <Link
+                      to="/tidak-mampu-pendidikan"
+                      className="btn bg-primary text-white py-2 px-4 rounded"
+                    >
+                      Surat Ket KK
+                    </Link>
+                    <Link
+                      to="/tidak-mampu-pendidikan"
+                      className="btn bg-primary text-white py-2 px-4 rounded"
+                    >
+                      Surat Ket KK
+                    </Link>
+                    <Link
+                      to="/tidak-mampu-pendidikan"
+                      className="btn bg-primary text-white py-2 px-4 rounded"
+                    >
+                      Surat Ket KK
+                    </Link>
+                    <Link
+                      to="/tidak-mampu-pendidikan"
+                      className="btn bg-primary text-white py-2 px-4 rounded"
+                    >
+                      Surat Ket KK
                     </Link>
                   </div>
                 )}
@@ -225,11 +303,11 @@ function Beranda() {
             <div className="card bg-white shadow-md rounded-lg p-4 flex flex-row items-center">
               <img
                 className="rounded-full w-32 h-32 object-cover mr-4"
-                src={`https://website.fahri.life/api/images/${ucapan.image}`}
+                src={`http://localhost:5050/api/images/${ucapan.image}`}
                 alt=""
               />
               <div>
-                <h4 className="text-xl font-bold">Kelurahan Sowi</h4>
+                <h4 className="text-xl font-bold">Kelurahan Amban</h4>
                 <p
                   className="text-gray-700 mt-2 text-justify"
                   dangerouslySetInnerHTML={{ __html: ucapan.pesan }}
@@ -249,7 +327,7 @@ function Beranda() {
                 title={news.title}
                 content={news.content.substring(0, 100) + "..."}
                 link={`/news/${news.id}`}
-                imageUrl={`https://website.fahri.life/api/images/${news.image_url}`}
+                imageUrl={`http://localhost:5050/api/images/${news.image_url}`}
               />
             ))}
           </div>
@@ -284,8 +362,8 @@ function Beranda() {
                 <div className="ml-3">
                   <h5 className="text-primary">Office</h5>
                   <p className="text-gray-700">
-                    32PP+9JR, Jl. Trikora Taman Ria, Sowi, Distrik Manokwari,
-                    Kabupaten Manokwari, Papua Bar. 98315
+                    5357+4VW, Jl. Gn. Salju, Amban, Kec. Manokwari Bar.,
+                    Kabupaten Manokwari, Papua Bar. 98312
                   </p>
                 </div>
               </div>
@@ -304,14 +382,14 @@ function Beranda() {
                 </div>
                 <div className="ml-3">
                   <h5 className="text-primary">Email</h5>
-                  <p className="text-gray-700">lurahsowi@gmail.com</p>
+                  <p className="text-gray-700">lurahamban@gmail.com</p>
                 </div>
               </div>
             </div>
             <div className="col-lg-4 col-md-6">
               <iframe
                 className="w-full h-72 rounded"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3288.064561869254!2d134.03394747397195!3d-0.9139987353304737!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d53f415a0bbf009%3A0x866bb92bca60446e!2sKantor%20Lurah%20Sowi!5e1!3m2!1sid!2sid!4v1717762982282!5m2!1sid!2sid"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3994.650942606982!2d134.06212037397145!3d-0.8421236352998912!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d540b025081f9eb%3A0x1cc8b5d44a4f1b0c!2sKantor%20Lurah%20Amban!5e0!3m2!1sid!2sid!4v1720118447832!5m2!1sid!2sid"
                 frameBorder="0"
                 style={{ minHeight: "300px", border: "0" }}
                 allowFullScreen=""
@@ -319,6 +397,7 @@ function Beranda() {
                 tabIndex="0"
               ></iframe>
             </div>
+
             <div className="col-lg-4 col-md-12">
               <div className="alert alert-success hidden my-alert" role="alert">
                 <strong> {submitStatus && <p>{submitStatus}</p>}</strong>

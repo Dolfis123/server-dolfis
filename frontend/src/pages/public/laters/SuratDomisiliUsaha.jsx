@@ -105,7 +105,7 @@ function SuratDomisiliUsaha() {
       formData.append("ktp_image", ktpImage);
 
       const response = await axios.post(
-        "https://website.fahri.life/api/buat-surat-domisili",
+        "http://localhost:5050/api/buat-surat-domisili",
         formData,
         {
           headers: {

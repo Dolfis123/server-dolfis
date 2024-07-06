@@ -38,11 +38,11 @@ function Footer() {
                 <h4 className="mb-4 text-white">Info Kontak</h4>
                 <a href="">
                   <i className="fa fa-map-marker-alt me-2"></i> 32PP+9JR, Jl.
-                  Trikora Taman Ria, Sowi, Distrik Manokwari, Kabupaten
-                  Manokwari, Papua Bar. 98315
+                  5357+4VW, Jl. Gn. Salju, Amban, Kec. Manokwari Bar., Kabupaten
+                  Manokwari, Papua Bar. 98312
                 </a>
                 <a href="">
-                  <i className="fas fa-envelope me-2"></i> sowi@gmail.com
+                  <i className="fas fa-envelope me-2"></i> lurahamban@gmail.com
                 </a>
 
                 <a href="" className="mb-3">
@@ -54,12 +54,12 @@ function Footer() {
               <div className="footer-item d-flex flex-column">
                 <h4 className="mb-4 text-white">Info Kontak</h4>
                 <a href="">
-                  <i className="fa fa-map-marker-alt me-2"></i> 32PP+9JR, Jl.
-                  Trikora Taman Ria, Sowi, Distrik Manokwari, Kabupaten
-                  Manokwari, Papua Bar. 98315
+                  <i className="fa fa-map-marker-alt me-2"></i> 5357+4VW, Jl.
+                  Gn. Salju, Amban, Kec. Manokwari Bar., Kabupaten Manokwari,
+                  Papua Bar. 98312
                 </a>
                 <a href="">
-                  <i className="fas fa-envelope me-2"></i> sowi@gmail.com
+                  <i className="fas fa-envelope me-2"></i> lurahamban@gmail.com
                 </a>
 
                 <a href="" className="mb-3">

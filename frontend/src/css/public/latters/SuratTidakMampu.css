@@ -16,7 +16,7 @@ body {
 }
 
 .kop-surat {
-  border-bottom: 4px solid #000;
+  border-bottom: 1.5px solid #000;
   padding: 0px;
   width: 100%;
 }
@@ -25,7 +25,7 @@ body {
 }
 .tengah {
   text-transform: none !important;
-  margin: 0px, 0px, 0px, 0px !important;
+
   text-align: center;
   font-family: "Times New Roman" !important;
   /* margin-right: 3000px; */

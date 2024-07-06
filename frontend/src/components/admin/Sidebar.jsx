@@ -22,7 +22,7 @@ function Sidebar({ activeComponent }) {
     const confirmed = window.confirm("Apakah Anda yakin ingin keluar?");
     if (confirmed) {
       try {
-        await axios.get("https://website.fahri.life/api/logout");
+        await axios.get("http://localhost:5050/api/logout");
         sessionStorage.removeItem("token");
         navigate("/");
       } catch (err) {
@@ -107,18 +107,26 @@ function Sidebar({ activeComponent }) {
                   </li>
                   <li>
                     <Link
-                      to="/permintaan-domisili-usaha"
+                      to="/permintaan-surat-domisili-umum"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                     >
-                      Permintaan Domisili Usaha
+                      Surat ket Domisili Umum
                     </Link>
                   </li>
                   <li>
                     <Link
-                      to="/permintaan/ditolak"
+                      to="/permintaan-surat-tidak-mampu-pendidikan"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                     >
-                      Permintaan Ditolak
+                      Surat ket Tidak Mampu Pendidikan
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/permintaan-surat-ket-ktp"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                    >
+                      Permintaan Ket KTP
                     </Link>
                   </li>
                 </ul>
@@ -159,6 +167,30 @@ function Sidebar({ activeComponent }) {
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                     >
                       Arsip Surat Masuk
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/arsip-ket-domisili-umum"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                    >
+                      Surat Ket Domisili Umum
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/arsip-ket-tidak-mampu-pendidikan"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                    >
+                      Surat Ket Tidak Mampu Pendidikan
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/arsip-ket-ktp"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                    >
+                      Surat Ket KTP
                     </Link>
                   </li>
                   <li>

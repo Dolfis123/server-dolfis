@@ -2,7 +2,6 @@ const db = require("../config/database");
 const moment = require("moment-timezone");
 const path = require("path");
 const multer = require("multer");
-const { v4: uuidv4 } = require("uuid");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -51,14 +50,13 @@ const createEmployee = (req, res) => {
     } = req.body;
 
     const photo = req.file ? req.file.filename : null;
-    const employee_id = uuidv4(); // Generate UUID for employee_id
 
     if (!full_name || !nip || !join_date || !employment_status) {
       console.error("Validation error: Missing required fields");
       return res.status(400).json({ error: "Missing required fields" });
     }
 
-    const checkDuplicateQuery = `SELECT * FROM employees WHERE nip = ?`;
+    const checkDuplicateQuery = "SELECT * FROM employees WHERE nip = ?";
 
     db.query(checkDuplicateQuery, [nip], (err, result) => {
       if (err) {
@@ -73,11 +71,10 @@ const createEmployee = (req, res) => {
 
       const sqlQuery = `
         INSERT INTO employees
-        (employee_id, full_name, nip, address, birth_date, phone_number, email, position, join_date, employment_status, department, gender, marital_status, education, blood_type, retirement_date, nationality, photo)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (full_name, nip, address, birth_date, phone_number, email, position, join_date, employment_status, department, gender, marital_status, education, blood_type, retirement_date, nationality, photo)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `;
       const values = [
-        employee_id,
         full_name,
         nip,
         address,
@@ -298,10 +295,10 @@ const getAllEmployees1 = (req, res) => {
 };
 
 module.exports = {
-  getAllEmployees1,
   createEmployee,
   getAllEmployees,
   getEmployeeById,
   updateEmployee,
   deleteEmployee,
+  getAllEmployees1,
 };

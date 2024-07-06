@@ -13,6 +13,10 @@ const employeeRoutes = require("./routes/employeeRoute");
 const persyaratanLayananRoute = require("./routes/persyaratanLayananRoute");
 const pemetaanRwRoute = require("./routes/pemetaanRwRoute");
 const polygonsRoute = require("./routes/poligonRwRoute");
+const domisiliRoute = require("./routes/surat_ket_domisiliRoute");
+const tidakMampuRoute = require("./routes/surat_tidak_mampuRoute");
+const suratRequestRoute = require("./routes/suratRequestRoute");
+const suratKetKtpRoute = require("./routes/surat_ket_kptRoute");
 
 const app = express();
 const PORT = 5050;
@@ -68,6 +72,10 @@ app.use("/api", employeeRoutes);
 app.use("/api", persyaratanLayananRoute);
 app.use("/api", pemetaanRwRoute);
 app.use("/api/polygons", polygonsRoute);
+app.use("/api", domisiliRoute);
+app.use("/api", tidakMampuRoute);
+app.use("/api", suratRequestRoute);
+app.use("/api", suratKetKtpRoute);
 
 app.use("/admin", requireLogin, (req, res, next) => {
   next();

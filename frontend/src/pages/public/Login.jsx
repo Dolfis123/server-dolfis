@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "../../index.css";
 
 const LoginForm = () => {
@@ -10,13 +11,10 @@ const LoginForm = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "https://website.fahri.life/api/login",
-        {
-          email,
-          password,
-        }
-      );
+      const response = await axios.post("http://localhost:5050/api/login", {
+        email,
+        password,
+      });
       if (response.data.Status === "Success") {
         sessionStorage.setItem("token", response.data.Token);
         window.location.href = "/dashboard"; // Redirect to dashboard
@@ -27,6 +25,11 @@ const LoginForm = () => {
       console.error("Error logging in:", err);
       setError("An error occurred. Please try again.");
     }
+  };
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/");
   };
 
   return (
@@ -56,6 +59,13 @@ const LoginForm = () => {
           >
             Masuk
           </button>
+          {/* <button
+            className="border p-3 rounded-lg w-full bg-green-700 text-white hover:bg-green-600 transition"
+            type="submit"
+            onClick={handleClick}
+          >
+            Kembali
+          </button> */}
         </form>
       </div>
     </div>

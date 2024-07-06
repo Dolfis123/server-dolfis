@@ -1,0 +1,8 @@
+s.back {
+  background-image: url("https://images.unsplash.com/photo-1658923951137-ba6003e9b7fa?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background-size: cover; /* Sesuaikan dengan kebutuhan, misalnya 'cover' atau 'contain' */
+  background-repeat: no-repeat;
+  background-position: center center; /* Sesuaikan dengan kebutuhan */
+  /* Jika Anda ingin menambahkan warna latar cadangan (fallback) */
+  background-color: #ffffff; /* Ganti dengan warna latar yang diinginkan */
+}
