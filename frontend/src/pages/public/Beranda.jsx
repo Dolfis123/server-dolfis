@@ -219,13 +219,13 @@ function Beranda() {
                       Surat Ket Tidak Mampu Untuk Pendidikan
                     </Link>
                     <Link
-                      to="/tidak-ket-ktp"
+                      to="/surat-ket-ktp"
                       className="btn bg-primary text-white py-2 px-4 rounded"
                     >
                       Surat Ket KTP
                     </Link>
                     <Link
-                      to="/tidak-mampu-pendidikan"
+                      to="/surat-ket-kk"
                       className="btn bg-primary text-white py-2 px-4 rounded"
                     >
                       Surat Ket KK
@@ -243,13 +243,13 @@ function Beranda() {
                       Surat Ket Kematian
                     </Link>
                     <Link
-                      to="/tidak-mampu-pendidikan"
+                      to="/surat-ket-ahli-waris"
                       className="btn bg-primary text-white py-2 px-4 rounded"
                     >
                       Surat Ket Ahli Waris
                     </Link>
                     <Link
-                      to="/tidak-mampu-pendidikan"
+                      to="/surat-ket-ahli-waris"
                       className="btn bg-primary text-white py-2 px-4 rounded"
                     >
                       Surat Ket KK

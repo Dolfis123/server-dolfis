@@ -36,7 +36,7 @@ function generateUniqueNumber() {
 }
 
 // Controller function untuk membuat surat keterangan KTP baru
-const createSuratKtp = (req, res) => {
+const createSuratKk = (req, res) => {
   // Handle file upload using multer middleware
   upload.single("ktp_image")(req, res, (err) => {
     if (err) {
@@ -47,6 +47,7 @@ const createSuratKtp = (req, res) => {
       jenis_kelamin,
       ttl,
       agama,
+      status_perkawinan,
       pekerjaan,
       alamat,
       rt_rw,
@@ -63,9 +64,9 @@ const createSuratKtp = (req, res) => {
 
     // SQL query to insert data into database
     const sqlQuery = `
-    INSERT INTO surat_ket_ktp
-    (nama, tanggal, jenis_kelamin, ttl, agama, pekerjaan, alamat, rt_rw, status_admin, keperluan, ktp_image, no_telepon, email, jenis_surat, hashed_id, nomor_surat)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'menunggu', ?, ?, ?, ?, 'Surat Keterangan KTP', ?, ?)
+    INSERT INTO surat_ket_kk
+    (nama, tanggal, jenis_kelamin, ttl, agama, pekerjaan, alamat, rt_rw, status_perkawinan, status_admin, keperluan, ktp_image, no_telepon, email, jenis_surat, hashed_id, nomor_surat)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'menunggu', ?, ?, ?, ?, 'Surat Keterangan KTP', ?, ?)
   `;
 
     // Get local timezone date using moment-timezone
@@ -80,6 +81,7 @@ const createSuratKtp = (req, res) => {
       jenis_kelamin,
       ttl,
       agama,
+      status_perkawinan,
       pekerjaan,
       alamat,
       rt_rw,
@@ -111,12 +113,12 @@ const createSuratKtp = (req, res) => {
 };
 
 // Controller function untuk mendapatkan surat domisili berdasarkan hashed_id
-const getSuratKetKTP = (req, res) => {
+const getSuratKetKk = (req, res) => {
   const { hashed_id } = req.params;
 
   // SQL query to retrieve surat data based on hashed_id
   const sqlQuery = `
-    SELECT * FROM surat_ket_ktp
+    SELECT * FROM surat_ket_kk
     WHERE hashed_id = ?
   `;
 
@@ -143,12 +145,12 @@ const getSuratKetKTP = (req, res) => {
 };
 
 // Controller function untuk mendapatkan surat domisili admin berdasarkan ID
-const getKetKTPAdmin = (req, res) => {
+const getKetKkAdmin = (req, res) => {
   const { id } = req.params;
 
   // SQL query to retrieve surat data based on ID with status_admin 'diterima'
   const sqlQuery = `
-    SELECT * FROM surat_ket_ktp
+    SELECT * FROM surat_ket_kk
     WHERE id = ?
   `;
 
@@ -175,13 +177,14 @@ const getKetKTPAdmin = (req, res) => {
 };
 
 // Controller function untuk mengupdate semua detail surat tidak mampu berdasarkan ID
-const updateSuratKtpAll = (req, res) => {
+const updateSuratKkAll = (req, res) => {
   const { id } = req.params;
   const {
     nama,
     ttl,
     jenis_kelamin,
     agama,
+    status_perkawinan,
     pekerjaan,
     alamat,
     rt_rw,
@@ -193,13 +196,14 @@ const updateSuratKtpAll = (req, res) => {
   } = req.body;
 
   const sqlQuery = `
-    UPDATE surat_ket_ktp
+    UPDATE surat_ket_kk
     SET 
       nama = ?, 
       ttl = ?, 
       jenis_kelamin = ?, 
       agama = ?, 
       pekerjaan = ?, 
+      status_perkawinan = ?,
       alamat = ?, 
       rt_rw = ?, 
       status_admin = ?,
@@ -216,6 +220,7 @@ const updateSuratKtpAll = (req, res) => {
       ttl,
       jenis_kelamin,
       agama,
+      status_perkawinan,
       pekerjaan,
       alamat,
       rt_rw,
@@ -243,13 +248,14 @@ const updateSuratKtpAll = (req, res) => {
 };
 
 // Controller function untuk mengupdate semua detail surat tidak mampu berdasarkan ID
-const updateSuratKtpAllUser = (req, res) => {
+const updateSuratKkAllUser = (req, res) => {
   const { hashed_id } = req.params;
   const {
     nama,
     ttl,
     jenis_kelamin,
     agama,
+    status_perkawinan,
     pekerjaan,
     alamat,
     rt_rw,
@@ -260,12 +266,13 @@ const updateSuratKtpAllUser = (req, res) => {
   } = req.body;
 
   const sqlQuery = `
-    UPDATE surat_ket_ktp
+    UPDATE surat_ket_kk
     SET 
       nama = ?, 
       ttl = ?, 
       jenis_kelamin = ?, 
       agama = ?, 
+      status_perkawinan,
       pekerjaan = ?, 
       alamat = ?, 
       rt_rw = ?, 
@@ -282,6 +289,7 @@ const updateSuratKtpAllUser = (req, res) => {
       ttl,
       jenis_kelamin,
       agama,
+      status_perkawinan,
       pekerjaan,
       alamat,
       rt_rw,
@@ -307,13 +315,12 @@ const updateSuratKtpAllUser = (req, res) => {
   );
 };
 
-// Controller function untuk mengupdate nomor telepon dan email surat domisili berdasarkan hashed_id
-const updateEmailKetKTP = (req, res) => {
+const updateEmailKetKk = (req, res) => {
   const { hashed_id } = req.params;
   const { no_telepon, email, keperluan } = req.body;
 
   const sqlQuery = `
-    UPDATE surat_ket_ktp
+    UPDATE surat_ket_kk
     SET no_telepon = ?, email = ?, keperluan = ?
     WHERE hashed_id = ?
   `;
@@ -323,10 +330,15 @@ const updateEmailKetKTP = (req, res) => {
     [no_telepon, email, keperluan, hashed_id],
     (err, result) => {
       if (err) {
-        console.error("Error updating nomor and email");
+        console.error("Error updating nomor and email:", err);
         return res
           .status(500)
           .json({ error: "Error updating nomor and email" });
+      }
+      if (result.affectedRows === 0) {
+        return res
+          .status(404)
+          .json({ error: "No record found with given hashed_id" });
       }
       return res.json({
         message: "nomor and email updated successfully",
@@ -342,7 +354,7 @@ const updateStatusDiterima = (req, res) => {
 
   // SQL query untuk mengubah status_admin menjadi 'diterima'
   const sqlQuery = `
-    UPDATE surat_ket_ktp
+    UPDATE surat_ket_kk
     SET status_admin = 'diterima'
     WHERE id = ?
   `;
@@ -357,8 +369,8 @@ const updateStatusDiterima = (req, res) => {
   });
 };
 
-const getSuratKtpMenunggu = (req, res) => {
-  const sqlQuery = `SELECT * FROM surat_ket_ktp WHERE status_admin = 'menunggu'`;
+const getSuratKkMenunggu = (req, res) => {
+  const sqlQuery = `SELECT * FROM surat_ket_kk WHERE status_admin = 'menunggu'`;
 
   db.query(sqlQuery, (err, result) => {
     if (err) {
@@ -380,10 +392,10 @@ const getSuratKtpMenunggu = (req, res) => {
 };
 
 // Controller function untuk mendapatkan semua surat tidak mampu yang sudah diterima oleh admin
-const getSuratKtpTerima = (req, res) => {
+const getSuratKkTerima = (req, res) => {
   // SQL query untuk mendapatkan semua data surat tidak mampu
   const sqlQuery = `
-    SELECT * FROM surat_ket_ktp where status_admin = 'diterima'
+    SELECT * FROM surat_ket_kk where status_admin = 'diterima'
   `;
 
   db.query(sqlQuery, (err, result) => {
@@ -400,12 +412,12 @@ const getSuratKtpTerima = (req, res) => {
 };
 
 // Controller function untuk menghapus surat tidak mampu berdasarkan ID
-const deleteKetKTP = (req, res) => {
+const deleteKetKk = (req, res) => {
   const { id } = req.params;
 
   // SQL query untuk menghapus surat tidak mampu berdasarkan ID
   const sqlQuery = `
-    DELETE FROM surat_ket_ktp
+    DELETE FROM surat_ket_kk
     WHERE id = ?
   `;
 
@@ -420,14 +432,14 @@ const deleteKetKTP = (req, res) => {
 };
 
 module.exports = {
-  createSuratKtp,
-  getSuratKetKTP,
-  getSuratKtpMenunggu,
-  getSuratKtpTerima,
-  deleteKetKTP,
+  createSuratKk,
+  getSuratKetKk,
+  getSuratKkMenunggu,
+  getSuratKkTerima,
+  deleteKetKk,
   updateStatusDiterima,
-  updateEmailKetKTP,
-  updateSuratKtpAll,
-  getKetKTPAdmin,
-  updateSuratKtpAllUser,
+  updateEmailKetKk,
+  updateSuratKkAll,
+  getKetKkAdmin,
+  updateSuratKkAllUser,
 };

@@ -35,21 +35,28 @@ function generateUniqueNumber() {
   return uniqueNumber.substring(0, 10); // Potong untuk mendapatkan panjang maksimal 10 karakter
 }
 
-// Controller function untuk membuat surat keterangan KTP baru
-const createSuratKtp = (req, res) => {
+// Controller function untuk membuat surat keterangan ahli waris baru
+const createSuratAhliWaris = (req, res) => {
   // Handle file upload using multer middleware
   upload.single("ktp_image")(req, res, (err) => {
     if (err) {
       return res.status(400).json({ error: "Error uploading file" });
     }
     const {
-      nama,
-      jenis_kelamin,
-      ttl,
-      agama,
-      pekerjaan,
-      alamat,
-      rt_rw,
+      nama_pemberi,
+      jenis_kelamin_pemberi,
+      tempat_lahir_pemberi,
+      tanggal_lahir_pemberi,
+      pekerjaan_pemberi,
+      agama_pemberi,
+      alamat_pemberi,
+      nama_penerima,
+      jenis_kelamin_penerima,
+      tempat_lahir_penerima,
+      tanggal_lahir_penerima,
+      pekerjaan_penerima,
+      agama_penerima,
+      alamat_penerima,
       keperluan,
       no_telepon,
       email,
@@ -63,9 +70,9 @@ const createSuratKtp = (req, res) => {
 
     // SQL query to insert data into database
     const sqlQuery = `
-    INSERT INTO surat_ket_ktp
-    (nama, tanggal, jenis_kelamin, ttl, agama, pekerjaan, alamat, rt_rw, status_admin, keperluan, ktp_image, no_telepon, email, jenis_surat, hashed_id, nomor_surat)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'menunggu', ?, ?, ?, ?, 'Surat Keterangan KTP', ?, ?)
+    INSERT INTO surat_ket_ahli_waris
+    (nama_pemberi, tanggal, jenis_kelamin_pemberi, tempat_lahir_pemberi, tanggal_lahir_pemberi, pekerjaan_pemberi, agama_pemberi, alamat_pemberi, nama_penerima, jenis_kelamin_penerima, tempat_lahir_penerima, tanggal_lahir_penerima, pekerjaan_penerima, agama_penerima, alamat_penerima, keperluan, ktp_image, no_telepon, email, hashed_id, nomor_surat)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
 
     // Get local timezone date using moment-timezone
@@ -75,14 +82,21 @@ const createSuratKtp = (req, res) => {
     const hashedId = newId; // Use random ID as hashed_id
 
     const values = [
-      nama,
+      nama_pemberi,
       tanggal,
-      jenis_kelamin,
-      ttl,
-      agama,
-      pekerjaan,
-      alamat,
-      rt_rw,
+      jenis_kelamin_pemberi,
+      tempat_lahir_pemberi,
+      tanggal_lahir_pemberi,
+      pekerjaan_pemberi,
+      agama_pemberi,
+      alamat_pemberi,
+      nama_penerima,
+      jenis_kelamin_penerima,
+      tempat_lahir_penerima,
+      tanggal_lahir_penerima,
+      pekerjaan_penerima,
+      agama_penerima,
+      alamat_penerima,
       keperluan,
       ktp_image,
       no_telepon,
@@ -102,7 +116,7 @@ const createSuratKtp = (req, res) => {
 
       // Include hashed ID in response to client
       return res.json({
-        message: "surat_ket_ktp created successfully",
+        message: "surat_ket_ahli_waris created successfully",
         newId,
         redirectUrl: `/download/${newId}`, // Example URL with random ID
       });
@@ -110,13 +124,13 @@ const createSuratKtp = (req, res) => {
   });
 };
 
-// Controller function untuk mendapatkan surat domisili berdasarkan hashed_id
-const getSuratKetKTP = (req, res) => {
+// Controller function untuk mendapatkan surat ahli waris berdasarkan hashed_id
+const getSuratAhliWaris = (req, res) => {
   const { hashed_id } = req.params;
 
   // SQL query to retrieve surat data based on hashed_id
   const sqlQuery = `
-    SELECT * FROM surat_ket_ktp
+    SELECT * FROM surat_ket_ahli_waris
     WHERE hashed_id = ?
   `;
 
@@ -129,26 +143,26 @@ const getSuratKetKTP = (req, res) => {
     if (result.length === 0) {
       return res.status(404).json({
         error:
-          "surat ket domisili dengan id ini tidak ada atau status admin belum diterima",
+          "surat ket ahli waris dengan id ini tidak ada atau status admin belum diterima",
       });
     }
 
     const data = result[0];
 
     return res.json({
-      message: "surat ket domisili data retrieved successfully",
+      message: "surat ket ahli waris data retrieved successfully",
       data,
     });
   });
 };
 
-// Controller function untuk mendapatkan surat domisili admin berdasarkan ID
-const getKetKTPAdmin = (req, res) => {
+// Controller function untuk mendapatkan surat ahli waris admin berdasarkan ID
+const getAhliWarisAdmin = (req, res) => {
   const { id } = req.params;
 
   // SQL query to retrieve surat data based on ID with status_admin 'diterima'
   const sqlQuery = `
-    SELECT * FROM surat_ket_ktp
+    SELECT * FROM surat_ket_ahli_waris
     WHERE id = ?
   `;
 
@@ -161,159 +175,115 @@ const getKetKTPAdmin = (req, res) => {
     if (result.length === 0) {
       return res.status(404).json({
         error:
-          "surat ket domisili dengan id ini tidak ada atau status admin belum diterima",
+          "surat ket ahli waris dengan id ini tidak ada atau status admin belum diterima",
       });
     }
 
     const data = result[0];
 
     return res.json({
-      message: "surat ket domisili data retrieved successfully",
+      message: "surat ket ahli waris data retrieved successfully",
       data,
     });
   });
 };
 
-// Controller function untuk mengupdate semua detail surat tidak mampu berdasarkan ID
-const updateSuratKtpAll = (req, res) => {
+// Controller function untuk mengupdate semua detail surat ahli waris berdasarkan ID
+const updateSuratAhliWarisAll = (req, res) => {
   const { id } = req.params;
   const {
-    nama,
-    ttl,
-    jenis_kelamin,
-    agama,
-    pekerjaan,
-    alamat,
-    rt_rw,
-    status_admin,
-    no_telepon,
-    email,
+    nama_pemberi,
+    jenis_kelamin_pemberi,
+    tempat_lahir_pemberi,
+    tanggal_lahir_pemberi,
+    pekerjaan_pemberi,
+    agama_pemberi,
+    alamat_pemberi,
+    nama_penerima,
+    jenis_kelamin_penerima,
+    tempat_lahir_penerima,
+    tanggal_lahir_penerima,
+    pekerjaan_penerima,
+    agama_penerima,
+    alamat_penerima,
     keperluan,
     ktp_image,
+    no_telepon,
+    email,
+    status_admin,
   } = req.body;
 
   const sqlQuery = `
-    UPDATE surat_ket_ktp
+    UPDATE surat_ket_ahli_waris
     SET 
-      nama = ?, 
-      ttl = ?, 
-      jenis_kelamin = ?, 
-      agama = ?, 
-      pekerjaan = ?, 
-      alamat = ?, 
-      rt_rw = ?, 
-      status_admin = ?,
+      nama_pemberi = ?, 
+      jenis_kelamin_pemberi = ?, 
+      tempat_lahir_pemberi = ?, 
+      tanggal_lahir_pemberi = ?, 
+      pekerjaan_pemberi = ?, 
+      agama_pemberi = ?, 
+      alamat_pemberi = ?, 
+      nama_penerima = ?, 
+      jenis_kelamin_penerima = ?, 
+      tempat_lahir_penerima = ?, 
+      tanggal_lahir_penerima = ?, 
+      pekerjaan_penerima = ?, 
+      agama_penerima = ?, 
+      alamat_penerima = ?, 
+      keperluan = ?, 
+      ktp_image = ?, 
       no_telepon = ?, 
       email = ?, 
-      keperluan = ?,
-      ktp_image = ?
+      status_admin = ?
     WHERE id = ?`;
 
   db.query(
     sqlQuery,
     [
-      nama,
-      ttl,
-      jenis_kelamin,
-      agama,
-      pekerjaan,
-      alamat,
-      rt_rw,
-      status_admin,
-      no_telepon,
-      email,
+      nama_pemberi,
+      jenis_kelamin_pemberi,
+      tempat_lahir_pemberi,
+      tanggal_lahir_pemberi,
+      pekerjaan_pemberi,
+      agama_pemberi,
+      alamat_pemberi,
+      nama_penerima,
+      jenis_kelamin_penerima,
+      tempat_lahir_penerima,
+      tanggal_lahir_penerima,
+      pekerjaan_penerima,
+      agama_penerima,
+      alamat_penerima,
       keperluan,
       ktp_image,
+      no_telepon,
+      email,
+      status_admin,
       id,
     ],
     (err, result) => {
       if (err) {
-        console.error("Error updating all surat_ket_ktp: ", err);
+        console.error("Error updating all surat_ket_ahli_waris: ", err);
         return res
           .status(500)
-          .json({ error: "Error updating all surat_ket_ktp" });
+          .json({ error: "Error updating all surat_ket_ahli_waris" });
       }
 
       return res.json({
-        message: "all surat_ket_ktp updated successfully",
+        message: "all surat_ket_ahli_waris updated successfully",
         updatedId: id,
       });
     }
   );
 };
 
-// Controller function untuk mengupdate semua detail surat tidak mampu berdasarkan ID
-const updateSuratKtpAllUser = (req, res) => {
-  const { hashed_id } = req.params;
-  const {
-    nama,
-    ttl,
-    jenis_kelamin,
-    agama,
-    pekerjaan,
-    alamat,
-    rt_rw,
-    no_telepon,
-    email,
-    keperluan,
-    ktp_image,
-  } = req.body;
-
-  const sqlQuery = `
-    UPDATE surat_ket_ktp
-    SET 
-      nama = ?, 
-      ttl = ?, 
-      jenis_kelamin = ?, 
-      agama = ?, 
-      pekerjaan = ?, 
-      alamat = ?, 
-      rt_rw = ?, 
-      no_telepon = ?, 
-      email = ?, 
-      keperluan = ?,
-      ktp_image = ?
-    WHERE hashed_id = ?`;
-
-  db.query(
-    sqlQuery,
-    [
-      nama,
-      ttl,
-      jenis_kelamin,
-      agama,
-      pekerjaan,
-      alamat,
-      rt_rw,
-      no_telepon,
-      email,
-      keperluan,
-      ktp_image,
-      hashed_id,
-    ],
-    (err, result) => {
-      if (err) {
-        console.error("Error updating all surat_ket_ktp: ", err);
-        return res
-          .status(500)
-          .json({ error: "Error updating all surat_ket_ktp" });
-      }
-
-      return res.json({
-        message: "all surat_ket_ktp updated successfully",
-        updatedId: hashed_id,
-      });
-    }
-  );
-};
-
-// Controller function untuk mengupdate nomor telepon dan email surat domisili berdasarkan hashed_id
-const updateEmailKetKTP = (req, res) => {
+// Controller function untuk mengupdate nomor telepon dan email surat ahli waris berdasarkan hashed_id
+const updateEmailAhliWaris = (req, res) => {
   const { hashed_id } = req.params;
   const { no_telepon, email, keperluan } = req.body;
 
   const sqlQuery = `
-    UPDATE surat_ket_ktp
+    UPDATE surat_ket_ahli_waris
     SET no_telepon = ?, email = ?, keperluan = ?
     WHERE hashed_id = ?
   `;
@@ -323,10 +293,15 @@ const updateEmailKetKTP = (req, res) => {
     [no_telepon, email, keperluan, hashed_id],
     (err, result) => {
       if (err) {
-        console.error("Error updating nomor and email");
+        console.error("Error updating nomor and email:", err);
         return res
           .status(500)
           .json({ error: "Error updating nomor and email" });
+      }
+      if (result.affectedRows === 0) {
+        return res
+          .status(404)
+          .json({ error: "No record found with given hashed_id" });
       }
       return res.json({
         message: "nomor and email updated successfully",
@@ -342,7 +317,7 @@ const updateStatusDiterima = (req, res) => {
 
   // SQL query untuk mengubah status_admin menjadi 'diterima'
   const sqlQuery = `
-    UPDATE surat_ket_ktp
+    UPDATE surat_ket_ahli_waris
     SET status_admin = 'diterima'
     WHERE id = ?
   `;
@@ -357,8 +332,8 @@ const updateStatusDiterima = (req, res) => {
   });
 };
 
-const getSuratKtpMenunggu = (req, res) => {
-  const sqlQuery = `SELECT * FROM surat_ket_ktp WHERE status_admin = 'menunggu'`;
+const getSuratAhliWarisMenunggu = (req, res) => {
+  const sqlQuery = `SELECT * FROM surat_ket_ahli_waris WHERE status_admin = 'menunggu'`;
 
   db.query(sqlQuery, (err, result) => {
     if (err) {
@@ -367,23 +342,24 @@ const getSuratKtpMenunggu = (req, res) => {
     }
 
     if (result.length === 0) {
-      return res
-        .status(404)
-        .json({ skckData: [], message: "No pending surat_ket_ktp found" });
+      return res.status(404).json({
+        skckData: [],
+        message: "No pending surat_ket_ahli_waris found",
+      });
     }
 
     return res.json({
-      message: "All surat_ket_ktp data retrieved successfully",
+      message: "All surat_ket_ahli_waris data retrieved successfully",
       skckData: result,
     });
   });
 };
 
-// Controller function untuk mendapatkan semua surat tidak mampu yang sudah diterima oleh admin
-const getSuratKtpTerima = (req, res) => {
-  // SQL query untuk mendapatkan semua data surat tidak mampu
+// Controller function untuk mendapatkan semua surat ahli waris yang sudah diterima oleh admin
+const getSuratAhliWarisTerima = (req, res) => {
+  // SQL query untuk mendapatkan semua data surat ahli waris
   const sqlQuery = `
-    SELECT * FROM surat_ket_ktp where status_admin = 'diterima'
+    SELECT * FROM surat_ket_ahli_waris where status_admin = 'diterima'
   `;
 
   db.query(sqlQuery, (err, result) => {
@@ -393,19 +369,19 @@ const getSuratKtpTerima = (req, res) => {
     }
 
     return res.json({
-      message: "All surat_ket_ktp data retrieved successfully",
+      message: "All surat_ket_ahli_waris data retrieved successfully",
       skckData: result,
     });
   });
 };
 
-// Controller function untuk menghapus surat tidak mampu berdasarkan ID
-const deleteKetKTP = (req, res) => {
+// Controller function untuk menghapus surat ahli waris berdasarkan ID
+const deleteAhliWaris = (req, res) => {
   const { id } = req.params;
 
-  // SQL query untuk menghapus surat tidak mampu berdasarkan ID
+  // SQL query untuk menghapus surat ahli waris berdasarkan ID
   const sqlQuery = `
-    DELETE FROM surat_ket_ktp
+    DELETE FROM surat_ket_ahli_waris
     WHERE id = ?
   `;
 
@@ -420,14 +396,13 @@ const deleteKetKTP = (req, res) => {
 };
 
 module.exports = {
-  createSuratKtp,
-  getSuratKetKTP,
-  getSuratKtpMenunggu,
-  getSuratKtpTerima,
-  deleteKetKTP,
+  createSuratAhliWaris,
+  getSuratAhliWaris,
+  getSuratAhliWarisMenunggu,
+  getSuratAhliWarisTerima,
+  deleteAhliWaris,
   updateStatusDiterima,
-  updateEmailKetKTP,
-  updateSuratKtpAll,
-  getKetKTPAdmin,
-  updateSuratKtpAllUser,
+  updateEmailAhliWaris,
+  updateSuratAhliWarisAll,
+  getAhliWarisAdmin,
 };

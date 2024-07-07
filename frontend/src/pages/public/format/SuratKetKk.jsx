@@ -5,9 +5,10 @@ import io from "socket.io-client";
 import "../../../css/public/latters/SuratTidakMampu.css";
 import Navbar from "../../../components/public/Navbar";
 
-function SuratKetKtp() {
+function SuratKetKk() {
   const [nama, setNama] = useState("");
   const [jenisKelamin, setJenisKelamin] = useState("");
+  const [status_perkawinan, setStatausPerkawinan] = useState("");
   const [ttl, setTtl] = useState("");
   const [pekerjaan, setPekerjaan] = useState("");
   const [agama, setAgama] = useState("");
@@ -57,6 +58,7 @@ function SuratKetKtp() {
       if (
         !nama ||
         !jenisKelamin ||
+        !status_perkawinan ||
         !ttl ||
         !pekerjaan ||
         !agama ||
@@ -71,6 +73,7 @@ function SuratKetKtp() {
       const formData = new FormData();
       formData.append("nama", nama);
       formData.append("jenis_kelamin", jenisKelamin);
+      formData.append("status_perkawinan", status_perkawinan);
       formData.append("ttl", ttl);
       formData.append("pekerjaan", pekerjaan);
       formData.append("agama", agama);
@@ -80,7 +83,7 @@ function SuratKetKtp() {
       formData.append("ktp_image", ktpImage);
 
       const response = await axios.post(
-        "http://localhost:5050/api/buat-surat-ket-ktp",
+        "http://localhost:5050/api/buat-surat-ket-kk",
         formData,
         {
           headers: {
@@ -100,6 +103,7 @@ function SuratKetKtp() {
 
         setNama("");
         setJenisKelamin("");
+        setStatausPerkawinan("");
         setTtl("");
         setPekerjaan("");
         setAgama("");
@@ -109,7 +113,7 @@ function SuratKetKtp() {
         setKtpImage("");
         setKtpImagePreview(""); // Reset gambar preview
 
-        navigate(`/persyaratan-surat-ket-ktp/${newId}`);
+        navigate(`/persyaratan-surat-ket-kk/${newId}`);
       } else {
         alert("Terjadi kesalahan dalam mendapatkan ID dari server.");
       }
@@ -136,7 +140,7 @@ function SuratKetKtp() {
           <form onSubmit={handleSubmit} className="block">
             <div className="text-center mb-6 mt-16">
               <h5 className="text-blue-600 text-2xl font-bold">
-                FORM SURAT KETERANGAN KTP
+                FORM SURAT KETERANGAN KK
               </h5>
             </div>
             <div className="mb-4">
@@ -206,6 +210,24 @@ function SuratKetKtp() {
                 <option value="">Pilih Agama</option>
                 <option value="Islam">Islam</option>
                 <option value="Kristen">Kristen</option>
+              </select>
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="status_perkawinan"
+                className="block text-sm font-medium text-gray-700"
+              >
+                <b>Status Perkawinan</b>
+              </label>
+              <select
+                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                id="status_perkawinan"
+                value={status_perkawinan}
+                onChange={(e) => setStatausPerkawinan(e.target.value)}
+              >
+                <option value="">Pilih Status Perkawinan</option>
+                <option value="kawin">Kawin</option>
+                <option value="belum kawin">Belum Kawin</option>
               </select>
             </div>
 
@@ -321,4 +343,4 @@ function SuratKetKtp() {
   );
 }
 
-export default SuratKetKtp;
+export default SuratKetKk;

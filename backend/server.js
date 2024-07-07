@@ -17,6 +17,8 @@ const domisiliRoute = require("./routes/surat_ket_domisiliRoute");
 const tidakMampuRoute = require("./routes/surat_tidak_mampuRoute");
 const suratRequestRoute = require("./routes/suratRequestRoute");
 const suratKetKtpRoute = require("./routes/surat_ket_kptRoute");
+const suratKetKkRoute = require("./routes/suratKetKkRoute");
+const suratKetAhliWaris = require("./routes/suratKetAhliWarisRoute");
 
 const app = express();
 const PORT = 5050;
@@ -76,6 +78,8 @@ app.use("/api", domisiliRoute);
 app.use("/api", tidakMampuRoute);
 app.use("/api", suratRequestRoute);
 app.use("/api", suratKetKtpRoute);
+app.use("/api", suratKetKkRoute);
+app.use("/api", suratKetAhliWaris);
 
 app.use("/admin", requireLogin, (req, res, next) => {
   next();

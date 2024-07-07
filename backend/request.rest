@@ -7,4 +7,4 @@ Content-Type: application/json
     "password": "4mb4n024"
 }
 ###
-GET http://localhost:5050/api/lihat-surat-ket-ktp-menunggu
+GET http://localhost:5050/api/lihat-surat-ahli-waris-menunggu
