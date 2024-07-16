@@ -35,26 +35,35 @@ function generateUniqueNumber() {
   return uniqueNumber.substring(0, 10); // Potong untuk mendapatkan panjang maksimal 10 karakter
 }
 
-// Controller function untuk membuat surat keterangan KTP baru
-const createSuratKk = (req, res) => {
+// Controller function untuk membuat surat ket beasiswa unipa baru
+const createSuratKetBeasiswaUnipa = (req, res) => {
   // Handle file upload using multer middleware
   upload.single("ktp_image")(req, res, (err) => {
     if (err) {
       return res.status(400).json({ error: "Error uploading file" });
     }
     const {
-      nama,
-      jenis_kelamin,
-      ttl,
-      agama,
-      status_perkawinan,
-      pekerjaan,
-      alamat,
-      rt_rw,
+      nama_tua,
+      jenis_kelamin_tua,
+      tempat_lahir_tua,
+      tanggal_lahir_tua,
+      pekerjaan_tua,
+      agama_tua,
+      alamat_tua,
+      umur_tua,
+      penghasilan_tua,
+      nama_anak,
+      jenis_kelamin_anak,
+      tempat_lahir_anak,
+      tanggal_lahir_anak,
+      agama_anak,
+      alamat_anak,
+      nim,
+      fakultas,
+      prodi,
       keperluan,
       no_telepon,
       email,
-      tempat_lahir,
     } = req.body;
 
     // Get image file name from req.file
@@ -65,9 +74,9 @@ const createSuratKk = (req, res) => {
 
     // SQL query to insert data into database
     const sqlQuery = `
-    INSERT INTO surat_ket_kk
-    (nama, tanggal, jenis_kelamin, ttl, agama, pekerjaan, alamat, rt_rw, status_perkawinan, status_admin, keperluan, ktp_image, no_telepon, email, jenis_surat, hashed_id, nomor_surat, tempat_lahir)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'menunggu', ?, ?, ?, ?, 'Surat Keterangan KTP', ?, ?, ?)
+    INSERT INTO surat_ket_beasiswa_unipa
+    (nama_tua, tanggal, jenis_kelamin_tua, tempat_lahir_tua, tanggal_lahir_tua, pekerjaan_tua, agama_tua, alamat_tua, umur_tua, penghasilan_tua, status_admin, nama_anak, jenis_kelamin_anak, tempat_lahir_anak, tanggal_lahir_anak, agama_anak, alamat_anak, nim, fakultas, prodi, keperluan, ktp_image, no_telepon, email, jenis_surat, hashed_id, nomor_surat)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'menunggu', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'Surat Ket Beasiswa Unipa', ?, ?)
   `;
 
     // Get local timezone date using moment-timezone
@@ -77,22 +86,31 @@ const createSuratKk = (req, res) => {
     const hashedId = newId; // Use random ID as hashed_id
 
     const values = [
-      nama,
+      nama_tua,
       tanggal,
-      jenis_kelamin,
-      ttl,
-      agama,
-      status_perkawinan,
-      pekerjaan,
-      alamat,
-      rt_rw,
+      jenis_kelamin_tua,
+      tempat_lahir_tua,
+      tanggal_lahir_tua,
+      pekerjaan_tua,
+      agama_tua,
+      alamat_tua,
+      umur_tua,
+      penghasilan_tua,
+      nama_anak,
+      jenis_kelamin_anak,
+      tempat_lahir_anak,
+      tanggal_lahir_anak,
+      agama_anak,
+      alamat_anak,
+      nim,
+      fakultas,
+      prodi,
       keperluan,
       ktp_image,
       no_telepon,
       email,
       hashedId, // Add hashedId to values
       nomor_surat,
-      tempat_lahir,
     ];
 
     // Execute SQL query
@@ -102,11 +120,11 @@ const createSuratKk = (req, res) => {
         return res.status(500).json({ error: "Error in running query" });
       }
 
-      console.log("Data saved to database with ID:", newId);
+      console.log("Data saved to database with ID:");
 
       // Include hashed ID in response to client
       return res.json({
-        message: "surat_ket_ktp created successfully",
+        message: "surat_ket_beasiswa_unipa created successfully",
         newId,
         redirectUrl: `/download/${newId}`, // Example URL with random ID
       });
@@ -115,12 +133,12 @@ const createSuratKk = (req, res) => {
 };
 
 // Controller function untuk mendapatkan surat domisili berdasarkan hashed_id
-const getSuratKetKk = (req, res) => {
+const getBeasiswa = (req, res) => {
   const { hashed_id } = req.params;
 
   // SQL query to retrieve surat data based on hashed_id
   const sqlQuery = `
-    SELECT * FROM surat_ket_kk
+    SELECT * FROM surat_ket_beasiswa_unipa
     WHERE hashed_id = ?
   `;
 
@@ -133,30 +151,30 @@ const getSuratKetKk = (req, res) => {
     if (result.length === 0) {
       return res.status(404).json({
         error:
-          "surat ket domisili dengan id ini tidak ada atau status admin belum diterima",
+          "surat ket beasiswa unipa dengan id ini tidak ada atau status admin belum diterima",
       });
     }
 
     const data = result[0];
 
     return res.json({
-      message: "surat ket domisili data retrieved successfully",
+      message: "surat ket beasiswa unipa data retrieved successfully",
       data,
     });
   });
 };
 
 // Controller function untuk mendapatkan surat domisili admin berdasarkan ID
-const getKetKkAdmin = (req, res) => {
+const getBeasiswaAdmin = (req, res) => {
   const { id } = req.params;
 
   // SQL query to retrieve surat data based on ID with status_admin 'diterima'
   const sqlQuery = `
-    SELECT * FROM surat_ket_kk
+    SELECT * FROM surat_ket_beasiswa_unipa
     WHERE id = ?
   `;
 
-  db.query(sqlQuery, [id], (err, result) => {
+  db.query(sqlQuery, id, (err, result) => {
     if (err) {
       console.error("Error running query:", err);
       return res.status(500).json({ error: "Error in running query" });
@@ -165,171 +183,219 @@ const getKetKkAdmin = (req, res) => {
     if (result.length === 0) {
       return res.status(404).json({
         error:
-          "surat ket domisili dengan id ini tidak ada atau status admin belum diterima",
+          "surat ket beasiswa unipa dengan id ini tidak ada atau status admin belum diterima",
       });
     }
 
     const data = result[0];
 
     return res.json({
-      message: "surat ket domisili data retrieved successfully",
+      message: "surat ket beasiswa unipa data retrieved successfully",
       data,
     });
   });
 };
 
-// Controller function untuk mengupdate semua detail surat tidak mampu berdasarkan ID
-const updateSuratKkAll = (req, res) => {
+// Controller function untuk mengupdate semua detail surat beasiswa berdasarkan ID
+const updateSuratBeasiswaAll = (req, res) => {
   const { id } = req.params;
   const {
-    nama,
-    ttl,
-    jenis_kelamin,
-    agama,
-    status_perkawinan,
-    pekerjaan,
-    alamat,
-    rt_rw,
+    nama_tua,
+    tempat_lahir_tua,
+    tanggal_lahir_tua,
+    jenis_kelamin_tua,
+    agama_tua,
+    pekerjaan_tua,
+    alamat_tua,
+    umur_tua,
+    penghasilan_tua,
     status_admin,
+    nama_anak,
+    tempat_lahir_anak,
+    tanggal_lahir_anak,
+    jenis_kelamin_anak,
+    agama_anak,
+    alamat_anak,
+    nim,
+    fakultas,
+    prodi,
+    keperluan,
     no_telepon,
     email,
-    keperluan,
-    ktp_image,
-    tempat_lahir,
   } = req.body;
 
   const sqlQuery = `
-    UPDATE surat_ket_kk
+    UPDATE surat_ket_beasiswa_unipa
     SET 
-      nama = ?, 
-      ttl = ?, 
-      jenis_kelamin = ?, 
-      agama = ?, 
-      pekerjaan = ?, 
-      status_perkawinan = ?,
-      alamat = ?, 
-      rt_rw = ?, 
+      nama_tua = ?, 
+      tempat_lahir_tua = ?, 
+      tanggal_lahir_tua = ?, 
+      jenis_kelamin_tua = ?, 
+      agama_tua = ?, 
+      pekerjaan_tua = ?, 
+      alamat_tua = ?, 
+      umur_tua = ?, 
+      penghasilan_tua = ?, 
       status_admin = ?,
-      no_telepon = ?, 
-      email = ?, 
+      nama_anak = ?,
+      tempat_lahir_anak = ?,
+      tanggal_lahir_anak = ?,
+      jenis_kelamin_anak = ?,
+      agama_anak = ?,
+      alamat_anak = ?,
+      nim = ?,
+      fakultas = ?,
+      prodi = ?,
       keperluan = ?,
-      ktp_image = ?,
-      tempat_lahir = ?
+      no_telepon = ?, 
+      email = ?
     WHERE id = ?`;
 
   db.query(
     sqlQuery,
     [
-      nama,
-      ttl,
-      jenis_kelamin,
-      agama,
-      status_perkawinan,
-      pekerjaan,
-      alamat,
-      rt_rw,
+      nama_tua,
+      tempat_lahir_tua,
+      tanggal_lahir_tua,
+      jenis_kelamin_tua,
+      agama_tua,
+      pekerjaan_tua,
+      alamat_tua,
+      umur_tua,
+      penghasilan_tua,
       status_admin,
+      nama_anak,
+      tempat_lahir_anak,
+      tanggal_lahir_anak,
+      jenis_kelamin_anak,
+      agama_anak,
+      alamat_anak,
+      nim,
+      fakultas,
+      prodi,
+      keperluan,
       no_telepon,
       email,
-      keperluan,
-      ktp_image,
-      tempat_lahir,
       id,
     ],
     (err, result) => {
       if (err) {
-        console.error("Error updating all surat_ket_ktp: ", err);
+        console.error("Error updating all surat beasiswa: ", err);
         return res
           .status(500)
-          .json({ error: "Error updating all surat_ket_ktp" });
+          .json({ error: "Error updating all surat beasiswa" });
       }
 
       return res.json({
-        message: "all surat_ket_ktp updated successfully",
+        message: "all surat beasiswa updating successfully",
         updatedId: id,
       });
     }
   );
 };
 
-// Controller function untuk mengupdate semua detail surat tidak mampu berdasarkan ID
-const updateSuratKkAllUser = (req, res) => {
+// Controller function untuk mengupdate semua detail surat tidak mampu berdasarkan hashed_id
+const updateSuratBeasiswaAllUser = (req, res) => {
   const { hashed_id } = req.params;
   const {
-    nama,
-    ttl,
-    jenis_kelamin,
-    agama,
-    status_perkawinan,
-    pekerjaan,
-    alamat,
-    rt_rw,
+    nama_tua,
+    tempat_lahir_tua,
+    tanggal_lahir_tua,
+    jenis_kelamin_tua,
+    agama_tua,
+    pekerjaan_tua,
+    alamat_tua,
+    umur_tua,
+    penghasilan_tua,
+    nama_anak,
+    tempat_lahir_anak,
+    tanggal_lahir_anak,
+    jenis_kelamin_anak,
+    agama_anak,
+    alamat_anak,
+    nim,
+    fakultas,
+    prodi,
+    keperluan,
     no_telepon,
     email,
-    keperluan,
-    ktp_image,
-    tempat_lahir,
   } = req.body;
 
   const sqlQuery = `
-    UPDATE surat_ket_kk
+    UPDATE surat_ket_beasiswa_unipa
     SET 
-      nama = ?, 
-      ttl = ?, 
-      jenis_kelamin = ?, 
-      agama = ?, 
-      status_perkawinan,
-      pekerjaan = ?, 
-      alamat = ?, 
-      rt_rw = ?, 
-      no_telepon = ?, 
-      email = ?, 
+      nama_tua = ?, 
+      tempat_lahir_tua = ?, 
+      tanggal_lahir_tua = ?, 
+      jenis_kelamin_tua = ?, 
+      agama_tua = ?, 
+      pekerjaan_tua = ?, 
+      alamat_tua = ?, 
+      umur_tua = ?, 
+      penghasilan_tua = ?, 
+      nama_anak = ?,
+      tempat_lahir_anak = ?,
+      tanggal_lahir_anak = ?,
+      jenis_kelamin_anak = ?,
+      agama_anak = ?,
+      alamat_anak = ?,
+      nim = ?,
+      fakultas = ?,
+      prodi = ?,
       keperluan = ?,
-      ktp_image = ?,
-      tempat_lahir = ?,
-
+      no_telepon = ?, 
+      email = ?
     WHERE hashed_id = ?`;
 
   db.query(
     sqlQuery,
     [
-      nama,
-      ttl,
-      jenis_kelamin,
-      agama,
-      status_perkawinan,
-      pekerjaan,
-      alamat,
-      rt_rw,
+      nama_tua,
+      tempat_lahir_tua,
+      tanggal_lahir_tua,
+      jenis_kelamin_tua,
+      agama_tua,
+      pekerjaan_tua,
+      alamat_tua,
+      umur_tua,
+      penghasilan_tua,
+      nama_anak,
+      tempat_lahir_anak,
+      tanggal_lahir_anak,
+      jenis_kelamin_anak,
+      agama_anak,
+      alamat_anak,
+      nim,
+      fakultas,
+      prodi,
+      keperluan,
       no_telepon,
       email,
-      keperluan,
-      ktp_image,
-      tempat_lahir,
       hashed_id,
     ],
     (err, result) => {
       if (err) {
-        console.error("Error updating all surat_ket_ktp: ", err);
+        console.error("Error updating all surat beasiswa: ", err);
         return res
           .status(500)
-          .json({ error: "Error updating all surat_ket_ktp" });
+          .json({ error: "Error updating all surat beasiswa" });
       }
 
       return res.json({
-        message: "all surat_ket_ktp updated successfully",
+        message: "all surat beasiswa updating successfully",
         updatedId: hashed_id,
       });
     }
   );
 };
 
-const updateEmailKetKk = (req, res) => {
+// Controller function untuk mengupdate nomor telepon dan email surat beasiswa berdasarkan hashed_id
+const updateBeasiswa = (req, res) => {
   const { hashed_id } = req.params;
   const { no_telepon, email, keperluan } = req.body;
 
   const sqlQuery = `
-    UPDATE surat_ket_kk
+    UPDATE surat_ket_beasiswa_unipa
     SET no_telepon = ?, email = ?, keperluan = ?
     WHERE hashed_id = ?
   `;
@@ -339,18 +405,13 @@ const updateEmailKetKk = (req, res) => {
     [no_telepon, email, keperluan, hashed_id],
     (err, result) => {
       if (err) {
-        console.error("Error updating nomor and email:", err);
+        console.error("Error updating nomor and email");
         return res
           .status(500)
           .json({ error: "Error updating nomor and email" });
       }
-      if (result.affectedRows === 0) {
-        return res
-          .status(404)
-          .json({ error: "No record found with given hashed_id" });
-      }
       return res.json({
-        message: "nomor and email updated successfully",
+        message: "nomor and email updating successfully",
         updatedId: hashed_id,
       });
     }
@@ -363,7 +424,7 @@ const updateStatusDiterima = (req, res) => {
 
   // SQL query untuk mengubah status_admin menjadi 'diterima'
   const sqlQuery = `
-    UPDATE surat_ket_kk
+    UPDATE surat_ket_beasiswa_unipa
     SET status_admin = 'diterima'
     WHERE id = ?
   `;
@@ -378,8 +439,9 @@ const updateStatusDiterima = (req, res) => {
   });
 };
 
-const getSuratKkMenunggu = (req, res) => {
-  const sqlQuery = `SELECT * FROM surat_ket_kk WHERE status_admin = 'menunggu'`;
+// Controller function untuk mendapatkan semua surat beasiswa yang menunggu persetujuan admin
+const getSuratBeasiswaMenunggu = (req, res) => {
+  const sqlQuery = `SELECT * FROM  surat_ket_beasiswa_unipa WHERE status_admin = 'menunggu'`;
 
   db.query(sqlQuery, (err, result) => {
     if (err) {
@@ -390,21 +452,21 @@ const getSuratKkMenunggu = (req, res) => {
     if (result.length === 0) {
       return res
         .status(404)
-        .json({ skckData: [], message: "No pending surat_ket_ktp found" });
+        .json({ message: "No pending surat beasiswa found" });
     }
 
     return res.json({
-      message: "All surat_ket_ktp data retrieved successfully",
-      skckData: result,
+      message: "All surat_beasiswa data retrieved successfully",
+      data: result,
     });
   });
 };
 
-// Controller function untuk mendapatkan semua surat tidak mampu yang sudah diterima oleh admin
-const getSuratKkTerima = (req, res) => {
-  // SQL query untuk mendapatkan semua data surat tidak mampu
+// Controller function untuk mendapatkan semua surat beasiswa yang sudah diterima oleh admin
+const getSuratBeasiswaTerima = (req, res) => {
+  // SQL query untuk mendapatkan semua data surat beasiswa
   const sqlQuery = `
-    SELECT * FROM surat_ket_kk where status_admin = 'diterima'
+    SELECT * FROM surat_ket_beasiswa_unipa where status_admin = 'diterima'
   `;
 
   db.query(sqlQuery, (err, result) => {
@@ -414,19 +476,19 @@ const getSuratKkTerima = (req, res) => {
     }
 
     return res.json({
-      message: "All surat_ket_ktp data retrieved successfully",
-      skckData: result,
+      message: "All surat_beasiswa data retrieved successfully",
+      data: result,
     });
   });
 };
 
-// Controller function untuk menghapus surat tidak mampu berdasarkan ID
-const deleteKetKk = (req, res) => {
+// Controller function untuk menghapus surat beasiswa berdasarkan ID
+const deleteBeasiswa = (req, res) => {
   const { id } = req.params;
 
-  // SQL query untuk menghapus surat tidak mampu berdasarkan ID
+  // SQL query untuk menghapus surat beasiswa berdasarkan ID
   const sqlQuery = `
-    DELETE FROM surat_ket_kk
+    DELETE FROM surat_ket_beasiswa_unipa
     WHERE id = ?
   `;
 
@@ -436,19 +498,22 @@ const deleteKetKk = (req, res) => {
       return res.status(500).json({ error: "Error in running query" });
     }
 
-    return res.json({ message: "SKCK deleted successfully", deletedId: id });
+    return res.json({
+      message: "Surat beasiswa deleted successfully",
+      deletedId: id,
+    });
   });
 };
 
 module.exports = {
-  createSuratKk,
-  getSuratKetKk,
-  getSuratKkMenunggu,
-  getSuratKkTerima,
-  deleteKetKk,
+  createSuratKetBeasiswaUnipa,
+  getBeasiswa,
+  getSuratBeasiswaMenunggu,
+  getSuratBeasiswaTerima,
+  deleteBeasiswa,
   updateStatusDiterima,
-  updateEmailKetKk,
-  updateSuratKkAll,
-  getKetKkAdmin,
-  updateSuratKkAllUser,
+  updateBeasiswa,
+  updateSuratBeasiswaAll,
+  getBeasiswaAdmin,
+  updateSuratBeasiswaAllUser,
 };

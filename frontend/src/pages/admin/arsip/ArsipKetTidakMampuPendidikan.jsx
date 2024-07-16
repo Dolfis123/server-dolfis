@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { FaEdit, FaTrash } from "react-icons/fa";
+// import { FaEdit, FaTrash } from "react-icons/fa";
 import { Modal, Button } from "react-bootstrap";
 import Sidebar from "../../../components/admin/Sidebar";
 import Navbar from "../../../components/admin/Navbar";
+import { Link } from "react-router-dom";
+import { FaPlus, FaEdit, FaEye, FaTrash } from "react-icons/fa";
 
 function ArsipKetTidakMampuPendidikan() {
   const [data, setData] = useState([]);
@@ -134,7 +136,7 @@ function ArsipKetTidakMampuPendidikan() {
         <Navbar />
         <div className="p-6">
           <div className="container mx-auto mt-6 order p-4 bg-white shadow-md rounded-md">
-            <h3 className="text-center text-2xl font-bold mb-4">Permintaan</h3>
+            <h3 className="text-center text-2xl font-bold mb-4">Arsip</h3>
             <input
               type="text"
               className="form-control mb-4 p-2 border border-gray-300 rounded w-1/2"
@@ -178,12 +180,12 @@ function ArsipKetTidakMampuPendidikan() {
                     <td className="border p-2">{surat.surat_tidak_mampu}</td>
                     <td className="border p-2">{surat.alamat}</td>
                     <td className="border p-2 flex space-x-2">
-                      {/* <Link
-                        to={`/detail-surat-domisili/${surat.id}`}
+                      <Link
+                        to={`/format-surat-tidak-mampu-pendidikan/${surat.id}`}
                         className="text-blue-500 hover:text-blue-700"
                       >
                         <FaEye />
-                      </Link> */}
+                      </Link>
                       <button
                         onClick={() => showEditModalHandler(surat)}
                         className="text-yellow-500 hover:text-yellow-700"
@@ -207,7 +209,7 @@ function ArsipKetTidakMampuPendidikan() {
                 onClick={handlePreviousPage}
                 disabled={currentPage === 1}
               >
-                Previous
+                Sebelumnya
               </button>
               <span className="mx-4">
                 Page {currentPage} of {totalPages}
@@ -217,7 +219,7 @@ function ArsipKetTidakMampuPendidikan() {
                 onClick={handleNextPage}
                 disabled={currentPage === totalPages}
               >
-                Next
+                Selanjutnya
               </button>
             </div>
           </div>
@@ -228,6 +230,7 @@ function ArsipKetTidakMampuPendidikan() {
         show={showDeleteModal}
         onHide={() => setShowDeleteModal(false)}
         backdropClassName="custom-backdrop"
+        style={{ color: "black" }}
       >
         <Modal.Header closeButton>
           <Modal.Title>Konfirmasi Hapus Surat</Modal.Title>

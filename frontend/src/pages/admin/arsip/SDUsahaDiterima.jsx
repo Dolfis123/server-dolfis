@@ -194,7 +194,7 @@ function SDUsahaDiterima() {
                 onClick={handlePreviousPage}
                 disabled={currentPage === 1}
               >
-                Previous
+                Sebelumnya
               </button>
               <span>
                 Page {currentPage} of {totalPages}
@@ -204,7 +204,7 @@ function SDUsahaDiterima() {
                 onClick={handleNextPage}
                 disabled={currentPage === totalPages}
               >
-                Next
+                Selanjutnya
               </button>
             </div>
           </div>
@@ -215,6 +215,7 @@ function SDUsahaDiterima() {
         show={showDeleteModal}
         onHide={() => setShowDeleteModal(false)}
         backdropClassName="custom-backdrop"
+        style={{ color: "black" }}
       >
         <Modal.Header closeButton>
           <Modal.Title>Konfirmasi Hapus Surat</Modal.Title>

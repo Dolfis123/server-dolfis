@@ -5,27 +5,38 @@ import { Modal, Button } from "react-bootstrap";
 import Sidebar from "../../../components/admin/Sidebar";
 import Navbar from "../../../components/admin/Navbar";
 
-function SuratDomisiliUmum() {
+function PermintaanBeasiswaUnipa() {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 7;
 
   const [selectSurat, setSelectSurat] = useState({
     id: "",
-    nama: "",
-    tempat_lahir: "",
-    ttl: "",
-    jk: "",
-    agama: "",
-    pekerjaan: "",
-    alamat: "",
-    rt_rw: "",
+    nama_tua: "",
+    tanggal: "",
+    jenis_kelamin_tua: "",
+    tempat_lahir_tua: "",
+    tanggal_lahir_tua: "",
+    pekerjaan_tua: "",
+    agama_tua: "",
+    alamat_tua: "",
+    umur_tua: "",
+    penghasilan_tua: "",
     status_admin: "",
+    nama_anak: "",
+    jenis_kelamin_anak: "",
+    tempat_lahir_anak: "",
+    tanggal_lahir_anak: "",
+    agama_anak: "",
+    alamat_anak: "",
+    nim: "",
+    fakultas: "",
+    prodi: "",
     keperluan: "",
-    ktp: "",
     ktp_image: "",
     no_telepon: "",
     email: "",
+    alamat: "",
   });
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -39,24 +50,18 @@ function SuratDomisiliUmum() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5050/api/lihat-surat-ket-domisili-menunggu-umum"
+        "http://localhost:5050/api/lihat-surat-beasiswa-menunggu"
       );
 
-      if (response.data && response.data.skckData) {
-        const sortedData = response.data.skckData.sort(
-          (a, b) => new Date(a.tanggal) - new Date(b.tanggal)
-        );
+      const sortedData = response.data.data.sort(
+        (a, b) => new Date(a.tanggal) - new Date(b.tanggal)
+      );
 
-        const reversedData = sortedData.reverse();
+      const reversedData = sortedData.reverse();
 
-        setData(reversedData);
-      } else {
-        console.error("Data format error:", response.data);
-        alert("Invalid data format received from server.");
-      }
+      setData(reversedData);
     } catch (error) {
       console.error("Error fetching data:", error);
-      alert("Failed to fetch data. Please try again later.");
     }
   };
 
@@ -69,7 +74,7 @@ function SuratDomisiliUmum() {
     if (selectSurat.id) {
       const id = selectSurat.id;
       axios
-        .delete(`http://localhost:5050/api/hapus-surat-domisili-umum/${id}`)
+        .delete(`http://localhost:5050/api/hapus-surat-beasiswa/${id}`)
         .then((res) => {
           console.log("Data berhasil dihapus");
           setShowDeleteModal(false);
@@ -89,13 +94,14 @@ function SuratDomisiliUmum() {
       const id = selectSurat.id;
       axios
         .put(
-          `http://localhost:5050/api/update-all-domisili-umum/${id}`,
+          `http://localhost:5050/api/update-all-surat-beasiswa/${id}`,
           selectSurat
         )
         .then((res) => {
           console.log("Data berhasil diubah");
           setShowEditModal(false);
           fetchData();
+          location.reload();
         })
         .catch((err) => console.log(err));
     }
@@ -134,7 +140,9 @@ function SuratDomisiliUmum() {
         <Navbar />
         <div className="p-6">
           <div className="container mx-auto mt-6 order p-4 bg-white shadow-md rounded-md">
-            <h3 className="text-center text-2xl font-bold mb-4">Permintaan</h3>
+            <h3 className="text-center text-2xl font-bold mb-4">
+              Permintaan Surat Beasiswa Unipa
+            </h3>
             <input
               type="text"
               className="form-control mb-4 p-2 border border-gray-300 rounded w-1/2"
@@ -149,8 +157,8 @@ function SuratDomisiliUmum() {
                   <th className="border p-2">Gambar</th>
                   <th className="border p-2">No Pendaftaran</th>
                   <th className="border p-2">Tanggal</th>
-                  <th className="border p-2">Nama</th>
-                  <th className="border p-2">Jenis Surat</th>
+                  <th className="border p-2">Nama Tua</th>
+                  <th className="border p-2">Nama Anak</th>
                   <th className="border p-2">Alamat</th>
                   <th className="border p-2">Aksi</th>
                 </tr>
@@ -165,7 +173,7 @@ function SuratDomisiliUmum() {
                       {surat.ktp_image && (
                         <img
                           src={`http://localhost:5050/api/images/${surat.ktp_image}`}
-                          alt={surat.nama}
+                          alt={surat.nama_tua}
                           className="w-16 h-16 object-cover"
                         />
                       )}
@@ -174,16 +182,10 @@ function SuratDomisiliUmum() {
                     <td className="border p-2">
                       {new Date(surat.tanggal).toLocaleDateString()}
                     </td>
-                    <td className="border p-2">{surat.nama}</td>
-                    <td className="border p-2">{surat.jenis_surat}</td>
-                    <td className="border p-2">{surat.alamat}</td>
+                    <td className="border p-2">{surat.nama_tua}</td>
+                    <td className="border p-2">{surat.nama_anak}</td>
+                    <td className="border p-2">{surat.alamat_tua}</td>
                     <td className="border p-2 flex space-x-2">
-                      {/* <Link
-                        to={`/detail-surat-domisili/${surat.id}`}
-                        className="text-blue-500 hover:text-blue-700"
-                      >
-                        <FaEye />
-                      </Link> */}
                       <button
                         onClick={() => showEditModalHandler(surat)}
                         className="text-yellow-500 hover:text-yellow-700"
@@ -217,7 +219,7 @@ function SuratDomisiliUmum() {
                 onClick={handleNextPage}
                 disabled={currentPage === totalPages}
               >
-                Selajutnya
+                Selanjutnya
               </button>
             </div>
           </div>
@@ -228,7 +230,6 @@ function SuratDomisiliUmum() {
         show={showDeleteModal}
         onHide={() => setShowDeleteModal(false)}
         backdropClassName="custom-backdrop"
-        style={{ color: "black" }}
       >
         <Modal.Header closeButton>
           <Modal.Title>Konfirmasi Hapus Surat</Modal.Title>
@@ -248,6 +249,7 @@ function SuratDomisiliUmum() {
         show={showEditModal}
         onHide={() => setShowEditModal(false)}
         backdropClassName="custom-backdrop"
+        style={{ color: "black" }}
       >
         <Modal.Header closeButton>
           <Modal.Title>Edit Surat</Modal.Title>
@@ -255,105 +257,206 @@ function SuratDomisiliUmum() {
         <Modal.Body>
           <form>
             <div className="form-group">
-              <label htmlFor="nama">Nama</label>
+              <label htmlFor="nama_tua">Nama Tua</label>
               <input
                 type="text"
-                id="nama"
-                name="nama"
-                className="form-control  hover:bg-gray-200"
-                value={selectSurat.nama}
+                id="nama_tua"
+                name="nama_tua"
+                className="form-control hover:bg-gray-200"
+                value={selectSurat.nama_tua}
                 onChange={handleChange}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="tempat_lahir">Tempat Lahir</label>
+              <label htmlFor="tempat_lahir_tua">Tempat Lahir Tua</label>
               <input
                 type="text"
-                id="tempat_lahir"
-                name="tempat_lahir"
-                className="form-control  hover:bg-gray-200"
-                value={selectSurat.tempat_lahir}
+                id="tempat_lahir_tua"
+                name="tempat_lahir_tua"
+                className="form-control hover:bg-gray-200"
+                value={selectSurat.tempat_lahir_tua}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="tanggal_lahir_tua">Tanggal Lahir Tua</label>
+              <input
+                type="date"
+                id="tanggal_lahir_tua"
+                name="tanggal_lahir_tua"
+                className="form-control hover:bg-gray-200"
+                value={selectSurat.tanggal_lahir_tua}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="jenis_kelamin_tua">Jenis Kelamin Tua</label>
+              <input
+                type="text"
+                id="jenis_kelamin_tua"
+                name="jenis_kelamin_tua"
+                className="form-control hover:bg-gray-200"
+                value={selectSurat.jenis_kelamin_tua}
                 onChange={handleChange}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="ttl">Tanggal Lahir</label>
+              <label htmlFor="agama_tua">Agama Tua</label>
               <input
                 type="text"
-                id="ttl"
-                name="ttl"
-                className="form-control  hover:bg-gray-200"
-                value={selectSurat.ttl}
+                id="agama_tua"
+                name="agama_tua"
+                className="form-control hover:bg-gray-200"
+                value={selectSurat.agama_tua}
                 onChange={handleChange}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="jk">Jenis Kelamin</label>
+              <label htmlFor="pekerjaan_tua">Pekerjaan Tua</label>
               <input
                 type="text"
-                id="jk"
-                name="jk"
-                className="form-control  hover:bg-gray-200"
-                value={selectSurat.jk}
+                id="pekerjaan_tua"
+                name="pekerjaan_tua"
+                className="form-control hover:bg-gray-200"
+                value={selectSurat.pekerjaan_tua}
                 onChange={handleChange}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="agama">Agama</label>
+              <label htmlFor="alamat_tua">Alamat Tua</label>
               <input
                 type="text"
-                id="agama"
-                name="agama"
-                className="form-control  hover:bg-gray-200"
-                value={selectSurat.agama}
+                id="alamat_tua"
+                name="alamat_tua"
+                className="form-control hover:bg-gray-200"
+                value={selectSurat.alamat_tua}
                 onChange={handleChange}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="pekerjaan">Pekerjaan</label>
+              <label htmlFor="umur_tua">Umur Tua</label>
               <input
                 type="text"
-                id="pekerjaan"
-                name="pekerjaan"
-                className="form-control  hover:bg-gray-200"
-                value={selectSurat.pekerjaan}
+                id="umur_tua"
+                name="umur_tua"
+                className="form-control hover:bg-gray-200"
+                value={selectSurat.umur_tua}
                 onChange={handleChange}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="alamat">Alamat</label>
+              <label htmlFor="penghasilan_tua">Penghasilan Tua</label>
               <input
                 type="text"
-                id="alamat"
-                name="alamat"
-                className="form-control  hover:bg-gray-200"
-                value={selectSurat.alamat}
+                id="penghasilan_tua"
+                name="penghasilan_tua"
+                className="form-control hover:bg-gray-200"
+                value={selectSurat.penghasilan_tua}
                 onChange={handleChange}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="rt_rw">RT/RW</label>
+              <label htmlFor="nama_anak">Nama Anak</label>
               <input
                 type="text"
-                id="rt_rw"
-                name="rt_rw"
-                className="form-control  hover:bg-gray-200"
-                value={selectSurat.rt_rw}
+                id="nama_anak"
+                name="nama_anak"
+                className="form-control hover:bg-gray-200"
+                value={selectSurat.nama_anak}
                 onChange={handleChange}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="status_admin">Status Admin</label>
-              <select
-                id="status_admin"
-                name="status_admin"
-                className="form-control  hover:bg-gray-200"
-                value={selectSurat.status_admin}
+              <label htmlFor="tempat_lahir_anak">Tempat Lahir Anak</label>
+              <input
+                type="text"
+                id="tempat_lahir_anak"
+                name="tempat_lahir_anak"
+                className="form-control hover:bg-gray-200"
+                value={selectSurat.tempat_lahir_anak}
                 onChange={handleChange}
-              >
-                <option value="menunggu">Menunggu</option>
-                <option value="diterima">Diterima</option>
-              </select>
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="tanggal_lahir_anak">Tanggal Lahir Anak</label>
+              <input
+                type="date"
+                id="tanggal_lahir_anak"
+                name="tanggal_lahir_anak"
+                className="form-control hover:bg-gray-200"
+                value={selectSurat.tanggal_lahir_anak}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="jenis_kelamin_anak">Jenis Kelamin Anak</label>
+              <input
+                type="text"
+                id="jenis_kelamin_anak"
+                name="jenis_kelamin_anak"
+                className="form-control hover:bg-gray-200"
+                value={selectSurat.jenis_kelamin_anak}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="agama_anak">Agama Anak</label>
+              <input
+                type="text"
+                id="agama_anak"
+                name="agama_anak"
+                className="form-control hover:bg-gray-200"
+                value={selectSurat.agama_anak}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="alamat_anak">Alamat Anak</label>
+              <input
+                type="text"
+                id="alamat_anak"
+                name="alamat_anak"
+                className="form-control hover:bg-gray-200"
+                value={selectSurat.alamat_anak}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="nim">NIM</label>
+              <input
+                type="text"
+                id="nim"
+                name="nim"
+                className="form-control hover:bg-gray-200"
+                value={selectSurat.nim}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="fakultas">Fakultas</label>
+              <input
+                type="text"
+                id="fakultas"
+                name="fakultas"
+                className="form-control hover:bg-gray-200"
+                value={selectSurat.fakultas}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="prodi">Prodi</label>
+              <input
+                type="text"
+                id="prodi"
+                name="prodi"
+                className="form-control hover:bg-gray-200"
+                value={selectSurat.prodi}
+                onChange={handleChange}
+              />
             </div>
             <div className="form-group">
               <label htmlFor="keperluan">Keperluan</label>
@@ -361,19 +464,8 @@ function SuratDomisiliUmum() {
                 type="text"
                 id="keperluan"
                 name="keperluan"
-                className="form-control  hover:bg-gray-200"
+                className="form-control hover:bg-gray-200"
                 value={selectSurat.keperluan}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="ktp">KTP</label>
-              <input
-                type="text"
-                id="ktp"
-                name="ktp"
-                className="form-control  hover:bg-gray-200"
-                value={selectSurat.ktp}
                 onChange={handleChange}
               />
             </div>
@@ -383,7 +475,7 @@ function SuratDomisiliUmum() {
                 type="text"
                 id="ktp_image"
                 name="ktp_image"
-                className="form-control  hover:bg-gray-200"
+                className="form-control hover:bg-gray-200"
                 value={selectSurat.ktp_image}
                 onChange={handleChange}
               />
@@ -394,7 +486,7 @@ function SuratDomisiliUmum() {
                 type="text"
                 id="no_telepon"
                 name="no_telepon"
-                className="form-control  hover:bg-gray-200"
+                className="form-control hover:bg-gray-200"
                 value={selectSurat.no_telepon}
                 onChange={handleChange}
               />
@@ -405,10 +497,23 @@ function SuratDomisiliUmum() {
                 type="text"
                 id="email"
                 name="email"
-                className="form-control  hover:bg-gray-200"
+                className="form-control hover:bg-gray-200"
                 value={selectSurat.email}
                 onChange={handleChange}
               />
+            </div>
+            <div className="form-group">
+              <label htmlFor="status_admin">Status Admin</label>
+              <select
+                id="status_admin"
+                name="status_admin"
+                className="form-control hover:bg-gray-200"
+                value={selectSurat.status_admin}
+                onChange={handleChange}
+              >
+                <option value="menunggu">Menunggu</option>
+                <option value="diterima">Diterima</option>
+              </select>
             </div>
           </form>
         </Modal.Body>
@@ -425,4 +530,4 @@ function SuratDomisiliUmum() {
   );
 }
 
-export default SuratDomisiliUmum;
+export default PermintaanBeasiswaUnipa;

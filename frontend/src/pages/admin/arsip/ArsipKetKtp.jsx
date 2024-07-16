@@ -199,7 +199,7 @@ function ArsipKetKtp() {
                 onClick={handlePreviousPage}
                 disabled={currentPage === 1}
               >
-                Previous
+                Sebelumnya
               </button>
               <span className="mx-4">
                 Page {currentPage} of {totalPages}
@@ -209,7 +209,7 @@ function ArsipKetKtp() {
                 onClick={handleNextPage}
                 disabled={currentPage === totalPages}
               >
-                Next
+                Selanjutnya
               </button>
             </div>
           </div>
@@ -220,6 +220,7 @@ function ArsipKetKtp() {
         show={showDeleteModal}
         onHide={() => setShowDeleteModal(false)}
         backdropClassName="custom-backdrop"
+        style={{ color: "black" }}
       >
         <Modal.Header closeButton>
           <Modal.Title>Konfirmasi Hapus Surat</Modal.Title>

@@ -102,7 +102,7 @@ function Sidebar({ activeComponent }) {
                       to="/permintaan-domisili-usaha"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                     >
-                      Permintaan Domisili Usaha
+                      Permintaan Surat Domisili Usaha
                     </Link>
                   </li>
                   <li>
@@ -110,7 +110,7 @@ function Sidebar({ activeComponent }) {
                       to="/permintaan-surat-domisili-umum"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                     >
-                      Surat ket Domisili Umum
+                      Permintaan Surat Domisili Umum
                     </Link>
                   </li>
                   <li>
@@ -118,7 +118,7 @@ function Sidebar({ activeComponent }) {
                       to="/permintaan-surat-tidak-mampu-pendidikan"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                     >
-                      Surat ket Tidak Mampu Pendidikan
+                      Permintaan Surat Tidak Mampu Pendidikan
                     </Link>
                   </li>
                   <li>
@@ -126,7 +126,31 @@ function Sidebar({ activeComponent }) {
                       to="/permintaan-surat-ket-ktp"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                     >
-                      Permintaan Ket KTP
+                      Permintaan Surat Ket KTP
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/permintaan-surat-ket-kk"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                    >
+                      Permintaan Surat Ket KK
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/permintaan-surat-ket-ahli-waris"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                    >
+                      Permintaan Surat Ket Ahli Waris
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/permintaan-surat-ket-beasiswa-unipa"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                    >
+                      Permintaan Surat Ket Beasiswa Unipa
                     </Link>
                   </li>
                 </ul>
@@ -174,7 +198,7 @@ function Sidebar({ activeComponent }) {
                       to="/arsip-ket-domisili-umum"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                     >
-                      Surat Ket Domisili Umum
+                      Arsip Surat Ket Domisili Umum
                     </Link>
                   </li>
                   <li>
@@ -182,7 +206,7 @@ function Sidebar({ activeComponent }) {
                       to="/arsip-ket-tidak-mampu-pendidikan"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                     >
-                      Surat Ket Tidak Mampu Pendidikan
+                      Arsip Surat Ket Tidak Mampu Pendidikan
                     </Link>
                   </li>
                   <li>
@@ -190,15 +214,31 @@ function Sidebar({ activeComponent }) {
                       to="/arsip-ket-ktp"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                     >
-                      Surat Ket KTP
+                      Arsip Surat Ket KTP
                     </Link>
                   </li>
                   <li>
                     <Link
-                      to="/arsip/surat-keluar"
+                      to="/arsip-ket-kk"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                     >
-                      Surat Keluar
+                      Arsip Surat Ket KK
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/arsip-surat-ket-ahli-waris"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                    >
+                      Arsip Surat Ket Ahli Waris
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/arsip-surat-ket-beasiswa-unipa"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                    >
+                      Arsip Surat Ket Beasiswa Unipa
                     </Link>
                   </li>
                   <li>

@@ -35,28 +35,23 @@ function SuratTidakMampuPendidikan() {
   useEffect(() => {
     fetchData();
   }, [searchTerm]);
-
   const fetchData = async () => {
     try {
       const response = await axios.get(
         "http://localhost:5050/api/lihat-surat-tidak-mampu-menunggu"
       );
 
-      if (response.data && response.data.skckData) {
-        const sortedData = response.data.skckData.sort(
-          (a, b) => new Date(a.tanggal) - new Date(b.tanggal)
-        );
+      // Asumsikan bahwa setiap item dalam response.data.data memiliki atribut 'tanggal' atau 'createdAt'
+      const sortedData = response.data.skckData.sort(
+        (a, b) => new Date(a.tanggal) - new Date(b.tanggal)
+      );
 
-        const reversedData = sortedData.reverse();
+      // Membalik urutan data sehingga yang terbaru berada di atas
+      const reversedData = sortedData.reverse();
 
-        setData(reversedData);
-      } else {
-        console.error("Data format error:", response.data);
-        alert("Invalid data format received from server.");
-      }
+      setData(reversedData);
     } catch (error) {
       console.error("Error fetching data:", error);
-      alert("Failed to fetch data. Please try again later.");
     }
   };
 
@@ -96,6 +91,7 @@ function SuratTidakMampuPendidikan() {
           console.log("Data berhasil diubah");
           setShowEditModal(false);
           fetchData();
+          window.location.reload();
         })
         .catch((err) => console.log(err));
     }
@@ -207,7 +203,7 @@ function SuratTidakMampuPendidikan() {
                 onClick={handlePreviousPage}
                 disabled={currentPage === 1}
               >
-                Previous
+                Sebelumnya
               </button>
               <span className="mx-4">
                 Page {currentPage} of {totalPages}
@@ -217,7 +213,7 @@ function SuratTidakMampuPendidikan() {
                 onClick={handleNextPage}
                 disabled={currentPage === totalPages}
               >
-                Next
+                Selanjutnya
               </button>
             </div>
           </div>
@@ -228,6 +224,7 @@ function SuratTidakMampuPendidikan() {
         show={showDeleteModal}
         onHide={() => setShowDeleteModal(false)}
         backdropClassName="custom-backdrop"
+        style={{ color: "black" }}
       >
         <Modal.Header closeButton>
           <Modal.Title>Konfirmasi Hapus Surat</Modal.Title>

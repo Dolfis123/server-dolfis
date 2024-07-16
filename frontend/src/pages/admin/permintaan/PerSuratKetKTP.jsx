@@ -40,27 +40,17 @@ function PerSuratKetKTP() {
         "http://localhost:5050/api/lihat-surat-ket-ktp-menunggu"
       );
 
-      console.log("Response from backend:", response.data); // Tambahkan ini untuk melihat respons
+      // Asumsikan bahwa setiap item dalam response.data.data memiliki atribut 'tanggal' atau 'createdAt'
+      const sortedData = response.data.skckData.sort(
+        (a, b) => new Date(a.tanggal) - new Date(b.tanggal)
+      );
 
-      if (response.data && response.data.skckData) {
-        const sortedData = response.data.skckData.sort(
-          (a, b) => new Date(a.tanggal) - new Date(b.tanggal)
-        );
+      // Membalik urutan data sehingga yang terbaru berada di atas
+      const reversedData = sortedData.reverse();
 
-        const reversedData = sortedData.reverse();
-
-        if (reversedData.length === 0) {
-          alert("Data kosong.");
-        } else {
-          setData(reversedData);
-        }
-      } else {
-        console.error("Data format error:", response.data);
-        alert("Invalid data format received from server.");
-      }
+      setData(reversedData);
     } catch (error) {
       console.error("Error fetching data:", error);
-      alert("Failed to fetch data. Please try again later.");
     }
   };
 
@@ -206,7 +196,7 @@ function PerSuratKetKTP() {
                 onClick={handlePreviousPage}
                 disabled={currentPage === 1}
               >
-                Previous
+                Sebelumnya
               </button>
               <span className="mx-4">
                 Page {currentPage} of {totalPages}
@@ -216,7 +206,7 @@ function PerSuratKetKTP() {
                 onClick={handleNextPage}
                 disabled={currentPage === totalPages}
               >
-                Next
+                Selanjutnya
               </button>
             </div>
           </div>
@@ -246,6 +236,7 @@ function PerSuratKetKTP() {
         show={showEditModal}
         onHide={() => setShowEditModal(false)}
         backdropClassName="custom-backdrop"
+        style={{ color: "black" }}
       >
         <Modal.Header closeButton>
           <Modal.Title>Edit Surat</Modal.Title>

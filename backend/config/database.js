@@ -2,10 +2,10 @@ const mysql = require("mysql");
 
 // Konfigurasi koneksi database
 const dbConfig = {
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "db_lurah_sowi",
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 };
 
 // Buat koneksi ke database menggunakan konfigurasi yang telah ditentukan

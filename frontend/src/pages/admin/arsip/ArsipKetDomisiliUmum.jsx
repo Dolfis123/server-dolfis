@@ -207,7 +207,7 @@ function ArsipKetDomisiliUmum() {
                 onClick={handlePreviousPage}
                 disabled={currentPage === 1}
               >
-                Previous
+                Selanjutnya
               </button>
               <span className="mx-4">
                 Page {currentPage} of {totalPages}
@@ -217,7 +217,7 @@ function ArsipKetDomisiliUmum() {
                 onClick={handleNextPage}
                 disabled={currentPage === totalPages}
               >
-                Next
+                Sebelumnya
               </button>
             </div>
           </div>
@@ -228,6 +228,7 @@ function ArsipKetDomisiliUmum() {
         show={showDeleteModal}
         onHide={() => setShowDeleteModal(false)}
         backdropClassName="custom-backdrop"
+        style={{ color: "black" }}
       >
         <Modal.Header closeButton>
           <Modal.Title>Konfirmasi Hapus Surat</Modal.Title>

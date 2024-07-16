@@ -5,7 +5,7 @@ import { Modal, Button } from "react-bootstrap";
 import Sidebar from "../../../components/admin/Sidebar";
 import Navbar from "../../../components/admin/Navbar";
 
-function SuratDomisiliUmum() {
+function PermintaanKetKK() {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 7;
@@ -13,19 +13,19 @@ function SuratDomisiliUmum() {
   const [selectSurat, setSelectSurat] = useState({
     id: "",
     nama: "",
-    tempat_lahir: "",
     ttl: "",
-    jk: "",
+    jenis_kelamin: "",
     agama: "",
     pekerjaan: "",
     alamat: "",
     rt_rw: "",
+    status_perkawinan: "",
     status_admin: "",
     keperluan: "",
-    ktp: "",
     ktp_image: "",
     no_telepon: "",
     email: "",
+    tempat_lahir: "",
   });
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -39,24 +39,20 @@ function SuratDomisiliUmum() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5050/api/lihat-surat-ket-domisili-menunggu-umum"
+        "http://localhost:5050/api/lihat-surat-diterima-kk"
       );
 
-      if (response.data && response.data.skckData) {
-        const sortedData = response.data.skckData.sort(
-          (a, b) => new Date(a.tanggal) - new Date(b.tanggal)
-        );
+      // Asumsikan bahwa setiap item dalam response.data.data memiliki atribut 'tanggal' atau 'createdAt'
+      const sortedData = response.data.skckData.sort(
+        (a, b) => new Date(a.tanggal) - new Date(b.tanggal)
+      );
 
-        const reversedData = sortedData.reverse();
+      // Membalik urutan data sehingga yang terbaru berada di atas
+      const reversedData = sortedData.reverse();
 
-        setData(reversedData);
-      } else {
-        console.error("Data format error:", response.data);
-        alert("Invalid data format received from server.");
-      }
+      setData(reversedData);
     } catch (error) {
       console.error("Error fetching data:", error);
-      alert("Failed to fetch data. Please try again later.");
     }
   };
 
@@ -69,7 +65,7 @@ function SuratDomisiliUmum() {
     if (selectSurat.id) {
       const id = selectSurat.id;
       axios
-        .delete(`http://localhost:5050/api/hapus-surat-domisili-umum/${id}`)
+        .delete(`http://localhost:5050/api/hapus-surat-ket-kk/${id}`)
         .then((res) => {
           console.log("Data berhasil dihapus");
           setShowDeleteModal(false);
@@ -89,13 +85,14 @@ function SuratDomisiliUmum() {
       const id = selectSurat.id;
       axios
         .put(
-          `http://localhost:5050/api/update-all-domisili-umum/${id}`,
+          `http://localhost:5050/api/update-all-surat-ket-kk/${id}`,
           selectSurat
         )
         .then((res) => {
           console.log("Data berhasil diubah");
           setShowEditModal(false);
           fetchData();
+          location.reload();
         })
         .catch((err) => console.log(err));
     }
@@ -134,7 +131,9 @@ function SuratDomisiliUmum() {
         <Navbar />
         <div className="p-6">
           <div className="container mx-auto mt-6 order p-4 bg-white shadow-md rounded-md">
-            <h3 className="text-center text-2xl font-bold mb-4">Permintaan</h3>
+            <h3 className="text-center text-2xl font-bold mb-4">
+              Arsip Kartu Keluarga
+            </h3>
             <input
               type="text"
               className="form-control mb-4 p-2 border border-gray-300 rounded w-1/2"
@@ -178,12 +177,6 @@ function SuratDomisiliUmum() {
                     <td className="border p-2">{surat.jenis_surat}</td>
                     <td className="border p-2">{surat.alamat}</td>
                     <td className="border p-2 flex space-x-2">
-                      {/* <Link
-                        to={`/detail-surat-domisili/${surat.id}`}
-                        className="text-blue-500 hover:text-blue-700"
-                      >
-                        <FaEye />
-                      </Link> */}
                       <button
                         onClick={() => showEditModalHandler(surat)}
                         className="text-yellow-500 hover:text-yellow-700"
@@ -217,7 +210,7 @@ function SuratDomisiliUmum() {
                 onClick={handleNextPage}
                 disabled={currentPage === totalPages}
               >
-                Selajutnya
+                Selanjutnya
               </button>
             </div>
           </div>
@@ -260,7 +253,7 @@ function SuratDomisiliUmum() {
                 type="text"
                 id="nama"
                 name="nama"
-                className="form-control  hover:bg-gray-200"
+                className="form-control hover:bg-gray-200"
                 value={selectSurat.nama}
                 onChange={handleChange}
               />
@@ -271,30 +264,32 @@ function SuratDomisiliUmum() {
                 type="text"
                 id="tempat_lahir"
                 name="tempat_lahir"
-                className="form-control  hover:bg-gray-200"
+                className="form-control hover:bg-gray-200"
                 value={selectSurat.tempat_lahir}
                 onChange={handleChange}
               />
             </div>
+
             <div className="form-group">
               <label htmlFor="ttl">Tanggal Lahir</label>
               <input
-                type="text"
+                type="date"
                 id="ttl"
                 name="ttl"
-                className="form-control  hover:bg-gray-200"
+                className="form-control hover:bg-gray-200"
                 value={selectSurat.ttl}
                 onChange={handleChange}
               />
             </div>
+
             <div className="form-group">
-              <label htmlFor="jk">Jenis Kelamin</label>
+              <label htmlFor="jenis_kelamin">Jenis Kelamin</label>
               <input
                 type="text"
-                id="jk"
-                name="jk"
-                className="form-control  hover:bg-gray-200"
-                value={selectSurat.jk}
+                id="jenis_kelamin"
+                name="jenis_kelamin"
+                className="form-control hover:bg-gray-200"
+                value={selectSurat.jenis_kelamin}
                 onChange={handleChange}
               />
             </div>
@@ -304,7 +299,7 @@ function SuratDomisiliUmum() {
                 type="text"
                 id="agama"
                 name="agama"
-                className="form-control  hover:bg-gray-200"
+                className="form-control hover:bg-gray-200"
                 value={selectSurat.agama}
                 onChange={handleChange}
               />
@@ -315,7 +310,7 @@ function SuratDomisiliUmum() {
                 type="text"
                 id="pekerjaan"
                 name="pekerjaan"
-                className="form-control  hover:bg-gray-200"
+                className="form-control hover:bg-gray-200"
                 value={selectSurat.pekerjaan}
                 onChange={handleChange}
               />
@@ -326,7 +321,7 @@ function SuratDomisiliUmum() {
                 type="text"
                 id="alamat"
                 name="alamat"
-                className="form-control  hover:bg-gray-200"
+                className="form-control hover:bg-gray-200"
                 value={selectSurat.alamat}
                 onChange={handleChange}
               />
@@ -337,17 +332,31 @@ function SuratDomisiliUmum() {
                 type="text"
                 id="rt_rw"
                 name="rt_rw"
-                className="form-control  hover:bg-gray-200"
+                className="form-control hover:bg-gray-200"
                 value={selectSurat.rt_rw}
                 onChange={handleChange}
               />
             </div>
             <div className="form-group">
+              <label htmlFor="status_perkawinan">Status Perkawinan</label>
+              <select
+                id="status_perkawinan"
+                name="status_perkawinan"
+                className="form-control hover:bg-gray-200"
+                value={selectSurat.status_perkawinan}
+                onChange={handleChange}
+              >
+                <option value="Kawin">Kawin</option>
+                <option value="Belum Kawin">Belum Kawin</option>
+              </select>
+            </div>
+
+            <div className="form-group">
               <label htmlFor="status_admin">Status Admin</label>
               <select
                 id="status_admin"
                 name="status_admin"
-                className="form-control  hover:bg-gray-200"
+                className="form-control hover:bg-gray-200"
                 value={selectSurat.status_admin}
                 onChange={handleChange}
               >
@@ -361,19 +370,8 @@ function SuratDomisiliUmum() {
                 type="text"
                 id="keperluan"
                 name="keperluan"
-                className="form-control  hover:bg-gray-200"
+                className="form-control hover:bg-gray-200"
                 value={selectSurat.keperluan}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="ktp">KTP</label>
-              <input
-                type="text"
-                id="ktp"
-                name="ktp"
-                className="form-control  hover:bg-gray-200"
-                value={selectSurat.ktp}
                 onChange={handleChange}
               />
             </div>
@@ -383,7 +381,7 @@ function SuratDomisiliUmum() {
                 type="text"
                 id="ktp_image"
                 name="ktp_image"
-                className="form-control  hover:bg-gray-200"
+                className="form-control hover:bg-gray-200"
                 value={selectSurat.ktp_image}
                 onChange={handleChange}
               />
@@ -394,7 +392,7 @@ function SuratDomisiliUmum() {
                 type="text"
                 id="no_telepon"
                 name="no_telepon"
-                className="form-control  hover:bg-gray-200"
+                className="form-control hover:bg-gray-200"
                 value={selectSurat.no_telepon}
                 onChange={handleChange}
               />
@@ -405,7 +403,7 @@ function SuratDomisiliUmum() {
                 type="text"
                 id="email"
                 name="email"
-                className="form-control  hover:bg-gray-200"
+                className="form-control hover:bg-gray-200"
                 value={selectSurat.email}
                 onChange={handleChange}
               />
@@ -425,4 +423,4 @@ function SuratDomisiliUmum() {
   );
 }
 
-export default SuratDomisiliUmum;
+export default PermintaanKetKK;

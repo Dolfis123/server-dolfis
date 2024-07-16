@@ -213,10 +213,22 @@ function Beranda() {
                       Surat Ket Domisili
                     </Link>
                     <Link
+                      to="/surat-ket-tidak-berdomisili"
+                      className="btn bg-primary text-white py-2 px-4 rounded"
+                    >
+                      Surat Ket Tidak Berdomisli
+                    </Link>
+                    <Link
                       to="/tidak-mampu-pendidikan"
                       className="btn bg-primary text-white py-2 px-4 rounded"
                     >
                       Surat Ket Tidak Mampu Untuk Pendidikan
+                    </Link>
+                    <Link
+                      to="/surat-ket-beasiswa-unipa"
+                      className="btn bg-primary text-white py-2 px-4 rounded"
+                    >
+                      Surat Ket Beasiswa Untuk Unipa
                     </Link>
                     <Link
                       to="/surat-ket-ktp"
@@ -230,65 +242,12 @@ function Beranda() {
                     >
                       Surat Ket KK
                     </Link>
-                    <Link
-                      to="/tidak-mampu-pendidikan"
-                      className="btn bg-primary text-white py-2 px-4 rounded"
-                    >
-                      Surat Ket Usaha
-                    </Link>
-                    <Link
-                      to="/tidak-mampu-pendidikan"
-                      className="btn bg-primary text-white py-2 px-4 rounded"
-                    >
-                      Surat Ket Kematian
-                    </Link>
+
                     <Link
                       to="/surat-ket-ahli-waris"
                       className="btn bg-primary text-white py-2 px-4 rounded"
                     >
                       Surat Ket Ahli Waris
-                    </Link>
-                    <Link
-                      to="/surat-ket-ahli-waris"
-                      className="btn bg-primary text-white py-2 px-4 rounded"
-                    >
-                      Surat Ket KK
-                    </Link>
-                    <Link
-                      to="/tidak-mampu-pendidikan"
-                      className="btn bg-primary text-white py-2 px-4 rounded"
-                    >
-                      Surat Ket KK
-                    </Link>
-                    <Link
-                      to="/tidak-mampu-pendidikan"
-                      className="btn bg-primary text-white py-2 px-4 rounded"
-                    >
-                      Surat Ket KK
-                    </Link>
-                    <Link
-                      to="/tidak-mampu-pendidikan"
-                      className="btn bg-primary text-white py-2 px-4 rounded"
-                    >
-                      Surat Ket KK
-                    </Link>
-                    <Link
-                      to="/tidak-mampu-pendidikan"
-                      className="btn bg-primary text-white py-2 px-4 rounded"
-                    >
-                      Surat Ket KK
-                    </Link>
-                    <Link
-                      to="/tidak-mampu-pendidikan"
-                      className="btn bg-primary text-white py-2 px-4 rounded"
-                    >
-                      Surat Ket KK
-                    </Link>
-                    <Link
-                      to="/tidak-mampu-pendidikan"
-                      className="btn bg-primary text-white py-2 px-4 rounded"
-                    >
-                      Surat Ket KK
                     </Link>
                   </div>
                 )}
@@ -337,17 +296,17 @@ function Beranda() {
               onClick={handlePrevPage}
               disabled={currentPage === 1}
             >
-              Previous
+              Sebelumnya
             </button>
             <span>
-              Page {currentPage} of {totalPages}
+              page {currentPage} of {totalPages}
             </span>
             <button
               className="btn btn-primary"
               onClick={handleNextPage}
               disabled={currentPage === totalPages}
             >
-              Next
+              Selanjutnya
             </button>
           </div>
         </div>

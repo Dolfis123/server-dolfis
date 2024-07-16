@@ -50,6 +50,7 @@ const createSuratAhliWaris = (req, res) => {
       pekerjaan_pemberi,
       agama_pemberi,
       alamat_pemberi,
+      status_admin,
       nama_penerima,
       jenis_kelamin_penerima,
       tempat_lahir_penerima,
@@ -71,8 +72,8 @@ const createSuratAhliWaris = (req, res) => {
     // SQL query to insert data into database
     const sqlQuery = `
     INSERT INTO surat_ket_ahli_waris
-    (nama_pemberi, tanggal, jenis_kelamin_pemberi, tempat_lahir_pemberi, tanggal_lahir_pemberi, pekerjaan_pemberi, agama_pemberi, alamat_pemberi, nama_penerima, jenis_kelamin_penerima, tempat_lahir_penerima, tanggal_lahir_penerima, pekerjaan_penerima, agama_penerima, alamat_penerima, keperluan, ktp_image, no_telepon, email, hashed_id, nomor_surat)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    (nama_pemberi, tanggal, jenis_kelamin_pemberi, tempat_lahir_pemberi, tanggal_lahir_pemberi, pekerjaan_pemberi, agama_pemberi, alamat_pemberi, status_admin, nama_penerima, jenis_kelamin_penerima, tempat_lahir_penerima, tanggal_lahir_penerima, pekerjaan_penerima, agama_penerima, alamat_penerima, keperluan, ktp_image, no_telepon, email, hashed_id, nomor_surat)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'menunggu', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
 
     // Get local timezone date using moment-timezone
@@ -343,14 +344,14 @@ const getSuratAhliWarisMenunggu = (req, res) => {
 
     if (result.length === 0) {
       return res.status(404).json({
-        skckData: [],
+        data: [],
         message: "No pending surat_ket_ahli_waris found",
       });
     }
 
     return res.json({
       message: "All surat_ket_ahli_waris data retrieved successfully",
-      skckData: result,
+      data: result,
     });
   });
 };
@@ -370,7 +371,7 @@ const getSuratAhliWarisTerima = (req, res) => {
 
     return res.json({
       message: "All surat_ket_ahli_waris data retrieved successfully",
-      skckData: result,
+      data: result,
     });
   });
 };

@@ -204,7 +204,7 @@ function SDUsahaAdmin() {
                 onClick={handlePreviousPage}
                 disabled={currentPage === 1}
               >
-                Previous
+                Sebelumnya
               </button>
               <span className="mx-4">
                 Page {currentPage} of {totalPages}
@@ -214,7 +214,7 @@ function SDUsahaAdmin() {
                 onClick={handleNextPage}
                 disabled={currentPage === totalPages}
               >
-                Next
+                Selanjutnya
               </button>
             </div>
           </div>
@@ -244,6 +244,7 @@ function SDUsahaAdmin() {
         show={showEditModal}
         onHide={() => setShowEditModal(false)}
         backdropClassName="custom-backdrop"
+        style={{ color: "black" }}
       >
         <Modal.Header closeButton>
           <Modal.Title>Edit Surat</Modal.Title>

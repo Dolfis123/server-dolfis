@@ -1,3 +1,4 @@
+require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const express = require("express");
 const cors = require("cors");
@@ -19,9 +20,10 @@ const suratRequestRoute = require("./routes/suratRequestRoute");
 const suratKetKtpRoute = require("./routes/surat_ket_kptRoute");
 const suratKetKkRoute = require("./routes/suratKetKkRoute");
 const suratKetAhliWaris = require("./routes/suratKetAhliWarisRoute");
+const suratKetBeasiswaUnipaRoute = require("./routes/suratKetBeasiswaUnipaRoute");
 
 const app = express();
-const PORT = 5050;
+const PORT = process.env.PORT || 4040;
 
 const requireLogin = (req, res, next) => {
   const token = req.headers["authorization"];
@@ -80,6 +82,7 @@ app.use("/api", suratRequestRoute);
 app.use("/api", suratKetKtpRoute);
 app.use("/api", suratKetKkRoute);
 app.use("/api", suratKetAhliWaris);
+app.use("/api", suratKetBeasiswaUnipaRoute);
 
 app.use("/admin", requireLogin, (req, res, next) => {
   next();

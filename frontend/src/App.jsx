@@ -41,6 +41,18 @@ import SuratKetKk from "./pages/public/format/SuratKetKk";
 import PersyaratanKetKk from "./pages/public/persyaratan/PersyaratanKetKk";
 import BuktiKetKk from "./pages/public/bukti/BuktiKetKk";
 import SuratKetAhliWaris from "./pages/public/format/SuratKetAhliWaris";
+import PersyaratanSuratAhliWaris from "./pages/public/persyaratan/PersyaratanSuratAhliWaris";
+import BuktiAhliWaris from "./pages/public/bukti/BuktiAhliWaris";
+import SuratKetBeasiswaUnipa from "./pages/public/format/SuratBeasiswaUnipa";
+import PersyaratanBeasiswaUnipa from "./pages/public/persyaratan/PersyaratanBeasiswaUnipa";
+import BuktiBeasiswaUnipa from "./pages/public/bukti/BuktiBeasiswaUnipa";
+import PermintaanKetKK from "./pages/admin/permintaan/PermintaanKetKK";
+import ArsipKetKK from "./pages/admin/arsip/ArsipKetKK";
+import PermintaanAhliWaris from "./pages/admin/permintaan/PermintaanAhliWaris";
+import ArsipAhliWaris from "./pages/admin/arsip/ArsipAhliWaris";
+import PermintaanBeasiswaUnipa from "./pages/admin/permintaan/PermintaanBeasiswaUnipa";
+import ArsipBeasiswaUnipa from "./pages/admin/arsip/ArsipBeasiswaUnipa";
+import LatterTidakMampuPendidikan from "./pages/admin/latters/LatterTidakMampuPendidikan";
 const isAuthenticated = () => {
   return !!sessionStorage.getItem("token");
 };
@@ -146,10 +158,58 @@ function App() {
             }
           />
           <Route
+            path="/permintaan-surat-ket-kk"
+            element={
+              <ProtectedRoute>
+                <PermintaanKetKK />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/permintaan-surat-ket-ahli-waris"
+            element={
+              <ProtectedRoute>
+                <PermintaanAhliWaris />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/permintaan-surat-ket-beasiswa-unipa"
+            element={
+              <ProtectedRoute>
+                <PermintaanBeasiswaUnipa />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/arsip-surat-ket-beasiswa-unipa"
+            element={
+              <ProtectedRoute>
+                <ArsipBeasiswaUnipa />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/arsip-surat-ket-ahli-waris"
+            element={
+              <ProtectedRoute>
+                <ArsipAhliWaris />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/arsip-ket-ktp"
             element={
               <ProtectedRoute>
                 <ArsipKetKtp />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/arsip-ket-kk"
+            element={
+              <ProtectedRoute>
+                <ArsipKetKK />
               </ProtectedRoute>
             }
           />
@@ -191,6 +251,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <SDUsahaDiterima />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/format-surat-tidak-mampu-pendidikan/:id"
+            element={
+              <ProtectedRoute>
+                <LatterTidakMampuPendidikan />
               </ProtectedRoute>
             }
           />
@@ -340,10 +408,13 @@ function App() {
           {/* Surat Ket Ahli Waris */}
           <Route path="/surat-ket-ahli-waris" element={<SuratKetAhliWaris />} />
           <Route
-            path="/persyaratan-surat-ket-kk/:hashed_id"
-            element={<PersyaratanKetKk />}
+            path="/persyaratan-surat-ahli-waris/:hashed_id"
+            element={<PersyaratanSuratAhliWaris />}
           />
-          <Route path="/bukti-ket-kk/:hashed_id" element={<BuktiKetKk />} />
+          <Route
+            path="/bukti-ket-ahli-waris/:hashed_id"
+            element={<BuktiAhliWaris />}
+          />
           {/* <Route
             path="/confir-data-tidak-mampu/:hashed_id"
             element={<ConfirmasiDataTidakMampu />}
@@ -367,7 +438,43 @@ function App() {
             /> */}
           {/* Surat ket kk end */}
 
-          {/* Surat Ket Ahli End */}
+          {/* Surat Ket beasiswa unipa start*/}
+
+          <Route
+            path="/surat-ket-beasiswa-unipa"
+            element={<SuratKetBeasiswaUnipa />}
+          />
+          <Route
+            path="/persyaratan-surat-beasiswa/:hashed_id"
+            element={<PersyaratanBeasiswaUnipa />}
+          />
+          <Route
+            path="/bukti-beasiswa-unipa/:hashed_id"
+            element={<BuktiBeasiswaUnipa />}
+          />
+          {/* <Route
+            path="/confir-data-tidak-mampu/:hashed_id"
+            element={<ConfirmasiDataTidakMampu />}
+            /> */}
+          {/* <Route
+            path="/detail-surat-tidak-mampu/:id"
+            element={<DesailSuratTidakMampu />}
+            /> */}
+          {/* <Route
+            path="/surat-tidak-mampu-arsip"
+            element={<SuratTidakMampuArsip />}
+            /> */}
+          {/* <Route
+            path="/format-surat-tidak-mampu/:id"
+            element={<FormatSuratTidakMampu />}
+            />
+            <Route path="/surat-tidak-mampu-pendidikan" />
+            <Route
+            path="/permintaan-surat-tidak-mampu"
+            element={<SuratTidakMampuPermintaan />}
+            /> */}
+
+          {/* Surat Ket beasiswa unipa end*/}
         </Routes>
       </BrowserRouter>
     </div>
