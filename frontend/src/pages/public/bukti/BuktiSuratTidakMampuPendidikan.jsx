@@ -17,7 +17,7 @@ function BuktiSuratTidakMampuPendidikan() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5050/api/lihat-surat-tidak-mampu/${hashed_id}`
+        `https://website.fahri.life/api/lihat-surat-tidak-mampu/${hashed_id}`
       );
       setData(response.data.data);
     } catch (error) {

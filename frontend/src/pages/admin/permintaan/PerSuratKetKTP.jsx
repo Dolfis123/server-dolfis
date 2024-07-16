@@ -37,7 +37,7 @@ function PerSuratKetKTP() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5050/api/lihat-surat-ket-ktp-menunggu"
+        "https://website.fahri.life/api/lihat-surat-ket-ktp-menunggu"
       );
 
       // Asumsikan bahwa setiap item dalam response.data.data memiliki atribut 'tanggal' atau 'createdAt'
@@ -63,7 +63,7 @@ function PerSuratKetKTP() {
     if (selectSurat.id) {
       const id = selectSurat.id;
       axios
-        .delete(`http://localhost:5050/api/hapus-surat-ket-ktp/${id}`)
+        .delete(`https://website.fahri.life/api/hapus-surat-ket-ktp/${id}`)
         .then((res) => {
           console.log("Data berhasil dihapus");
           setShowDeleteModal(false);
@@ -83,7 +83,7 @@ function PerSuratKetKTP() {
       const id = selectSurat.id;
       axios
         .put(
-          `http://localhost:5050/api/update-all-surat-ket-ktp/${id}`,
+          `https://website.fahri.life/api/update-all-surat-ket-ktp/${id}`,
           selectSurat
         )
         .then((res) => {
@@ -159,7 +159,7 @@ function PerSuratKetKTP() {
                     <td className="border p-2">
                       {surat.ktp_image && (
                         <img
-                          src={`http://localhost:5050/api/images/${surat.ktp_image}`}
+                          src={`https://website.fahri.life/api/images/${surat.ktp_image}`}
                           alt={surat.nama}
                           className="w-16 h-16 object-cover"
                         />

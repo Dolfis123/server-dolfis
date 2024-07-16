@@ -28,7 +28,7 @@ function PersyaratanKetKtp() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5050/lihat-surat-ket-ktp/${hashed_id}`
+        `https://website.fahri.life/api/lihat-surat-ket-ktp/${hashed_id}`
       );
       setData(response.data.data);
       setFormData({
@@ -87,7 +87,7 @@ function PersyaratanKetKtp() {
 
     try {
       const response = await axios.put(
-        `http://localhost:5050/api/update-nomor-email-ktp/${hashed_id}`,
+        `https://website.fahri.life/api/update-nomor-email-ktp/${hashed_id}`,
         formData
       );
 

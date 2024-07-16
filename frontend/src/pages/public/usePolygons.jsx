@@ -6,7 +6,7 @@ function usePolygons(mapRef) {
 
   useEffect(() => {
     // Fetch data from API
-    fetch("http://localhost:3040/api/polygons")
+    fetch("https://website.fahri.life/api/polygons")
       .then((response) => response.json())
       .then((data) => {
         // Pastikan data koordinat diparsing sebagai JSON

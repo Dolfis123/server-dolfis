@@ -107,7 +107,7 @@ function SuratTidakMampu() {
       formData.append("pdf_path", pdfPath);
 
       const response = await axios.post(
-        "http://localhost:5050/api/buat-surat-tidak-mampu",
+        "https://website.fahri.life/api/buat-surat-tidak-mampu",
         formData,
         {
           headers: {

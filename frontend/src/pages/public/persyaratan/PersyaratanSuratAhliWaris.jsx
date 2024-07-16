@@ -28,7 +28,7 @@ function PersyaratanSuratAhliWaris() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5050/api/lihat-surat-ahli-waris/${hashed_id}`
+        `https://website.fahri.life/api/lihat-surat-ahli-waris/${hashed_id}`
       );
       setData(response.data.data);
       setFormData({
@@ -87,7 +87,7 @@ function PersyaratanSuratAhliWaris() {
 
     try {
       const response = await axios.put(
-        `http://localhost:5050/api/update-nomor-email-ahli-waris/${hashed_id}`,
+        `https://website.fahri.life/api/update-nomor-email-ahli-waris/${hashed_id}`,
         formData
       );
 

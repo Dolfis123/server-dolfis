@@ -50,7 +50,7 @@ function Beranda() {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get("http://localhost:5050/api/news");
+        const response = await axios.get("https://website.fahri.life/api/news");
         if (response.data.Result) {
           setNewsList(response.data.Result.reverse());
         } else {
@@ -68,7 +68,7 @@ function Beranda() {
     const fetchUcapan = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5050/api/lihat-ucapan"
+          "https://website.fahri.life/api/lihat-ucapan"
         );
         if (response.data.Result) {
           setUcapanList(response.data.Result);
@@ -262,7 +262,7 @@ function Beranda() {
             <div className="card bg-white shadow-md rounded-lg p-4 flex flex-row items-center">
               <img
                 className="rounded-full w-32 h-32 object-cover mr-4"
-                src={`http://localhost:5050/api/images/${ucapan.image}`}
+                src={`https://website.fahri.life/api/images/${ucapan.image}`}
                 alt=""
               />
               <div>
@@ -286,7 +286,7 @@ function Beranda() {
                 title={news.title}
                 content={news.content.substring(0, 100) + "..."}
                 link={`/news/${news.id}`}
-                imageUrl={`http://localhost:5050/api/images/${news.image_url}`}
+                imageUrl={`https://website.fahri.life/api/images/${news.image_url}`}
               />
             ))}
           </div>

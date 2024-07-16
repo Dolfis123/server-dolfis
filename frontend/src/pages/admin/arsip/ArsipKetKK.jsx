@@ -39,7 +39,7 @@ function PermintaanKetKK() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5050/api/lihat-surat-diterima-kk"
+        "https://website.fahri.life/api/lihat-surat-diterima-kk"
       );
 
       // Asumsikan bahwa setiap item dalam response.data.data memiliki atribut 'tanggal' atau 'createdAt'
@@ -65,7 +65,7 @@ function PermintaanKetKK() {
     if (selectSurat.id) {
       const id = selectSurat.id;
       axios
-        .delete(`http://localhost:5050/api/hapus-surat-ket-kk/${id}`)
+        .delete(`https://website.fahri.life/api/hapus-surat-ket-kk/${id}`)
         .then((res) => {
           console.log("Data berhasil dihapus");
           setShowDeleteModal(false);
@@ -85,7 +85,7 @@ function PermintaanKetKK() {
       const id = selectSurat.id;
       axios
         .put(
-          `http://localhost:5050/api/update-all-surat-ket-kk/${id}`,
+          `https://website.fahri.life/api/update-all-surat-ket-kk/${id}`,
           selectSurat
         )
         .then((res) => {
@@ -163,7 +163,7 @@ function PermintaanKetKK() {
                     <td className="border p-2">
                       {surat.ktp_image && (
                         <img
-                          src={`http://localhost:5050/api/images/${surat.ktp_image}`}
+                          src={`https://website.fahri.life/api/images/${surat.ktp_image}`}
                           alt={surat.nama}
                           className="w-16 h-16 object-cover"
                         />

@@ -20,7 +20,7 @@ function LatterTidakMampuPendidikan() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5050/api/lihat-surat-tidak-mampu-admin/${id}`
+        `https://website.fahri.life/api/lihat-surat-tidak-mampu-admin/${id}`
       );
       setData(response.data.data);
     } catch (error) {
@@ -30,7 +30,9 @@ function LatterTidakMampuPendidikan() {
 
   const fetchEmployees = async () => {
     try {
-      const response = await axios.get("http://localhost:5050/api/employees");
+      const response = await axios.get(
+        "https://website.fahri.life/api/employees"
+      );
       console.log("Employees data: ", response.data.data); // Tambahkan ini
       setEmployees(response.data.data);
     } catch (error) {

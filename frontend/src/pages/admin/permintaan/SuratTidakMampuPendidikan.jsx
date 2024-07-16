@@ -38,7 +38,7 @@ function SuratTidakMampuPendidikan() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5050/api/lihat-surat-tidak-mampu-menunggu"
+        "https://website.fahri.life/api/lihat-surat-tidak-mampu-menunggu"
       );
 
       // Asumsikan bahwa setiap item dalam response.data.data memiliki atribut 'tanggal' atau 'createdAt'
@@ -64,7 +64,9 @@ function SuratTidakMampuPendidikan() {
     if (selectSurat.id) {
       const id = selectSurat.id;
       axios
-        .delete(`http://localhost:5050/api/hapus-surat-domisili-umum/${id}`)
+        .delete(
+          `https://website.fahri.life/api/hapus-surat-domisili-umum/${id}`
+        )
         .then((res) => {
           console.log("Data berhasil dihapus");
           setShowDeleteModal(false);
@@ -84,7 +86,7 @@ function SuratTidakMampuPendidikan() {
       const id = selectSurat.id;
       axios
         .put(
-          `http://localhost:5050/api/update-all-surat-tidak-mampu/${id}`,
+          `https://website.fahri.life/api/update-all-surat-tidak-mampu/${id}`,
           selectSurat
         )
         .then((res) => {
@@ -160,7 +162,7 @@ function SuratTidakMampuPendidikan() {
                     <td className="border p-2">
                       {surat.ktp_image && (
                         <img
-                          src={`http://localhost:5050/api/images/${surat.ktp_image}`}
+                          src={`https://website.fahri.life/api/images/${surat.ktp_image}`}
                           alt={surat.nama}
                           className="w-16 h-16 object-cover"
                         />

@@ -57,7 +57,7 @@ function EditSDUsaha() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5050/lihat-surat-domisili-usaha/${hashed_id}`
+        `https://website.fahri.life/api/lihat-surat-domisili-usaha/${hashed_id}`
       );
       setData(response.data.data);
     } catch (error) {
@@ -118,10 +118,9 @@ function EditSDUsaha() {
       formData.append("ktp", ktp);
       formData.append("alamat", alamat);
       formData.append("ktp_image", ktpImage);
-    
 
       const response = await axios.put(
-        `http://localhost:5050/update-surat-domisili-usaha-user/${hashed_id}`,
+        `https://website.fahri.life/api/update-surat-domisili-usaha-user/${hashed_id}`,
         formData
       );
 
@@ -317,8 +316,8 @@ function EditSDUsaha() {
               <div className="row mb-3">
                 <label htmlFor="ktpImage" className="col-sm-2 col-form-label">
                   <b>Gambar KTP</b>
-                 </label>
-                 <div className="col-sm-5">
+                </label>
+                <div className="col-sm-5">
                   <input
                     type="file"
                     className="form-control"
@@ -333,7 +332,7 @@ function EditSDUsaha() {
                       style={{ width: "100%", marginTop: "10px" }}
                     />
                   )}
-                 </div>
+                </div>
               </div>
               <button type="submit" className="btn btn-primary">
                 Update

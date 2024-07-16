@@ -50,7 +50,7 @@ function ArsipBeasiswaUnipa() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5050/api/lihat-surat-beasiswa-diterima"
+        "https://website.fahri.life/api/lihat-surat-beasiswa-diterima"
       );
 
       const sortedData = response.data.data.sort(
@@ -74,7 +74,7 @@ function ArsipBeasiswaUnipa() {
     if (selectSurat.id) {
       const id = selectSurat.id;
       axios
-        .delete(`http://localhost:5050/api/hapus-surat-beasiswa/${id}`)
+        .delete(`https://website.fahri.life/api/hapus-surat-beasiswa/${id}`)
         .then((res) => {
           console.log("Data berhasil dihapus");
           setShowDeleteModal(false);
@@ -94,7 +94,7 @@ function ArsipBeasiswaUnipa() {
       const id = selectSurat.id;
       axios
         .put(
-          `http://localhost:5050/api/update-all-surat-beasiswa/${id}`,
+          `https://website.fahri.life/api/update-all-surat-beasiswa/${id}`,
           selectSurat
         )
         .then((res) => {
@@ -172,7 +172,7 @@ function ArsipBeasiswaUnipa() {
                     <td className="border p-2">
                       {surat.ktp_image && (
                         <img
-                          src={`http://localhost:5050/api/images/${surat.ktp_image}`}
+                          src={`https://website.fahri.life/api/images/${surat.ktp_image}`}
                           alt={surat.nama_tua}
                           className="w-16 h-16 object-cover"
                         />
@@ -209,7 +209,7 @@ function ArsipBeasiswaUnipa() {
                 onClick={handlePreviousPage}
                 disabled={currentPage === 1}
               >
-                Sebelumnya 
+                Sebelumnya
               </button>
               <span className="mx-4">
                 Page {currentPage} of {totalPages}

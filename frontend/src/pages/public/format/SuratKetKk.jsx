@@ -83,7 +83,7 @@ function SuratKetKk() {
       formData.append("ktp_image", ktpImage);
 
       const response = await axios.post(
-        "http://localhost:5050/api/buat-surat-ket-kk",
+        "https://website.fahri.life/api/buat-surat-ket-kk",
         formData,
         {
           headers: {

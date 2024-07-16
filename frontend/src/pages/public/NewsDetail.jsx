@@ -13,7 +13,7 @@ function NewsDetail() {
     const fetchNewsDetail = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5050/api/news/${id}`
+          `https://website.fahri.life/api/news/${id}`
         );
         setNews(response.data.Result[0]);
       } catch (error) {
@@ -23,7 +23,7 @@ function NewsDetail() {
 
     const fetchLatestNews = async () => {
       try {
-        const response = await axios.get("http://localhost:5050/api/news");
+        const response = await axios.get("https://website.fahri.life/api/news");
         // Assuming the response is not sorted by default
         const sortedNews = response.data.Result.sort(
           (a, b) => new Date(b.created_at) - new Date(a.created_at)
@@ -60,7 +60,7 @@ function NewsDetail() {
             {formatDate(news.created_at)}
           </p>
           <img
-            src={`http://localhost:5050/api/images/${news.image_url}`}
+            src={`https://website.fahri.life/api/images/${news.image_url}`}
             alt={news.title}
             className="w-full h-96 object-contain"
           />
@@ -88,7 +88,7 @@ function NewsDetail() {
               <li key={item.id} className="bg-white p-3 shadow-md rounded-lg">
                 <Link to={`/news/${item.id}`} className="text-blue-500">
                   <img
-                    src={`http://localhost:5050/api/images/${item.image_url}`}
+                    src={`https://website.fahri.life/api/images/${item.image_url}`}
                     alt={item.title}
                     className="w-full h-32 object-cover mb-2"
                   />

@@ -38,7 +38,7 @@ function Wilayah() {
   useEffect(() => {
     const fetchMarkers = async () => {
       try {
-        const responseRW = await axios.get("http://localhost:5050/api/rw");
+        const responseRW = await axios.get("https://website.fahri.life/api/rw");
         const dataRW = responseRW.data.map((item) => {
           const latLong = item.latLong ? item.latLong.split(",") : [0, 0];
           const popupContent = `
@@ -46,7 +46,9 @@ function Wilayah() {
           <p class="bg-[#180e5a] text-white m-0 text-lg text-center p-1 mb-1">${
             item.nama_RW
           }</p>
-          <img src="http://localhost:5050/api/images/${item.image_rw}" alt="${
+          <img src="https://website.fahri.life/api/images/${
+            item.image_rw
+          }" alt="${
             item.nama_ketua_rw
           }" class="max-w-full h-[115px] border border-black ml-5 mt-5 float-left" />
           <div class="float-left ml-10">
@@ -103,7 +105,7 @@ function Wilayah() {
 
   function handleSearchCombined() {
     const searchRW = axios.get(
-      `http://localhost:5050/api/rw/search/${searchQuery}`
+      `https://website.fahri.life/api/rw/search/${searchQuery}`
     );
 
     searchRW
@@ -126,7 +128,7 @@ function Wilayah() {
               <p class="bg-[#180e5a] text-white m-0 text-lg text-center p-1 mb-1">${
                 item.nama_RW
               }</p>
-              <img src="http://localhost:5050/api/images/${
+              <img src="https://website.fahri.life/api/images/${
                 item.image_rw
               }" alt="${
               item.nama_ketua_rw

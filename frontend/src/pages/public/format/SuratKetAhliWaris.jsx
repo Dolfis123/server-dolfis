@@ -99,7 +99,7 @@ function SuratKetAhliWaris() {
       formData.append("ktp_image", ktpImage);
 
       const response = await axios.post(
-        "http://localhost:5050/api/buat-surat-ahli-waris",
+        "https://website.fahri.life/api/buat-surat-ahli-waris",
         formData,
         {
           headers: {

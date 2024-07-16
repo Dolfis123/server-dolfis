@@ -39,7 +39,7 @@ function SuratDomisiliUmum() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5050/api/lihat-surat-ket-domisili-menunggu-umum"
+        "https://website.fahri.life/api/lihat-surat-ket-domisili-menunggu-umum"
       );
 
       if (response.data && response.data.skckData) {
@@ -69,7 +69,9 @@ function SuratDomisiliUmum() {
     if (selectSurat.id) {
       const id = selectSurat.id;
       axios
-        .delete(`http://localhost:5050/api/hapus-surat-domisili-umum/${id}`)
+        .delete(
+          `https://website.fahri.life/api/hapus-surat-domisili-umum/${id}`
+        )
         .then((res) => {
           console.log("Data berhasil dihapus");
           setShowDeleteModal(false);
@@ -89,7 +91,7 @@ function SuratDomisiliUmum() {
       const id = selectSurat.id;
       axios
         .put(
-          `http://localhost:5050/api/update-all-domisili-umum/${id}`,
+          `https://website.fahri.life/api/update-all-domisili-umum/${id}`,
           selectSurat
         )
         .then((res) => {
@@ -164,7 +166,7 @@ function SuratDomisiliUmum() {
                     <td className="border p-2">
                       {surat.ktp_image && (
                         <img
-                          src={`http://localhost:5050/api/images/${surat.ktp_image}`}
+                          src={`https://website.fahri.life/api/images/${surat.ktp_image}`}
                           alt={surat.nama}
                           className="w-16 h-16 object-cover"
                         />

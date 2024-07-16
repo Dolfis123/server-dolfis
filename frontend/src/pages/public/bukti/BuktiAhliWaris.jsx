@@ -17,7 +17,7 @@ function BuktiAhliWaris() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5050/api/lihat-surat-ahli-waris/${hashed_id}`
+        `https://website.fahri.life/api/lihat-surat-ahli-waris/${hashed_id}`
       );
       setData(response.data.data);
     } catch (error) {

@@ -28,7 +28,7 @@ function PersyaratanKetKk() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5050/api/lihat-surat-ket-kk/${hashed_id}`
+        `https://website.fahri.life/api/lihat-surat-ket-kk/${hashed_id}`
       );
       setData(response.data.data);
       setFormData({
@@ -87,7 +87,7 @@ function PersyaratanKetKk() {
 
     try {
       const response = await axios.put(
-        `http://localhost:5050/api/update-nomor-email-kk/${hashed_id}`,
+        `https://website.fahri.life/api/update-nomor-email-kk/${hashed_id}`,
         formData
       );
 

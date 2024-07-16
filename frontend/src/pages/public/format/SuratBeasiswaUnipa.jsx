@@ -128,7 +128,7 @@ function SuratKetBeasiswaUnipa() {
       formData.append("ktp_image", ktpImage);
 
       const response = await axios.post(
-        "http://localhost:5050/api/buat-surat-beasiswa",
+        "https://website.fahri.life/api/buat-surat-beasiswa",
         formData,
         {
           headers: {

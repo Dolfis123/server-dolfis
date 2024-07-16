@@ -122,7 +122,7 @@ function SDUsaha() {
       formData.append("ktp_image", ktpImage);
 
       const response = await axios.post(
-        "http://localhost:5050/api/buat-surat-domisili",
+        "https://website.fahri.life/api/buat-surat-domisili",
         formData,
         {
           headers: {
