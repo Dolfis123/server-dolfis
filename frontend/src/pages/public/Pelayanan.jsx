@@ -43,10 +43,10 @@ function Pelayanan() {
           <br />
           <div className="flex justify-center">
             <button
-              className="btn bg-primary text-white mb-4 py-2 px-4"
+              className="btn bg-primary text-white mb-4 py-2 px-2"
               onClick={toggleServices}
             >
-              <span className="me-2" style={{ fontSize: "20px" }}>
+              <span className="me-1" style={{ fontSize: "15px" }}>
                 🚀
               </span>
               {showServices
@@ -56,18 +56,55 @@ function Pelayanan() {
             </button>
           </div>
           {showServices && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-2">
               <Link
                 to="/surat-ket-domisili-usaha"
                 className="btn bg-primary text-white py-2 px-4 rounded"
               >
-                Surat Keterangan Domisili Usaha
+                Surat Ket Domisili Usaha
               </Link>
               <Link
-                to="#"
+                to="/surat-ket-domisili-umum"
                 className="btn bg-primary text-white py-2 px-4 rounded"
               >
-                Surat Keterangan Tidak Mampu
+                Surat Ket Domisili
+              </Link>
+              <Link
+                to="/surat-ket-tidak-berdomisili"
+                className="btn bg-primary text-white py-2 px-4 rounded"
+              >
+                Surat Ket Tidak Berdomisli
+              </Link>
+              <Link
+                to="/tidak-mampu-pendidikan"
+                className="btn bg-primary text-white py-2 px-4 rounded"
+              >
+                Surat Ket Tidak Mampu Untuk Pendidikan
+              </Link>
+              <Link
+                to="/surat-ket-beasiswa-unipa"
+                className="btn bg-primary text-white py-2 px-4 rounded"
+              >
+                Surat Ket Beasiswa Untuk Unipa
+              </Link>
+              <Link
+                to="/surat-ket-ktp"
+                className="btn bg-primary text-white py-2 px-4 rounded"
+              >
+                Surat Ket KTP
+              </Link>
+              <Link
+                to="/surat-ket-kk"
+                className="btn bg-primary text-white py-2 px-4 rounded"
+              >
+                Surat Ket KK
+              </Link>
+
+              <Link
+                to="/surat-ket-ahli-waris"
+                className="btn bg-primary text-white py-2 px-4 rounded"
+              >
+                Surat Ket Ahli Waris
               </Link>
             </div>
           )}
